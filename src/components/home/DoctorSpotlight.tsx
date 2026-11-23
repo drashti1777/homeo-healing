@@ -16,14 +16,14 @@ export function DoctorSpotlight() {
   return (
     <section className="section bg-white overflow-hidden py-16 lg:py-24">
       <div className="wrap">
-        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
-          {/* Doctor Visual Side */}
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+          {/* Doctor Visual Side (Equal 50% Width) */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="lg:col-span-5 relative"
+            className="relative w-full"
           >
             {/* Visual Frame */}
             <div className="relative mx-auto w-full max-w-sm sm:max-w-md">
@@ -70,13 +70,13 @@ export function DoctorSpotlight() {
             </motion.div>
           </motion.div>
 
-          {/* Details Side */}
+          {/* Details Side (Equal 50% Width) */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="lg:col-span-7 space-y-6"
+            className="space-y-6 w-full"
           >
             <div>
               <span className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-700">

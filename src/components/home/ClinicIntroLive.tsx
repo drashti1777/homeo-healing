@@ -9,22 +9,22 @@ export function ClinicIntroLive() {
   return (
     <section className="section bg-white py-16 lg:py-24">
       <div className="wrap">
-        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
-          {/* Left Column: Image of Doctor Consultation */}
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+          {/* Left Column: Image of Doctor Consultation (Equal 50% Width) */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-5 relative group"
+            className="relative group w-full"
           >
-            <div className="relative mx-auto w-full max-w-md overflow-hidden rounded-[2.5rem] bg-gradient-to-tr from-forest-800 to-forest-600 p-2 shadow-xl shadow-forest-900/10 transition-shadow duration-500 group-hover:shadow-2xl group-hover:shadow-forest-900/20">
-              <div className="relative aspect-[4/3] sm:aspect-[1/1] w-full overflow-hidden rounded-[2.2rem] bg-sage-100">
+            <div className="relative w-full overflow-hidden rounded-[2.5rem] bg-gradient-to-tr from-forest-800 to-forest-600 p-2 shadow-xl shadow-forest-900/10 transition-shadow duration-500 group-hover:shadow-2xl group-hover:shadow-forest-900/20">
+              <div className="relative aspect-[4/3] sm:aspect-[5/4] lg:aspect-[4/3] w-full overflow-hidden rounded-[2.2rem] bg-sage-100">
                 <Image
                   src="/gallery/indian-consultation.webp"
                   alt="Dr. Neeta's Homeo Health Care - Consultation"
                   fill
-                  sizes="(min-width: 1024px) 26rem, 90vw"
+                  sizes="(min-width: 1024px) 50vw, 90vw"
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
                 <div
@@ -47,13 +47,13 @@ export function ClinicIntroLive() {
             </div>
           </motion.div>
 
-          {/* Right Column: Exact Line-to-Line Text from Live Site */}
+          {/* Right Column: Exact Line-to-Line Text from Live Site (Equal 50% Width) */}
           <motion.div
             initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="lg:col-span-7 space-y-6"
+            className="space-y-6 w-full"
           >
             <div>
               <span className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-700">

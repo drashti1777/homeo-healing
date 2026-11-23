@@ -182,7 +182,7 @@ export function TestimonialSlider({
       </div>
 
       {/* Main Dual-Column Interactive Stage */}
-      <div className="grid gap-8 lg:grid-cols-12 lg:items-start">
+      <div className="grid gap-8 lg:grid-cols-12">
         {/* Left Column: Spotlight Patient Story (7 of 12 columns) */}
         <div
           className={`relative lg:col-span-7 flex flex-col justify-between overflow-hidden rounded-[2.5rem] p-6 sm:p-8 md:p-10 transition-all duration-300 ${
@@ -369,7 +369,7 @@ export function TestimonialSlider({
         </div>
 
         {/* Right Column: Interactive Patient Stories Deck (5 of 12 columns, Desktop) */}
-        <div className="hidden lg:flex lg:col-span-5 flex-col gap-2.5">
+        <div className="hidden lg:flex lg:col-span-5 flex-col gap-2.5 sticky top-24 lg:top-28 self-start">
           <div className="flex items-center justify-between px-2 mb-1">
             <span
               className={`text-xs font-bold uppercase tracking-wider ${

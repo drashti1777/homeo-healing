@@ -1,0 +1,86 @@
+[
+  {
+    "_id": "6b00144215dedca39df8527f",
+    "answer": "No. Please never stop or change prescribed medicine without advice from your doctor. Homeopathy here is offered as a complementary approach only.",
+    "reviewNote": "Safety FAQ written for the new website (not on the previous site).",
+    "reviewStatus": "pending-review",
+    "slug": "can-i-use-homeopathy-instead-of-prescribed-medicine"
+  },
+  {
+    "_id": "6b00144215dedca39df85280",
+    "answer": "It is a detailed conversation about your symptoms, health history, sleep, energy, emotional wellbeing and daily life. Your doctor explains any suggestions and what to expect.",
+    "reviewNote": "Safety FAQ written for the new website (not on the previous site).",
+    "reviewStatus": "pending-review",
+    "slug": "what-happens-in-a-first-consultation"
+  },
+  {
+    "_id": "6b00144215dedca39df85281",
+    "answer": "No. The form sends a request. Your appointment is confirmed only once the clinic has contacted you and agreed a time.",
+    "reviewNote": "Safety FAQ written for the new website (not on the previous site).",
+    "reviewStatus": "pending-review",
+    "slug": "does-the-appointment-form-book-my-appointment"
+  },
+  {
+    "_id": "6b00144215dedca39df85282",
+    "answer": "No. Everything here is educational. For urgent or emergency problems contact your local emergency services.",
+    "reviewNote": "Safety FAQ written for the new website (not on the previous site).",
+    "reviewStatus": "pending-review",
+    "slug": "is-this-website-medical-advice"
+  },
+  {
+    "_id": "6b0021af863e21ec725cad08",
+    "answer": "Homoeopathy is a system of alternative medicine founded by Samuel Hahnemann. It is based on the principle \"similia similibus curentur\" (\"like cures like\"): a substance that causes symptoms in a healthy person is used to treat similar symptoms in a sick person.",
+    "reviewNote": "Factual answer; spelling and grammar corrected only.",
+    "reviewStatus": "original-unchanged",
+    "slug": "what-is-homeopathy"
+  },
+  {
+    "_id": "6b0021af863e21ec725cad0a",
+    "answer": "People choose homoeopathy for different reasons. At our clinic, medicine is always prescribed after a detailed analysis of your personality and the totality of your individual characteristics, both physical and mental. Homoeopathic medicines are used for all age groups and come as easy-to-take sweet pills.\n\nHomoeopathy is a complementary approach. It does not replace diagnosis or evidence-based treatment by a qualified medical doctor, and we do not promise any particular result.",
+    "reviewNote": "Unsupported claims removed from the original: CLAIM: 'solution for every sort of disease'; CLAIM: 'No side effects'; CLAIM: 'permanent cure'. Approve or edit before marking as clinically reviewed.",
+    "reviewStatus": "pending-review",
+    "slug": "why-homeopathy"
+  },
+  {
+    "_id": "6b0021af863e21ec725cad0c",
+    "answer": "Our consultations look at you as a whole person rather than a single complaint, including your lifestyle, sleep, appetite and emotional wellbeing. For children, we also pay attention to overall growth and development.\n\nPlease continue routine check-ups, vaccinations, and any nutrition or supplement advice from your paediatrician or doctor.",
+    "reviewNote": "Unsupported claims removed from the original: CLAIM: 'boost up the immune system'; CLAIM: helps absorb nutrients 'without adding up supplementation' (could discourage needed supplements). Approve or edit before marking as clinically reviewed.",
+    "reviewStatus": "pending-review",
+    "slug": "other-benefits-of-consulting-us"
+  },
+  {
+    "_id": "6b0021af863e21ec725cad0e",
+    "answer": "A homeopath is a medical professional trained in homeopathy who prescribes natural remedies after considering a person's symptoms, personality, lifestyle and hereditary factors, using minute doses of natural substances according to homeopathic principles.",
+    "reviewNote": "Factual answer; spelling and grammar corrected only.",
+    "reviewStatus": "original-unchanged",
+    "slug": "who-is-a-homeopath"
+  },
+  {
+    "_id": "6b0021af863e21ec725cad10",
+    "answer": "Homeopathic medicines are made from highly diluted substances of natural origin, such as plants (for example arnica, red onion, belladonna, poison ivy and stinging nettle), animals (for example crushed bees) or minerals (for example white arsenic). They are diluted with the help of alcohol, water or sugar.",
+    "reviewNote": "Factual answer; spelling and grammar corrected only.",
+    "reviewStatus": "original-unchanged",
+    "slug": "what-are-homeopathic-medicines-made-of"
+  },
+  {
+    "_id": "6b0021af863e21ec725cad12",
+    "answer": "Properly prepared homoeopathic medicines are made from highly diluted natural substances and do not contain steroids. Buy medicines only from your homeopath or a licensed pharmacy.\n\nIf you take prescribed steroid medicine, never stop it suddenly or reduce the dose without your doctor's advice. Stopping steroids abruptly can be dangerous.",
+    "reviewNote": "Unsupported claims removed from the original: CLAIM: 'cures a disease without any side-effects'; LOGIC: absence of side effects presented as evidence of no steroids. Approve or edit before marking as clinically reviewed.",
+    "reviewStatus": "pending-review",
+    "slug": "do-homeopathic-medicines-contain-steroids"
+  },
+  {
+    "_id": "6b0021af863e21ec725cad14",
+    "answer": "Homeopathic medicines are usually taken alongside conventional treatment. Always tell both your homeopath and your doctor about every medicine, remedy and supplement you take.\n\nDo not stop or change any prescribed medicine without your doctor's advice.",
+    "reviewNote": "Unsupported claims removed from the original: CLAIM: 'not known to cause any interaction'. Approve or edit before marking as clinically reviewed.",
+    "reviewStatus": "pending-review",
+    "slug": "can-homeopathic-medicines-be-taken-with-other-medicines"
+  },
+  {
+    "_id": "6b0021af863e21ec725cad16",
+    "answer": "No. Research in homeopathy is limited, and large systematic reviews have not found reliable evidence that homeopathic remedies work better than placebo for treating any health condition. Homeopathy is not scientifically proven to cure, treat or prevent disease.\n\nSome people still choose homeopathy as a complementary approach, for example for the time and attention of a detailed consultation. If you do, please keep seeing your doctor, continue prescribed treatment, and do not delay medical care for new, severe or worsening symptoms.",
+    "reviewNote": "Unsupported claims removed from the original: UNSOURCED FIGURE: 'millions of people'. Approve or edit before marking as clinically reviewed.",
+    "reviewStatus": "pending-review",
+    "slug": "is-homeopathy-scientifically-proven"
+  }
+]

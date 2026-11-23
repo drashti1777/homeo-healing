@@ -1,0 +1,51 @@
+{
+  "name": "homeo-healing",
+  "version": "1.0.0",
+  "description": "Homeo-Healing website",
+  "scripts": {
+    "dev": "node scripts/ensure-db.cjs && next dev",
+    "build": "next build",
+    "start": "next start",
+    "seed": "tsx --env-file=.env.local scripts/seed.ts",
+    "typecheck": "tsc --noEmit",
+    "db": "mongod --dbpath .data/db --port 27018 --bind_ip 127.0.0.1 --setParameter diagnosticDataCollectionEnabled=false",
+    "import:drneeta": "tsx --env-file=.env.local scripts/import-drneeta.ts",
+    "import:gallery": "tsx scripts/import-gallery.ts",
+    "migrate:doctor": "tsx --env-file=.env.local scripts/migrate-doctor.ts",
+    "migrate:treatments": "tsx --env-file=.env.local scripts/migrate-treatments.ts",
+    "migrate:faqs": "tsx --env-file=.env.local scripts/migrate-faqs.ts",
+    "migrate:contact": "tsx --env-file=.env.local scripts/migrate-contact-gallery.ts"
+  },
+  "type": "module",
+  "dependencies": {
+    "@hookform/resolvers": "^7.0.7",
+    "@react-three/fiber": "^9.8.2",
+    "bcryptjs": "^3.0.3",
+    "gsap": "^3.15.1",
+    "jose": "^6.2.18",
+    "lucide-react": "^1.77.0",
+    "mongoose": "^9.12.2",
+    "motion": "^14.14.0",
+    "next": "^16.4.6",
+    "puppeteer-core": "^25.18.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-hook-form": "^7.92.0",
+    "sharp": "^0.35.5",
+    "three": "^0.187.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.5",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/three": "^0.187.0",
+    "postcss": "^8.5.33",
+    "tailwindcss": "^4.3.5",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  },
+  "private": "true"
+}

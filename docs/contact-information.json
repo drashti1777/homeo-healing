@@ -1,0 +1,113 @@
+{
+  "extracted": "2026-11-20",
+  "clinicName": {
+    "value": "Dr. Neeta's Homeo Health Care",
+    "variantsSeenOnSource": ["Dr. Neeta's Homeo Health Care", "Dr Neeta's Homoeo health care", "Dr. Neeta's Homeo Healthcare", "Dr Neeta Homeopathy Clinic", "Dr.Neeta's Homeopathy Clinic", "Dr Neeta Parmar's homeo health care"],
+    "domain": "drneetahomeohealing.com",
+    "verificationStatus": "needs-owner-verification",
+    "notes": "Pick one official name. The new project brief calls the site 'Homeo-Healing'."
+  },
+  "tagline": {
+    "value": "Our Mission Of Compassion. Our Vision Of Excellence.",
+    "sourceUrl": "https://drneetahomeohealing.com/",
+    "verificationStatus": "verified-from-source"
+  },
+  "locations": [
+    {
+      "id": "loc-bhavnagar-footer",
+      "label": "Bhavnagar (footer and Contact page address)",
+      "sourceUrl": "https://drneetahomeohealing.com/contact.php",
+      "original": "2nd Floor, Ratna Plaza complex, R.T.O, Vithalwadi Road, Above R.K travels, Opposite Madhav Complex, Shastrinagar, Bhavnagar, Gujarat",
+      "contactPageVariant": "2nd Floor, Ratna Plaza complex, R.T.O, Vithalwadi Road. R.K travels, Madhav Complex, Shastrinagar, Bhavnagar, Gujarat",
+      "mapEmbed": "Google Maps embed centred on 'R K Travels' (21.764082, 72.1251679)",
+      "verificationStatus": "conflict",
+      "notes": "Conflicts with the header address (3rd floor, Vishwakarma circle, Vijayraj Nagar). Owner must confirm floor and street."
+    },
+    {
+      "id": "loc-bhavnagar-header",
+      "label": "Bhavnagar (top-bar header address)",
+      "sourceUrl": "https://drneetahomeohealing.com/",
+      "original": "3rd floor, Ratna plaza complex, Vishwakarma circle, vijayraj nagar, Bhavnagar",
+      "mapEmbed": "Contact page has a second Google Maps embed centred on 'Vijayrajnagar, Bhavnagar, Gujarat'",
+      "verificationStatus": "conflict",
+      "notes": "Shown on every page header. Different floor and area from the footer address."
+    },
+    {
+      "id": "loc-ahmedabad",
+      "label": "Ahmedabad",
+      "sourceUrl": "https://drneetahomeohealing.com/contact.php",
+      "original": "32_FF, 1st Floor, 4D Square, Opp IIT Eng. College, Nr.Visat Petrol Pump to Gandhinagar Highway, Motera, Ahmedabad, Gujarat",
+      "relatedNameOnAboutPage": "Homeo health care & Pharmacy at Ahemdabad",
+      "verificationStatus": "needs-owner-verification",
+      "notes": "Confirm this is the 'Homeo Health Care & Pharmacy' branch, its hours and phone. 'Opp IIT Eng. College' should be confirmed (likely a nearby engineering college)."
+    }
+  ],
+  "phones": [
+    { "value": "+91 81606 02060", "sourceUrl": "https://drneetahomeohealing.com/contact.php", "usage": "Footer and Contact page; tel link is 'tel:81606 02060' (missing country code)", "verificationStatus": "verified-from-source" }
+  ],
+  "emails": [
+    { "value": "drneetahomeohealing@gmail.com", "sourceUrl": "https://drneetahomeohealing.com/contact.php", "usage": "Footer and Contact page (Cloudflare-obfuscated in HTML, decoded)", "verificationStatus": "verified-from-source" }
+  ],
+  "openingHours": {
+    "original": "Opening Hours : Monday To Saturday - 8AM To 8PM",
+    "sourceUrl": "https://drneetahomeohealing.com/",
+    "verificationStatus": "needs-owner-verification",
+    "notes": "Unclear whether this applies to both branches."
+  },
+  "social": [
+    { "network": "Facebook", "url": "https://www.facebook.com/Dr-Neetss-Homeo-Health-Care-107686881068210", "verificationStatus": "verified-from-source", "notes": "Page slug spells 'Neetss'." },
+    { "network": "Instagram", "url": "https://www.instagram.com/drneetahomeoheathcare/", "verificationStatus": "verified-from-source", "notes": "Handle spells 'heathcare' (missing l)." },
+    { "network": "YouTube", "url": "https://www.youtube.com/embed/MmN6xSjrdtk", "verificationStatus": "needs-owner-verification", "notes": "Single embedded video on Gallery page; no channel link." },
+    { "network": "Practo", "url": null, "verificationStatus": "missing", "notes": "Icon in header links to '#'." },
+    { "network": "Justdial", "url": null, "verificationStatus": "missing", "notes": "Icons in header and footer link to '#'." }
+  ],
+  "whatsapp": {
+    "provider": "Elfsight free WhatsApp Chat widget (elfsight-app-4bf818b1-4c35-4cfb-9e2d-2c9e15b7dc2c)",
+    "number": null,
+    "verificationStatus": "missing",
+    "notes": "Number is loaded by the widget's JavaScript and is not in the page HTML. Ask owner for the WhatsApp number."
+  },
+  "enquiryForms": [
+    {
+      "id": "form-contact",
+      "sourceUrl": "https://drneetahomeohealing.com/contact.php",
+      "title": "Leave Reply",
+      "method": "POST to same page",
+      "fields": [
+        { "name": "name", "label": "Full Name", "type": "text", "required": false },
+        { "name": "email", "label": "E-mail Address", "type": "text", "required": true },
+        { "name": "number", "label": "Phone No", "type": "number", "required": true },
+        { "name": "message", "label": "Write a Message", "type": "textarea", "required": true }
+      ],
+      "successMessage": "Your message was sent successfully.",
+      "notes": "Where submissions are delivered is unknown (server-side PHP)."
+    },
+    {
+      "id": "form-home-cta",
+      "sourceUrl": "https://drneetahomeohealing.com/",
+      "title": "Booked an appointment",
+      "method": "POST to contact.php with no fields",
+      "fields": [],
+      "notes": "Button only; it navigates to the Contact page. No real appointment booking system exists."
+    }
+  ],
+  "payment": {
+    "sourceUrl": "https://drneetahomeohealing.com/paynow.php",
+    "originalTitle": "Scan & Pay for Dr. Neeta's Homeo Health Care",
+    "provider": "Paytm UPI (static QR code image)",
+    "upiId": "7623913175@paytm",
+    "qrImages": ["https://drneetahomeohealing.com/assets/img/scan.jpg", "https://drneetahomeohealing.com/assets/img/scanf.webp"],
+    "gateway": "None. No online checkout, amount entry, order ID or receipt; it is a static QR image.",
+    "otherIcons": "Paytm and Google Pay icons in footer link to '#'.",
+    "verificationStatus": "needs-owner-verification",
+    "notes": "UPI number (7623913175) differs from the clinic phone. Owner must confirm the UPI ID and QR are current before they are shown again."
+  },
+  "seoMeta": {
+    "title": "Dr Neeta's Homeo Health Care",
+    "description": "Homeopathy Doctors in Bhavnagar, Bhavanagar - Book Doctor Appointment, Consult Online, View Doctor Fees, User Reviews, Address of Homeopathy Doctors",
+    "keywords": "Homeopathic Treatment in Bhavnagar, arthritis homeopathic Bhavnagar, hair loss homeopathic treatment Bhavnagar, autism homeopathic Bhavnagar, asthma homeopathy Bhavnagar , depression homeopathic Bhavnagar, skin homeopathic Bhavnagar, spondylitis homeopathic treatment Bhavnagar",
+    "canonical": "https://drneetahomeohealing.com/",
+    "notes": "Same meta on every page. Description reads like a directory listing ('View Doctor Fees, User Reviews') and should be rewritten."
+  },
+  "websiteDeveloper": "Midnight Digital Pvt. Ltd. (footer credit)"
+}

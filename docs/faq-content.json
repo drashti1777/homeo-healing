@@ -1,0 +1,96 @@
+{
+  "sourceUrl": "https://drneetahomeohealing.com/faq.php",
+  "originalPageTitle": "FAQ About Homeopathy",
+  "extracted": "2026-11-20",
+  "note": "Answers on the live page are in collapsed accordions; full text was read from the page HTML. 'original' is verbatim (bullets joined with ' | '). 'revisedProposal' corrects spelling/grammar and, where flagged, rewords medical claims. Revisions are proposals only until the owner and a clinician approve them.",
+  "items": [
+    {
+      "id": "faq-01",
+      "sourceUrl": "https://drneetahomeohealing.com/faq.php",
+      "contentType": "faq",
+      "originalTitle": "What is homoeopathy?",
+      "original": "Homoeopathy is alternative medicine. - Founder: Samuel Hahneman | Based on principle \"similia similibus curentur\"/ likes cure likes(means substance that cause symptoms of a disease in healthy people would cure similar symptoms in sick people)",
+      "revisedProposal": "Homoeopathy is a system of alternative medicine founded by Samuel Hahnemann. It is based on the principle \"similia similibus curentur\" (\"like cures like\"): a substance that causes symptoms in a healthy person is used to treat similar symptoms in a sick person.",
+      "changes": ["Spelling: Hahneman → Hahnemann", "Grammar"],
+      "flags": [],
+      "verificationStatus": "verified-from-source"
+    },
+    {
+      "id": "faq-02",
+      "sourceUrl": "https://drneetahomeohealing.com/faq.php",
+      "contentType": "faq",
+      "originalTitle": "Why Homoeopathy?",
+      "original": "Homeopathic medicine have solution for every sort of disease conditions and for all age groups. | No side effects. | Easy to take(sweet pills). | You can experience gentle and permanent cure with the help of homoeopathic medicine. | Homoeopathic medicine always given after detailed analysis of personality and prescription based on totality of individual characteristics which would be more effective to get rid of yours problems (physical/mental).",
+      "revisedProposal": "Homoeopathic medicine is used for people of all age groups. The medicines are easy to take (sweet pills). Medicine is always prescribed after a detailed analysis of your personality and the totality of your individual characteristics, both physical and mental.",
+      "changes": ["Grammar", "Removed claims listed in flags (pending clinical review)"],
+      "flags": ["CLAIM: 'solution for every sort of disease'", "CLAIM: 'No side effects'", "CLAIM: 'permanent cure'"],
+      "verificationStatus": "needs-clinical-review"
+    },
+    {
+      "id": "faq-03",
+      "sourceUrl": "https://drneetahomeohealing.com/faq.php",
+      "contentType": "faq",
+      "originalTitle": "What are the other benefits if you connect to us?",
+      "original": "Homeopathic medicine boost up the immune system. | Experience the changes in overall you as a person. | Esp.in case of children Homoeopathic medicine will be helpful for overall growth/development. | Homoeopathic medicine helps to absorb all necessary nutrients from their routine diet without adding up supplementation.",
+      "revisedProposal": "Our approach looks at you as a whole person. For children, we also pay attention to overall growth and development. Please continue routine care, nutrition advice and vaccinations from your paediatrician.",
+      "changes": ["Grammar", "Removed claims listed in flags (pending clinical review)"],
+      "flags": ["CLAIM: 'boost up the immune system'", "CLAIM: helps absorb nutrients 'without adding up supplementation' (could discourage needed supplements)"],
+      "verificationStatus": "needs-clinical-review"
+    },
+    {
+      "id": "faq-04",
+      "sourceUrl": "https://drneetahomeohealing.com/faq.php",
+      "contentType": "faq",
+      "originalTitle": "Who is a homeopath?",
+      "original": "A homeopath is a medical professional who is trained in homeopathy and specialises in providing natural remedies for a diseased person after considering their symptoms, personality, lifestyle, and hereditary factors. He treats diseases using minute doses of natural substances, based on homeopathic principles.",
+      "revisedProposal": "A homeopath is a medical professional trained in homeopathy who prescribes natural remedies after considering a person's symptoms, personality, lifestyle and hereditary factors, using minute doses of natural substances according to homeopathic principles.",
+      "changes": ["Minor grammar; gender-neutral wording"],
+      "flags": [],
+      "verificationStatus": "verified-from-source"
+    },
+    {
+      "id": "faq-05",
+      "sourceUrl": "https://drneetahomeohealing.com/faq.php",
+      "contentType": "faq",
+      "originalTitle": "What are homeopathic medicines made up of?",
+      "original": "Homeopathic medicines are made up of highly diluted substances of natural origin such as plants (like arnica, red onion, belladonna, poison ivy, and stinging nettle), animals (like crushed bees), or minerals (like white arsenic). They are diluted with the help of alcohol, water, or sugar.",
+      "revisedProposal": "Unchanged.",
+      "changes": [],
+      "flags": [],
+      "verificationStatus": "verified-from-source"
+    },
+    {
+      "id": "faq-06",
+      "sourceUrl": "https://drneetahomeohealing.com/faq.php",
+      "contentType": "faq",
+      "originalTitle": "Do homeopathic medicines contain steroids?",
+      "original": "Homoeopathic medicines do not contain steroids as they are made from natural substances that are found around us. Steroids are known to produce many side-effects such as rise in blood pressure, weight gain, mood swings, weakened bones, etc. However, homeopathy cures a disease without any side-effects, which, in turn, provides evidence that it does not contain steroids.",
+      "revisedProposal": "Properly prepared homoeopathic medicines do not contain steroids; they are made from highly diluted natural substances. Buy medicines only from your homeopath or a licensed pharmacy, and never stop prescribed steroid medicines suddenly without your doctor's advice.",
+      "changes": ["Removed claims listed in flags (pending clinical review)", "Added safety note"],
+      "flags": ["CLAIM: 'cures a disease without any side-effects'", "LOGIC: absence of side effects presented as evidence of no steroids"],
+      "verificationStatus": "needs-clinical-review"
+    },
+    {
+      "id": "faq-07",
+      "sourceUrl": "https://drneetahomeohealing.com/faq.php",
+      "contentType": "faq",
+      "originalTitle": "Can homeopathic medicines be taken along with other medicines?",
+      "original": "It is safe to take homeopathic medicines along with other medicines as they are not known to cause any interaction with other conventional treatments. However, it is best to consult a homeopathic physician before taking any medicines.",
+      "revisedProposal": "Homeopathic medicines are generally taken alongside conventional treatment. Always tell both your homeopath and your doctor about every medicine you take, and do not stop or change prescribed medicines without your doctor's advice.",
+      "changes": ["Removed absolute safety/no-interaction claim (pending clinical review)", "Added advice to inform the treating doctor"],
+      "flags": ["CLAIM: 'not known to cause any interaction'"],
+      "verificationStatus": "needs-clinical-review"
+    },
+    {
+      "id": "faq-08",
+      "sourceUrl": "https://drneetahomeohealing.com/faq.php",
+      "contentType": "faq",
+      "originalTitle": "Is homeopathy scientifically proven?",
+      "original": "Research in homeopathy is a comparatively new field and hence, there are very less scientific reports stating the effectiveness of this mode of treatment. However, there are millions of peole who are known to benefit from this alternative medicine.",
+      "revisedProposal": "Research in homeopathy is limited, and systematic reviews have not found reliable evidence that homeopathic remedies work better than placebo for treating health conditions. Many people nonetheless choose homeopathy as a complementary approach.",
+      "changes": ["Spelling: peole → people", "Evidence statement made accurate", "Removed 'millions of people' (unsourced figure)"],
+      "flags": ["UNSOURCED FIGURE: 'millions of people'"],
+      "verificationStatus": "needs-clinical-review"
+    }
+  ]
+}

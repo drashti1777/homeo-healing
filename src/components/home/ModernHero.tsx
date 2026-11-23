@@ -7,7 +7,7 @@ import { ArrowRight, CheckCircle2, Clock, MapPin, PhoneCall, ShieldCheck, Stetho
 
 export function ModernHero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-sage-50/70 via-white to-white pt-8 pb-16 lg:pt-14 lg:pb-24">
+    <section className="relative overflow-hidden bg-gradient-to-b from-sage-50/70 via-white to-white pt-24 pb-16 sm:pt-28 md:pt-32 lg:pt-36 lg:pb-24">
       {/* Background ambient decorative shapes */}
       <div
         aria-hidden="true"

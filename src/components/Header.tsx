@@ -42,9 +42,7 @@ export function Header({ clinicName }: { clinicName: string }) {
       <motion.header
         animate={{ y: hidden && !reduce ? "-100%" : "0%" }}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,backdrop-filter] duration-500 ${
-          scrolled ? "glass shadow-[0_1px_0_rgb(40_36_109/0.08)]" : "bg-transparent"
-        }`}
+        className="fixed inset-x-0 top-0 z-50 bg-white/95 backdrop-blur-md border-b border-sand-200/70 shadow-[0_2px_12px_-4px_rgba(40,36,109,0.06)] transition-all duration-300"
       >
         <div className="wrap flex h-[4.5rem] items-center justify-between gap-6">
           <Link href="/" className="flex items-center shrink-0" aria-label={`${clinicName} home`}>

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Clock, Heart, Leaf, Mail, MapPin, Phone, Sparkles, Users } from "lucide-react";
-import { ModernHero } from "@/components/home/ModernHero";
+import { FullScreenHeroBanner } from "@/components/home/FullScreenHeroBanner";
 import { TrustMetricsBar } from "@/components/home/TrustMetricsBar";
 import { ClinicIntroLive } from "@/components/home/ClinicIntroLive";
 import { DoctorSpotlight } from "@/components/home/DoctorSpotlight";
@@ -44,8 +44,8 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* 1. New Modern Animated Hero with Indian Doctor Visual & Floating Badges */}
-      <ModernHero />
+      {/* 1. Full-Screen Cinematic Hero Banner with Animated Slider & Indian Doctor Visuals */}
+      <FullScreenHeroBanner />
 
       {/* 2. Elevated Trust & Metrics Bar */}
       <TrustMetricsBar />

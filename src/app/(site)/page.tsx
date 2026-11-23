@@ -45,24 +45,23 @@ export default async function HomePage() {
       {/* 6. Why Homeopathy (With Indian Multi-Gen Family Health Visual) */}
       <WhyHomeopathySection />
 
-      {/* 7. Patient's Testimonials */}
+      {/* 7. Patient's Testimonials (Modern Light & Crisp Styling) */}
       {reviews.length > 0 && (
-        <section className="relative overflow-hidden bg-forest-900 py-16 text-paper" aria-labelledby="testimonials-heading">
-          <div aria-hidden="true" className="pointer-events-none absolute -left-32 -top-32 size-[26rem] rounded-full bg-forest-700/40 blur-2xl" />
+        <section className="relative overflow-hidden bg-sand-50/70 py-16 lg:py-24 border-t border-forest-900/5" aria-labelledby="testimonials-heading">
           <div className="wrap relative">
             <div className="mx-auto max-w-2xl text-center">
-              <span className="inline-block rounded-full bg-emerald-500/20 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-emerald-300 border border-emerald-400/30">
+              <span className="inline-block rounded-full bg-emerald-100 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-emerald-800 border border-emerald-300">
                 Patient Feedback
               </span>
-              <h2 id="testimonials-heading" className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-medium text-white">
+              <h2 id="testimonials-heading" className="mt-3 font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-forest-950">
                 Patient&apos;s Testimonials
               </h2>
-              <p className="mt-3 text-sm sm:text-base text-sage-200">
+              <p className="mt-3 text-sm sm:text-base text-ink-soft">
                 {TESTIMONIALS_INTRO}
               </p>
             </div>
             <div className="mt-10">
-              <TestimonialSlider reviews={reviews} />
+              <TestimonialSlider reviews={reviews} theme="light" />
             </div>
           </div>
         </section>

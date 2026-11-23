@@ -40,22 +40,22 @@ export function TrustMetricsBar() {
             return (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                className="group relative rounded-3xl border border-forest-800/10 bg-white p-6 shadow-md shadow-forest-900/5 transition-all duration-300 hover:border-forest-800/20 hover:shadow-xl hover:shadow-forest-900/10"
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.5, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ y: -8, scale: 1.02, transition: { duration: 0.25 } }}
+                className="group relative rounded-3xl border border-forest-800/10 bg-white p-6 shadow-md shadow-forest-900/5 transition-all duration-300 hover:border-emerald-500/40 hover:shadow-2xl hover:shadow-emerald-900/10 cursor-default"
               >
                 <div className="flex items-center justify-between mb-4">
-                  <div className="flex size-12 items-center justify-center rounded-2xl bg-sage-50 text-forest-800 transition-colors duration-300 group-hover:bg-forest-800 group-hover:text-white">
+                  <div className="flex size-12 items-center justify-center rounded-2xl bg-sage-50 text-forest-800 transition-all duration-300 group-hover:bg-emerald-600 group-hover:text-white group-hover:rotate-6 group-hover:scale-110">
                     <Icon className="size-6" aria-hidden="true" />
                   </div>
-                  <span className="rounded-full bg-sage-100/70 px-3 py-1 text-xs font-semibold text-forest-800">
+                  <span className="rounded-full bg-sage-100/70 px-3 py-1 text-xs font-semibold text-forest-800 transition-colors group-hover:bg-emerald-100 group-hover:text-emerald-900">
                     {item.badge}
                   </span>
                 </div>
-                <h3 className="font-serif text-lg font-bold text-forest-950">
+                <h3 className="font-serif text-lg font-bold text-forest-950 transition-colors group-hover:text-emerald-800">
                   {item.title}
                 </h3>
                 <p className="mt-2 text-xs sm:text-sm text-ink-soft leading-relaxed">

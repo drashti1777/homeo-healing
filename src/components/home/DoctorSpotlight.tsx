@@ -54,8 +54,12 @@ export function DoctorSpotlight() {
               </div>
             </div>
 
-            {/* Second Image Badge (Consultation preview) */}
-            <div className="hidden sm:block absolute -bottom-6 -right-4 w-44 aspect-[4/3] rounded-2xl overflow-hidden border-4 border-white shadow-lg shadow-forest-900/15">
+            {/* Second Image Badge (Consultation preview) with subtle floating animation */}
+            <motion.div
+              animate={{ y: [0, -6, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              className="hidden sm:block absolute -bottom-6 -right-4 w-44 aspect-[4/3] rounded-2xl overflow-hidden border-4 border-white shadow-xl shadow-forest-900/20"
+            >
               <Image
                 src="/gallery/indian-consultation.webp"
                 alt="Dr. Neeta consulting a patient"
@@ -63,7 +67,7 @@ export function DoctorSpotlight() {
                 sizes="11rem"
                 className="object-cover"
               />
-            </div>
+            </motion.div>
           </motion.div>
 
           {/* Details Side */}

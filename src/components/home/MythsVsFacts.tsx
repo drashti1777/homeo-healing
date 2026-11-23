@@ -30,11 +30,12 @@ export function MythsVsFacts() {
         <div className="mt-12 grid gap-8 lg:grid-cols-2">
           {/* Card 1: Fast & Permanent Relief */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="rounded-3xl border border-forest-800/10 bg-white p-7 sm:p-9 shadow-md shadow-forest-900/5 hover:border-forest-800/20 hover:shadow-xl transition-all"
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={{ y: -6, transition: { duration: 0.25 } }}
+            className="rounded-3xl border border-forest-800/10 bg-white p-7 sm:p-9 shadow-md shadow-forest-900/5 hover:border-emerald-500/30 hover:shadow-2xl hover:shadow-emerald-950/10 transition-all duration-300"
           >
             <div className="flex items-center gap-2.5 text-emerald-700 font-bold text-xs uppercase tracking-wider mb-4">
               <CheckCircle2 className="size-4 shrink-0" />
@@ -50,11 +51,12 @@ export function MythsVsFacts() {
 
           {/* Card 2: Dr. Neeta's Clinic Identity */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="rounded-3xl border border-forest-800/10 bg-white p-7 sm:p-9 shadow-md shadow-forest-900/5 hover:border-forest-800/20 hover:shadow-xl transition-all flex flex-col justify-between"
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={{ y: -6, transition: { duration: 0.25 } }}
+            className="rounded-3xl border border-forest-800/10 bg-white p-7 sm:p-9 shadow-md shadow-forest-900/5 hover:border-emerald-500/30 hover:shadow-2xl hover:shadow-emerald-950/10 transition-all duration-300 flex flex-col justify-between"
           >
             <div>
               <div className="flex items-center gap-2.5 text-forest-800 font-bold text-xs uppercase tracking-wider mb-4">
@@ -71,7 +73,7 @@ export function MythsVsFacts() {
                 {conditions.map((c) => (
                   <span
                     key={c}
-                    className="rounded-lg bg-sage-50 px-2.5 py-1 text-xs font-medium text-forest-900"
+                    className="rounded-lg bg-sage-50 px-2.5 py-1 text-xs font-medium text-forest-900 transition-all duration-200 hover:bg-emerald-100 hover:text-emerald-900 hover:scale-105 cursor-default"
                   >
                     {c}
                   </span>

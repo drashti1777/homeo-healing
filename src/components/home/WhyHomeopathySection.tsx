@@ -67,12 +67,16 @@ export function WhyHomeopathySection() {
               It is proven that it has no side effect as well no interaction with any other pathy like modern medicine. Homeopathy is a science in which we are giving medicine which affects the whole person not a single disease/problem. In many disease only modern medicine gives just temporary relief on the other hand homeopathy medicine are best work in reversible diseases and gives permanent cure...
             </p>
 
-            {/* Highlighted Quote Box from index.php */}
-            <div className="rounded-2xl border-l-4 border-emerald-500 bg-white p-5 shadow-sm">
+            {/* Highlighted Quote Box from index.php with subtle floating animation */}
+            <motion.div
+              animate={{ y: [0, -4, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              className="rounded-2xl border-l-4 border-emerald-500 bg-white p-5 shadow-md shadow-forest-900/5 transition-shadow hover:shadow-lg"
+            >
               <p className="text-sm sm:text-base font-semibold text-forest-950 leading-relaxed">
                 “Homeopathic medicines are widely acceptable because it is suitable for all age group from pediatric to geriatric and it&apos;s sweet taste which gives attraction &amp; acceptance towards this medicines.”
               </p>
-            </div>
+            </motion.div>
 
             <div className="pt-2">
               <Link

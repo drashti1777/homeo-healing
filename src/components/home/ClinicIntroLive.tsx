@@ -12,29 +12,33 @@ export function ClinicIntroLive() {
         <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
           {/* Left Column: Image of Doctor Consultation */}
           <motion.div
-            initial={{ opacity: 0, x: -24 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="lg:col-span-5 relative"
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5 relative group"
           >
-            <div className="relative mx-auto w-full max-w-md overflow-hidden rounded-[2.5rem] bg-gradient-to-tr from-forest-800 to-forest-600 p-2 shadow-xl shadow-forest-900/10">
+            <div className="relative mx-auto w-full max-w-md overflow-hidden rounded-[2.5rem] bg-gradient-to-tr from-forest-800 to-forest-600 p-2 shadow-xl shadow-forest-900/10 transition-shadow duration-500 group-hover:shadow-2xl group-hover:shadow-forest-900/20">
               <div className="relative aspect-[4/3] sm:aspect-[1/1] w-full overflow-hidden rounded-[2.2rem] bg-sage-100">
                 <Image
                   src="/gallery/indian-consultation.webp"
                   alt="Dr. Neeta's Homeo Health Care - Consultation"
                   fill
                   sizes="(min-width: 1024px) 26rem, 90vw"
-                  className="object-cover"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
                 <div
                   aria-hidden="true"
-                  className="absolute inset-0 bg-gradient-to-t from-forest-950/70 via-transparent to-transparent"
+                  className="absolute inset-0 bg-gradient-to-t from-forest-950/75 via-transparent to-transparent"
                 />
                 <div className="absolute bottom-6 left-6 right-6 text-white">
-                  <span className="inline-block rounded-full bg-emerald-500/90 px-3 py-1 text-xs font-semibold uppercase tracking-wider backdrop-blur-sm">
+                  <motion.span
+                    animate={{ y: [0, -4, 0] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    className="inline-block rounded-full bg-emerald-500/90 px-3 py-1 text-xs font-semibold uppercase tracking-wider backdrop-blur-sm shadow-sm"
+                  >
                     Holistic Healing
-                  </span>
+                  </motion.span>
                   <h3 className="mt-2 font-serif text-2xl font-bold text-white">
                     Dr. Neeta&apos;s Homeo Health Care
                   </h3>

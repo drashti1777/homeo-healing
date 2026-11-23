@@ -59,6 +59,11 @@ export const TESTIMONIALS = [
     quote: "I am suffering from neck pain from last 10 months. I tried various treatments but was not getting any relief. Then a friend suggested me Dr Neeta Parmar's homeo health care. I visited it and am undergoing treatment. Now I am feeling a lot better and almost cured. I had lost all the hopes but due to this treatment now I can enjoy my life as I was doing before. Thanks a lot, Dr Neeta Parmar's homeo health care and team.",
   },
   {
+    name: "Dr. K.R. Zanzrukiya",
+    location: "Gujarat",
+    quote: "આપની હોમયોપોથી ની દવા થી મારાં 15 વર્ષ થી સાંધા ના દુખાવા માં ઘણી રાહત થઈ છે. આપનો નિદાન કરવાનો અને વાત કરવાનો સ્વભાવ ખરેખર યોગ્ય છે, આભાર જય સ્વામિનારાયણ.",
+  },
+  {
     name: "Mr. Ullas Rathod (MBA)",
     location: "",
     quote: "I had allergic problem like nasal congestion, cold and cough. I tried many doctors and medicines but didn't get any relief. Then I took Homoeopathic medicine from Dr. Neeta by consulting her. She treated me so well, my problem got resolved now. And I must say she is so experienced and humble, after her treatment I am feeling so well in my overall health. I strongly recommend her for effective Homoeopathic treatment.",

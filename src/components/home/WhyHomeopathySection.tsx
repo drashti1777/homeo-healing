@@ -3,34 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { ArrowRight, Check, HeartHandshake, Leaf, ShieldAlert, Sparkles, Zap } from "lucide-react";
-
-const REASONS = [
-  {
-    num: "01",
-    title: "Root-Cause Eradication",
-    desc: "Instead of temporarily suppressing outward symptoms with heavy chemical sedatives, homoeopathy addresses the underlying constitutional triggers.",
-  },
-  {
-    num: "02",
-    title: "Zero Adverse Side Effects",
-    desc: "Non-toxic micro-dilutions ensure gentle healing that is completely safe for infants, young children, pregnant women, and elderly patients.",
-  },
-  {
-    num: "03",
-    title: "Permanent Immunity Enhancement",
-    desc: "By stimulating the body's natural defense force, treatments reduce recurring allergies, seasonal infections, and chronic relapses.",
-  },
-  {
-    num: "04",
-    title: "Holistic Mind-Body Assessment",
-    desc: "Care plans evaluate emotional stress, dietary habits, sleep cycles, and daily lifestyle factors for truly personalized healing.",
-  },
-];
+import { ArrowRight, CheckCircle2, Heart, Leaf, ShieldCheck, Sparkles } from "lucide-react";
 
 export function WhyHomeopathySection() {
   return (
-    <section className="section bg-beige-100/70 py-16 lg:py-24 overflow-hidden">
+    <section className="section bg-sage-50/60 py-16 lg:py-24 overflow-hidden border-t border-forest-800/10">
       <div className="wrap">
         <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
           {/* Left Column: Image of Indian Family Health */}
@@ -56,17 +33,17 @@ export function WhyHomeopathySection() {
                 />
                 <div className="absolute bottom-6 left-6 right-6 text-white">
                   <p className="text-xs font-semibold uppercase tracking-wider text-emerald-400">
-                    Trusted by Generations
+                    Holistic Medicine
                   </p>
                   <h3 className="mt-1 font-serif text-2xl font-bold text-white">
-                    Gentle Care for Every Stage of Life
+                    Permanent Cure for the Whole Person
                   </h3>
                 </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Right Column: Reasons List */}
+          {/* Right Column: Original content from index.php */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -76,41 +53,34 @@ export function WhyHomeopathySection() {
           >
             <div>
               <span className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-700">
-                Natural Medicine
+                Gentle &amp; Proven
               </span>
               <h2 className="mt-2 font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-forest-950 leading-tight">
-                Why Thousands Choose Homoeopathy Over Temporary Relief
+                Why to go with HOMEOPATHY
               </h2>
+              <h4 className="mt-2 text-base sm:text-lg font-medium text-forest-800">
+                Homeopathic medicines are safe and acting very gently!
+              </h4>
             </div>
 
-            <div className="space-y-4 pt-2">
-              {REASONS.map((r, i) => (
-                <div
-                  key={r.num}
-                  className="flex gap-4 rounded-2xl border border-forest-800/10 bg-white p-5 shadow-sm transition-all hover:border-forest-800/20 hover:shadow-md"
-                >
-                  <span className="font-serif text-xl font-bold text-emerald-600 shrink-0">
-                    {r.num}
-                  </span>
-                  <div>
-                    <h4 className="font-serif text-base font-bold text-forest-950">
-                      {r.title}
-                    </h4>
-                    <p className="mt-1 text-xs sm:text-sm text-ink-soft leading-relaxed">
-                      {r.desc}
-                    </p>
-                  </div>
-                </div>
-              ))}
+            <p className="text-base sm:text-lg text-ink-soft leading-relaxed">
+              It is proven that it has no side effect as well no interaction with any other pathy like modern medicine. Homeopathy is a science in which we are giving medicine which affects the whole person not a single disease/problem. In many disease only modern medicine gives just temporary relief on the other hand homeopathy medicine are best work in reversible diseases and gives permanent cure...
+            </p>
+
+            {/* Highlighted Quote Box from index.php */}
+            <div className="rounded-2xl border-l-4 border-emerald-500 bg-white p-5 shadow-sm">
+              <p className="text-sm sm:text-base font-semibold text-forest-950 leading-relaxed">
+                “Homeopathic medicines are widely acceptable because it is suitable for all age group from pediatric to geriatric and it&apos;s sweet taste which gives attraction &amp; acceptance towards this medicines.”
+              </p>
             </div>
 
             <div className="pt-2">
               <Link
-                href="/book-appointment"
-                className="inline-flex items-center gap-2 rounded-full bg-forest-800 px-7 py-3.5 text-sm font-semibold text-white shadow-md shadow-forest-800/20 transition-all hover:bg-forest-900 hover:-translate-y-0.5"
+                href="/treatments"
+                className="group inline-flex items-center gap-2.5 rounded-full bg-forest-800 px-7 py-3.5 text-sm sm:text-base font-semibold text-white shadow-md shadow-forest-800/20 transition-all hover:bg-forest-900 hover:shadow-lg hover:-translate-y-0.5"
               >
-                <span>Request Appointment Today</span>
-                <ArrowRight className="size-4" />
+                <span>View Treatments</span>
+                <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
           </motion.div>

@@ -1,77 +1,97 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "motion/react";
-import { CheckCircle2, HelpCircle, XCircle } from "lucide-react";
-
-const COMPARISONS = [
-  {
-    myth: "Homeopathy acts very slowly and takes months to give relief.",
-    fact: "In acute conditions like high fever, acute cough, diarrhea, and infections, homeopathic remedies act rapidly and effectively.",
-  },
-  {
-    myth: "Homeopathic medicines contain hidden steroids.",
-    fact: "100% false. Homeopathic remedies are purely prepared from natural plants, minerals, and herbal micro-dilutions with zero steroids.",
-  },
-  {
-    myth: "You must follow extreme dietary bans (no garlic, onion, coffee).",
-    fact: "Modern homeopathic practice only requires a clean mouth 15 minutes before and after taking your medicine.",
-  },
-  {
-    myth: "It only works for minor everyday colds, not chronic illnesses.",
-    fact: "Constitutional homeopathic treatment addresses deep chronic conditions like psoriasis, arthritis, asthma, PCOS, and thyroid disorders.",
-  },
-];
+import { ArrowRight, CheckCircle2, ShieldCheck, Sparkles, Stethoscope } from "lucide-react";
 
 export function MythsVsFacts() {
+  const conditions = [
+    "Diabetes", "Thyroid", "Women Health", "Arthritis", "Infertility",
+    "Sinusitis", "Hypertension", "Hair & Skin", "Allergy", "Asthma",
+    "Migraine", "Spondylitis", "Children Diseases"
+  ];
+
   return (
-    <section className="section bg-white py-16 lg:py-24">
+    <section className="section bg-gradient-to-b from-white via-sage-50/40 to-white py-16 lg:py-24">
       <div className="wrap">
-        <div className="text-center max-w-2xl mx-auto">
+        <div className="mx-auto max-w-4xl text-center">
           <span className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-700">
-            Truth &amp; Science
+            Truth &amp; Awareness
           </span>
           <h2 className="mt-2 font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-forest-950">
-            Myths vs. Facts About Homeopathy
+            Myths and Facts about HOMEOPATHY
           </h2>
-          <p className="mt-3 text-base text-ink-soft">
-            Clearing misconceptions so you can make informed, confident choices for your family&apos;s healthcare.
+          <p className="mt-3 text-base sm:text-lg font-medium text-forest-800">
+            Take advantage of homeopathy for living a healthy life and stop your search for the best Homeopathy Hospital in Bhavnagar.
           </p>
         </div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2">
-          {COMPARISONS.map((item, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              whileHover={{ y: -4 }}
-              className="rounded-3xl border border-forest-800/10 bg-white p-6 sm:p-7 shadow-sm transition-all duration-300 hover:border-forest-800/20 hover:shadow-xl hover:shadow-forest-900/5 space-y-4"
-            >
-              {/* Myth Box */}
-              <div className="rounded-2xl border border-rose-100 bg-rose-50/50 p-4">
-                <div className="flex items-center gap-2 text-rose-700">
-                  <XCircle className="size-4 shrink-0" />
-                  <span className="text-xs font-bold uppercase tracking-wider">Myth</span>
-                </div>
-                <p className="mt-1 text-sm font-medium text-rose-950 leading-relaxed">
-                  {item.myth}
-                </p>
-              </div>
+        {/* Content Cards */}
+        <div className="mt-12 grid gap-8 lg:grid-cols-2">
+          {/* Card 1: Fast & Permanent Relief */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="rounded-3xl border border-forest-800/10 bg-white p-7 sm:p-9 shadow-md shadow-forest-900/5 hover:border-forest-800/20 hover:shadow-xl transition-all"
+          >
+            <div className="flex items-center gap-2.5 text-emerald-700 font-bold text-xs uppercase tracking-wider mb-4">
+              <CheckCircle2 className="size-4 shrink-0" />
+              <span>Fast Acting &amp; Complete Eradication</span>
+            </div>
+            <p className="text-sm sm:text-base text-ink-soft leading-relaxed">
+              It is believed that Homeopathy treatment is slowly acting, But in many diseases like diarrhea, minor infection and fever it acts faster than other treatments.
+            </p>
+            <p className="mt-4 text-sm sm:text-base text-ink-soft leading-relaxed">
+              In chronic diseases like diabetes, high or low blood pressure etc, Homeopathy medicines may take time to heal, but it can eradicate the disease completely. Unlike other treatments in which patient needs to take lifetime medications, homeopathy will bless you with medicine free life after treatment. Homeopathy treatment never leads to unnatural changes and patient feels healthy and fit through this treatment.
+            </p>
+          </motion.div>
 
-              {/* Fact Box */}
-              <div className="rounded-2xl border border-emerald-100 bg-emerald-50/50 p-4">
-                <div className="flex items-center gap-2 text-emerald-700">
-                  <CheckCircle2 className="size-4 shrink-0" />
-                  <span className="text-xs font-bold uppercase tracking-wider">Medical Fact</span>
-                </div>
-                <p className="mt-1 text-sm text-forest-950 leading-relaxed font-normal">
-                  {item.fact}
-                </p>
+          {/* Card 2: Dr. Neeta's Clinic Identity */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="rounded-3xl border border-forest-800/10 bg-white p-7 sm:p-9 shadow-md shadow-forest-900/5 hover:border-forest-800/20 hover:shadow-xl transition-all flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center gap-2.5 text-forest-800 font-bold text-xs uppercase tracking-wider mb-4">
+                <Stethoscope className="size-4 shrink-0 text-emerald-600" />
+                <span>One Stop Solution in Bhavnagar</span>
               </div>
-            </motion.div>
-          ))}
+              <p className="text-sm sm:text-base text-ink-soft leading-relaxed">
+                There are wide array of Homeopathy hospitals in Bhavnagar but Dr. Neeta&apos;s Homeopathy Clinic run by Dr. Neeta has its own identity. She brings on the table her decades of experience in homeopathy and cures various diseases through her expertise.
+              </p>
+              <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-forest-800">
+                Conditions treated in this homeopathy clinic:
+              </p>
+              <div className="mt-3 flex flex-wrap gap-1.5">
+                {conditions.map((c) => (
+                  <span
+                    key={c}
+                    className="rounded-lg bg-sage-50 px-2.5 py-1 text-xs font-medium text-forest-900"
+                  >
+                    {c}
+                  </span>
+                ))}
+              </div>
+              <p className="mt-4 text-xs sm:text-sm text-ink-soft leading-relaxed">
+                Treatment involves complete health evaluation of the patients, thus catering nothing but healthy life to them. You can call this homeopathy hospital as one stop solution for all your health related problems.
+              </p>
+            </div>
+
+            <div className="mt-6 pt-4 border-t border-forest-800/10">
+              <Link
+                href="/about"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-forest-800 hover:text-emerald-700"
+              >
+                <span>Know More About Our Approach</span>
+                <ArrowRight className="size-4" />
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

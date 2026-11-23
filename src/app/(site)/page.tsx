@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Clock, Heart, Leaf, Mail, MapPin, Phone, Sparkles, Users } from "lucide-react";
 import { ModernHero } from "@/components/home/ModernHero";
 import { TrustMetricsBar } from "@/components/home/TrustMetricsBar";
+import { OriginalIntroSection } from "@/components/home/OriginalIntroSection";
 import { DoctorSpotlight } from "@/components/home/DoctorSpotlight";
 import { ModernTreatmentsSection } from "@/components/home/ModernTreatmentsSection";
 import { MythsVsFacts } from "@/components/home/MythsVsFacts";
@@ -11,14 +12,14 @@ import { ConsultationCta } from "@/components/home/ConsultationCta";
 import { TestimonialSlider } from "@/components/TestimonialSlider";
 import { SectionHeading } from "@/components/ui";
 import { CLINIC, TESTIMONIALS, TESTIMONIALS_INTRO, mapsLink } from "@/content/clinic";
-import { branchesFrom, defaultSettings, getDoctor, getGalleryImages, getSettings, getTestimonials, getTreatments } from "@/lib/data";
+import { branchesFrom, defaultSettings, getGalleryImages, getSettings, getTestimonials, getTreatments } from "@/lib/data";
 import { buildMetadata } from "@/lib/seo";
 
 export async function generateMetadata() {
   return buildMetadata({
     path: "/",
     title: "Dr. Neeta's Homeo Health Care | Chief Consultant in Bhavnagar & Ahmedabad",
-    description: "Holistic, gentle homeopathic care by Dr. Neeta Parmar (MD Repertory). Consultations in Bhavnagar & Ahmedabad, and online appointments across India.",
+    description: "Providing one of the best Homoeopathic Treatment at our Place. Vast clinical experience in homeopathic treatments by Dr. Neeta Parmar.",
   });
 }
 
@@ -34,7 +35,7 @@ export default async function HomePage() {
 
   // Clinic's 16 treatment categories
   const categories = allTreatments.filter((t) => t.order < 100);
-  const reviews = testimonials.length > 0 ? testimonials.slice(0, 4) : TESTIMONIALS;
+  const reviews = testimonials.length > 0 ? testimonials.slice(0, 5) : TESTIMONIALS;
 
   const locations = branchesFrom(settings).map((b) => ({
     key: b.key,
@@ -47,35 +48,38 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* 1. New Modern Hero Section with Indian Doctor & Trust Badges */}
+      {/* 1. Hero Section (Providing one of the best Homoeopathic Treatment at our Place) */}
       <ModernHero />
 
-      {/* 2. Trust Metrics & Experience Bar */}
+      {/* 2. Trust Metrics Bar */}
       <TrustMetricsBar />
 
-      {/* 3. Meet Dr. Neeta Parmar Section */}
+      {/* 3. Original Intro: Yes! Homeopathy treatment is highly effective */}
+      <OriginalIntroSection />
+
+      {/* 4. Meet Dr. Neeta Parmar (Decades of clinical experience) */}
       <DoctorSpotlight />
 
-      {/* 4. Specialized Treatments Grid with Tabs & Condition Pills */}
+      {/* 5. Treatment Categories (16 Categories) */}
       <ModernTreatmentsSection treatments={categories} />
 
-      {/* 5. Myths vs. Facts Interactive Side-by-Side Cards */}
+      {/* 6. Myths and Facts about HOMEOPATHY (Exact text from index.php) */}
       <MythsVsFacts />
 
-      {/* 6. Why Homeopathy with Indian Family Visual */}
+      {/* 7. Why to go with HOMEOPATHY (Exact text from index.php) */}
       <WhyHomeopathySection />
 
-      {/* 7. Patient Testimonials */}
+      {/* 8. Patient's Testimonials (Our Treatment always speaks louder than us) */}
       {reviews.length > 0 && (
         <section className="relative overflow-hidden bg-forest-900 py-16 text-paper" aria-labelledby="testimonials-heading">
           <div aria-hidden="true" className="pointer-events-none absolute -left-32 -top-32 size-[26rem] rounded-full bg-forest-700/40 blur-2xl" />
           <div className="wrap relative">
             <div className="mx-auto max-w-2xl text-center">
               <span className="inline-block rounded-full bg-emerald-500/20 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-emerald-300 border border-emerald-400/30">
-                Patient Experiences
+                Patient Feedback
               </span>
               <h2 id="testimonials-heading" className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-medium text-white">
-                Stories of Natural Recovery
+                Patient&apos;s Testimonials
               </h2>
               <p className="mt-3 text-sm sm:text-base text-sage-200">
                 {TESTIMONIALS_INTRO}
@@ -88,7 +92,7 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* 8. Clinic Locations (Bhavnagar & Ahmedabad) */}
+      {/* 9. Clinic Locations (Bhavnagar & Ahmedabad) */}
       {locations.length > 0 && (
         <section className="section bg-sage-50/50 py-16 lg:py-24" aria-labelledby="locations-heading">
           <div className="wrap">
@@ -161,7 +165,7 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* 9. Final High-Impact Consultation Banner */}
+      {/* 10. Consult Us Now Banner */}
       <ConsultationCta />
     </>
   );

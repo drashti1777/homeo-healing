@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ArrowRight, ChevronLeft, ChevronRight, PhoneCall, ShieldCheck, Sparkles, Star } from "lucide-react";
+import { ArrowRight, PhoneCall, ShieldCheck, Sparkles, Star } from "lucide-react";
 
 const SLIDES = [
   {
@@ -172,26 +172,6 @@ export function FullScreenHeroBanner() {
         </motion.div>
       </AnimatePresence>
 
-      {/* Prev / Next Slide Arrows */}
-      <div className="wrap absolute inset-x-0 top-1/2 -translate-y-1/2 pointer-events-none hidden sm:flex items-center justify-between z-20">
-        <button
-          type="button"
-          onClick={() => go(-1)}
-          aria-label="Previous slide"
-          className="pointer-events-auto grid size-12 place-items-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-md transition-all hover:bg-white/25 hover:border-white/40 active:scale-95"
-        >
-          <ChevronLeft className="size-6" />
-        </button>
-
-        <button
-          type="button"
-          onClick={() => go(1)}
-          aria-label="Next slide"
-          className="pointer-events-auto grid size-12 place-items-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-md transition-all hover:bg-white/25 hover:border-white/40 active:scale-95"
-        >
-          <ChevronRight className="size-6" />
-        </button>
-      </div>
 
       {/* Slide Indicators (Bottom Dots / Progress Bars) */}
       <div className="absolute inset-x-0 bottom-8 z-20 flex justify-center items-center gap-3">

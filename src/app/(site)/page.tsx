@@ -5,7 +5,6 @@ import { ModernHero } from "@/components/home/ModernHero";
 import { TrustMetricsBar } from "@/components/home/TrustMetricsBar";
 import { OriginalIntroSection } from "@/components/home/OriginalIntroSection";
 import { DoctorSpotlight } from "@/components/home/DoctorSpotlight";
-import { ModernTreatmentsSection } from "@/components/home/ModernTreatmentsSection";
 import { MythsVsFacts } from "@/components/home/MythsVsFacts";
 import { WhyHomeopathySection } from "@/components/home/WhyHomeopathySection";
 import { ConsultationCta } from "@/components/home/ConsultationCta";
@@ -60,10 +59,7 @@ export default async function HomePage() {
       {/* 4. Meet Dr. Neeta Parmar (Decades of clinical experience) */}
       <DoctorSpotlight />
 
-      {/* 5. Treatment Categories (16 Categories) */}
-      <ModernTreatmentsSection treatments={categories} />
-
-      {/* 6. Myths and Facts about HOMEOPATHY (Exact text from index.php) */}
+      {/* 5. Myths and Facts about HOMEOPATHY (Exact text from index.php) */}
       <MythsVsFacts />
 
       {/* 7. Why to go with HOMEOPATHY (Exact text from index.php) */}

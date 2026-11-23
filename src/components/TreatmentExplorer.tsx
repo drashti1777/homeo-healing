@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { Search, ShieldAlert, X } from "lucide-react";
+import { ChevronRight, Search, ShieldAlert, X } from "lucide-react";
 import { TreatmentIcon } from "./TreatmentIcon";
 
 export type ExplorerItem = {
@@ -171,45 +171,91 @@ export function TreatmentExplorer({ items, groups }: { items: ExplorerItem[]; gr
                 initial={reduce ? false : { opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.96 }}
+                whileHover={reduce ? undefined : { y: -6 }}
                 transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               >
-                <div className="flex h-full flex-col overflow-hidden rounded-[2rem] border border-sage-200 bg-paper">
-                  <div className="relative aspect-[16/10] overflow-hidden bg-sage-100">
-                    {t.image ? (
-                      <Image src={t.image} alt={t.imageAlt || ""} fill sizes="(min-width:1024px) 30vw, (min-width:640px) 45vw, 100vw" className="object-cover" />
-                    ) : (
-                      <span className="grid size-full place-items-center text-forest-600"><TreatmentIcon name={t.icon} className="size-14" /></span>
-                    )}
-                    <span className="glass absolute left-4 top-4 grid size-11 place-items-center rounded-full text-forest-800">
-                      <TreatmentIcon name={t.icon} className="size-5" />
-                    </span>
-                    {t.riskLevel === "specialist" && (
-                      <span className="glass absolute right-4 top-4 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[0.7rem] font-semibold text-forest-800">
-                        <ShieldAlert className="size-3.5" aria-hidden="true" /> Specialist care needed
+                <div className="group flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-forest-800/10 bg-white shadow-sm transition-all duration-300 hover:border-forest-800/20 hover:shadow-xl hover:shadow-forest-900/10">
+                  <div>
+                    <div className="relative aspect-[16/10] overflow-hidden bg-sage-100">
+                      {t.image ? (
+                        <Image
+                          src={t.image}
+                          alt={t.imageAlt || ""}
+                          fill
+                          sizes="(min-width:1024px) 30vw, (min-width:640px) 45vw, 100vw"
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                      ) : (
+                        <span className="grid size-full place-items-center text-forest-600">
+                          <TreatmentIcon name={t.icon} className="size-14" />
+                        </span>
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-forest-950/70 via-transparent to-transparent pointer-events-none" />
+                      
+                      <span className="glass absolute left-4 top-4 grid size-11 place-items-center rounded-full text-forest-800">
+                        <TreatmentIcon name={t.icon} className="size-5" />
                       </span>
-                    )}
-                  </div>
-                  <div className="flex flex-1 flex-col p-6">
-                    <h3 className="text-2xl font-normal">{t.title}</h3>
-                    {t.conditions.length > 0 && (
-                      <ul className="mt-4 flex flex-wrap gap-1.5" aria-label={`Conditions listed under ${t.title}`}>
-                        {(matched.length ? matched : open[t.slug] ? t.conditions : t.conditions.slice(0, 5)).map((c) => (
-                          <li key={c} className={`rounded-full px-2.5 py-1 text-xs ${matched.includes(c) ? "bg-forest-800 text-paper" : "bg-sage-100 text-forest-800"}`}>{c}</li>
-                        ))}
-                        {t.conditions.length > 5 && !matched.length && (
-                          <li>
-                            <button
-                              type="button"
-                              aria-expanded={!!open[t.slug]}
-                              onClick={() => setOpen((o) => ({ ...o, [t.slug]: !o[t.slug] }))}
-                              className="rounded-full border border-forest-800/25 px-2.5 py-1 text-xs font-medium text-forest-800 transition-colors hover:bg-forest-800 hover:text-paper"
+                      {t.riskLevel === "specialist" && (
+                        <span className="glass absolute right-4 top-4 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[0.7rem] font-semibold text-forest-800">
+                          <ShieldAlert className="size-3.5" aria-hidden="true" /> Specialist care needed
+                        </span>
+                      )}
+
+                      <div className="absolute bottom-3 left-4 right-4">
+                        <span className="inline-block rounded-full bg-white/95 px-3 py-1 text-[11px] font-semibold text-forest-800 backdrop-blur-sm shadow-sm">
+                          {t.conditions.length > 0 ? `${t.conditions.length} Conditions Treated` : "Comprehensive Care"}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="p-6">
+                      <h3 className="font-serif text-2xl font-bold text-forest-950 group-hover:text-forest-800 transition-colors">
+                        {t.title}
+                      </h3>
+                      {t.summary && (
+                        <p className="mt-2 text-xs sm:text-sm text-ink-soft line-clamp-2 leading-relaxed">
+                          {t.summary}
+                        </p>
+                      )}
+                      {t.conditions.length > 0 && (
+                        <ul className="mt-4 flex flex-wrap gap-1.5" aria-label={`Conditions listed under ${t.title}`}>
+                          {(matched.length ? matched : open[t.slug] ? t.conditions : t.conditions.slice(0, 5)).map((c) => (
+                            <li
+                              key={c}
+                              className={`rounded-lg px-2.5 py-1 text-xs font-medium transition-colors ${
+                                matched.includes(c)
+                                  ? "bg-forest-800 text-paper"
+                                  : "bg-sage-50 text-forest-900"
+                              }`}
                             >
-                              {open[t.slug] ? "Show less" : `+${t.conditions.length - 5} more`}
-                            </button>
-                          </li>
-                        )}
-                      </ul>
-                    )}
+                              {c}
+                            </li>
+                          ))}
+                          {t.conditions.length > 5 && !matched.length && (
+                            <li>
+                              <button
+                                type="button"
+                                aria-expanded={!!open[t.slug]}
+                                onClick={() => setOpen((o) => ({ ...o, [t.slug]: !o[t.slug] }))}
+                                className="rounded-lg border border-forest-800/20 bg-white px-2.5 py-1 text-xs font-medium text-forest-800 transition-colors hover:bg-forest-800 hover:text-white"
+                              >
+                                {open[t.slug] ? "Show less" : `+${t.conditions.length - 5} more`}
+                              </button>
+                            </li>
+                          )}
+                        </ul>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="p-6 pt-0">
+                    <Link
+                      href={`/treatments/${t.slug}`}
+                      className="inline-flex w-full items-center justify-between rounded-xl bg-sage-50/70 px-4 py-2.5 text-xs font-semibold text-forest-800 transition-all hover:bg-forest-800 hover:text-white"
+                    >
+                      <span>Explore Treatment</span>
+                      <ChevronRight className="size-4" />
+                    </Link>
                   </div>
                 </div>
               </motion.li>

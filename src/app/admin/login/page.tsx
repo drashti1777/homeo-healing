@@ -14,8 +14,14 @@ export default function AdminLoginPage() {
     setBusy(true);
     setError("");
     const form = new FormData(e.currentTarget);
+    const email = String(form.get("email") || "").trim();
+    const password = String(form.get("password") || "");
     try {
-      const res = await fetch("/api/auth/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: form.get("email"), password: form.get("password") }) });
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
       if (!res.ok) {
         const d = (await res.json().catch(() => ({}))) as { error?: string };
         setError(d.error ?? "Could not sign in.");

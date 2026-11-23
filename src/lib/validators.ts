@@ -74,7 +74,7 @@ export const contactSchema = z.object({
 export type ContactInput = z.infer<typeof contactSchema>;
 
 export const loginSchema = z.object({
-  email: z.email("Enter a valid email address"),
+  email: z.string().trim().email("Enter a valid email address"),
   password: z.string().min(1, "Enter your password").max(200),
 });
 

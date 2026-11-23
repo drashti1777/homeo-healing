@@ -7,6 +7,7 @@ const globalCache = globalThis as unknown as {
 const cache = (globalCache.__mongoose ??= {});
 
 export async function connectDb() {
+  if (!process.env.MONGODB_URI) throw new Error("No database configured");
   if (cache.conn && cache.conn.connection.readyState === 1) return cache.conn;
   cache.promise ??= mongoose.connect(env().MONGODB_URI, {
     bufferCommands: false,

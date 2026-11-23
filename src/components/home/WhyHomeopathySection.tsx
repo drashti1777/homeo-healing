@@ -10,35 +10,50 @@ export function WhyHomeopathySection() {
     <section className="section bg-sage-50/60 py-16 lg:py-24 overflow-hidden border-t border-forest-800/10">
       <div className="wrap">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
-          {/* Left Column: Image of Indian Family Health (Equal 50% Width) */}
+          {/* Left Column: Image of Indian Family Health (Equal 50% Width, Clean Borderless Frame with Smooth Hover Animation) */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="relative w-full"
+            whileHover={{ y: -8, transition: { duration: 0.3 } }}
+            className="relative group w-full"
           >
-            <div className="relative w-full overflow-hidden rounded-[2.5rem] bg-gradient-to-tr from-forest-800 to-forest-600 p-2 shadow-xl shadow-forest-900/10">
-              <div className="relative aspect-[4/3] sm:aspect-[5/4] lg:aspect-[4/3] w-full overflow-hidden rounded-[2.2rem] bg-sage-100">
-                <Image
-                  src="/gallery/indian-family-health.webp"
-                  alt="Happy healthy Indian multi-generational family enjoying natural vitality"
-                  fill
-                  sizes="(min-width: 1024px) 50vw, 90vw"
-                  className="object-cover"
-                />
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0 bg-gradient-to-t from-forest-950/70 via-transparent to-transparent"
-                />
-                <div className="absolute bottom-6 left-6 right-6 text-white">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-emerald-400">
-                    Holistic Medicine
-                  </p>
-                  <h3 className="mt-1 font-serif text-2xl font-bold text-white">
-                    Permanent Cure for the Whole Person
-                  </h3>
-                </div>
+            <div className="relative aspect-[4/3] sm:aspect-[5/4] lg:aspect-[4/3] w-full overflow-hidden rounded-3xl sm:rounded-[2.5rem] bg-sage-100 shadow-2xl shadow-forest-900/10 border border-forest-900/5">
+              <Image
+                src="/gallery/indian-family-health.webp"
+                alt="Happy healthy Indian multi-generational family enjoying natural vitality"
+                fill
+                sizes="(min-width: 1024px) 50vw, 90vw"
+                className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              />
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 bg-gradient-to-t from-forest-950/80 via-transparent to-transparent"
+              />
+
+              {/* Floating Top-Right Animated Badge */}
+              <motion.div
+                animate={{ y: [0, -5, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                className="absolute top-5 right-5 z-10 inline-flex items-center gap-2 rounded-2xl bg-white/95 px-3.5 py-1.5 text-xs font-bold text-forest-950 backdrop-blur-md shadow-lg shadow-forest-900/15"
+              >
+                <Leaf className="size-3.5 text-emerald-600" />
+                <span>100% Gentle &amp; Safe</span>
+              </motion.div>
+
+              <div className="absolute bottom-6 left-6 right-6 text-white z-10">
+                <motion.span
+                  animate={{ y: [0, -4, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/95 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider backdrop-blur-md shadow-md"
+                >
+                  <span className="size-1.5 rounded-full bg-white animate-ping" />
+                  <span>Holistic Medicine</span>
+                </motion.span>
+                <h3 className="mt-2 font-serif text-2xl font-bold text-white">
+                  Permanent Cure for the Whole Person
+                </h3>
               </div>
             </div>
           </motion.div>

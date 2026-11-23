@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Clock, Heart, Leaf, Mail, MapPin, Phone, Sparkles, Users } from "lucide-react";
 import { ModernHero } from "@/components/home/ModernHero";
 import { TrustMetricsBar } from "@/components/home/TrustMetricsBar";
-import { OriginalIntroSection } from "@/components/home/OriginalIntroSection";
+import { ModernHighlightsBento } from "@/components/home/ModernHighlightsBento";
 import { DoctorSpotlight } from "@/components/home/DoctorSpotlight";
 import { MythsVsFacts } from "@/components/home/MythsVsFacts";
 import { WhyHomeopathySection } from "@/components/home/WhyHomeopathySection";
@@ -11,29 +11,26 @@ import { ConsultationCta } from "@/components/home/ConsultationCta";
 import { TestimonialSlider } from "@/components/TestimonialSlider";
 import { SectionHeading } from "@/components/ui";
 import { CLINIC, TESTIMONIALS, TESTIMONIALS_INTRO, mapsLink } from "@/content/clinic";
-import { branchesFrom, defaultSettings, getGalleryImages, getSettings, getTestimonials, getTreatments } from "@/lib/data";
+import { branchesFrom, defaultSettings, getGalleryImages, getSettings, getTestimonials } from "@/lib/data";
 import { buildMetadata } from "@/lib/seo";
 
 export async function generateMetadata() {
   return buildMetadata({
     path: "/",
     title: "Dr. Neeta's Homeo Health Care | Chief Consultant in Bhavnagar & Ahmedabad",
-    description: "Providing one of the best Homoeopathic Treatment at our Place. Vast clinical experience in homeopathic treatments by Dr. Neeta Parmar.",
+    description: "Advanced, holistic homeopathic care by Dr. Neeta Parmar (MD Repertory). Consultations in Bhavnagar & Ahmedabad, and online appointments across India.",
   });
 }
 
 const telHref = (p: string) => `tel:${p.replace(/[^+\d]/g, "")}`;
 
 export default async function HomePage() {
-  const [allTreatments, testimonials, settings, galleryDb] = await Promise.all([
-    getTreatments().catch(() => []),
+  const [testimonials, settings, galleryDb] = await Promise.all([
     getTestimonials().catch(() => []),
     getSettings().catch(() => defaultSettings),
     getGalleryImages().catch(() => []),
   ]);
 
-  // Clinic's 16 treatment categories
-  const categories = allTreatments.filter((t) => t.order < 100);
   const reviews = testimonials.length > 0 ? testimonials.slice(0, 5) : TESTIMONIALS;
 
   const locations = branchesFrom(settings).map((b) => ({
@@ -47,25 +44,25 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* 1. Hero Section (Providing one of the best Homoeopathic Treatment at our Place) */}
+      {/* 1. New Modern Animated Hero with Indian Doctor Visual & Floating Badges */}
       <ModernHero />
 
-      {/* 2. Trust Metrics Bar */}
+      {/* 2. Elevated Trust & Metrics Bar */}
       <TrustMetricsBar />
 
-      {/* 3. Original Intro: Yes! Homeopathy treatment is highly effective */}
-      <OriginalIntroSection />
+      {/* 3. Modern Interactive Highlights Bento Grid (Advanced Whole-Body Care) */}
+      <ModernHighlightsBento />
 
-      {/* 4. Meet Dr. Neeta Parmar (Decades of clinical experience) */}
+      {/* 4. Meet Dr. Neeta Parmar (Credentials, Indian Clinic Consultation Visual) */}
       <DoctorSpotlight />
 
-      {/* 5. Myths and Facts about HOMEOPATHY (Exact text from index.php) */}
+      {/* 5. Myths and Facts about HOMEOPATHY (Modern Interactive Cards) */}
       <MythsVsFacts />
 
-      {/* 7. Why to go with HOMEOPATHY (Exact text from index.php) */}
+      {/* 6. Why Homeopathy (With Indian Multi-Gen Family Health Visual) */}
       <WhyHomeopathySection />
 
-      {/* 8. Patient's Testimonials (Our Treatment always speaks louder than us) */}
+      {/* 7. Patient's Testimonials */}
       {reviews.length > 0 && (
         <section className="relative overflow-hidden bg-forest-900 py-16 text-paper" aria-labelledby="testimonials-heading">
           <div aria-hidden="true" className="pointer-events-none absolute -left-32 -top-32 size-[26rem] rounded-full bg-forest-700/40 blur-2xl" />
@@ -88,7 +85,7 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* 9. Clinic Locations (Bhavnagar & Ahmedabad) */}
+      {/* 8. Clinic Locations (Bhavnagar & Ahmedabad) */}
       {locations.length > 0 && (
         <section className="section bg-sage-50/50 py-16 lg:py-24" aria-labelledby="locations-heading">
           <div className="wrap">
@@ -161,7 +158,7 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* 10. Consult Us Now Banner */}
+      {/* 9. High-Impact Consultation Banner */}
       <ConsultationCta />
     </>
   );

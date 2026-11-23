@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { ArrowRight, CheckCircle2, PhoneCall, ShieldCheck, Star } from "lucide-react";
+import { ArrowRight, CheckCircle2, PhoneCall, ShieldCheck, Sparkles, Star } from "lucide-react";
 
 export function ModernHero() {
   return (
@@ -33,21 +33,20 @@ export function ModernHero() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
               </span>
-              <span>Providing Best Homeopathy Consultancy Services in India</span>
+              <span>100% Gentle &amp; Natural Healing • Gujarat&apos;s Trusted Clinic</span>
             </div>
 
-            {/* Main Headline from original index.php */}
-            <h1 className="font-serif text-3xl sm:text-5xl lg:text-[3.25rem] font-medium leading-[1.15] tracking-tight text-forest-950">
-              Providing one of the best{" "}
+            {/* Main Headline */}
+            <h1 className="font-serif text-3xl sm:text-5xl lg:text-[3.5rem] font-medium leading-[1.12] tracking-tight text-forest-950">
+              Natural Healing for Life,{" "}
               <span className="bg-gradient-to-r from-forest-800 via-forest-700 to-emerald-600 bg-clip-text text-transparent">
-                Homoeopathic Treatment
-              </span>{" "}
-              at our Place
+                Rooted in Compassion &amp; Science
+              </span>
             </h1>
 
-            {/* Subtitle from original index.php */}
-            <p className="max-w-xl text-base sm:text-lg text-ink-soft leading-relaxed font-normal">
-              Homeopathy is a system of natural medicine based upon the ancient principle of <em>“like cures like.”</em> Vast clinical experience in homeopathic treatments by <strong>Dr. Neeta Parmar</strong>.
+            {/* Subtitle */}
+            <p className="max-w-xl text-base sm:text-lg text-ink-soft leading-relaxed">
+              Experience deep, root-cause recovery with <strong>Dr. Neeta Parmar</strong> (MD Repertory, 15+ Years Clinical Experience). Gentle, personalized homeopathic care for chronic and acute ailments with zero side effects.
             </p>
 
             {/* CTA Buttons Row */}
@@ -56,31 +55,32 @@ export function ModernHero() {
                 href="/book-appointment"
                 className="group relative inline-flex items-center gap-2.5 rounded-full bg-forest-800 px-7 py-3.5 text-sm sm:text-base font-semibold text-white shadow-lg shadow-forest-800/25 transition-all duration-300 hover:bg-forest-900 hover:shadow-xl hover:shadow-forest-800/30 hover:-translate-y-0.5 active:translate-y-0"
               >
-                <span>Booked an appointment</span>
+                <span>Book Consultation</span>
                 <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
               </Link>
 
-              <Link
-                href="/about"
+              <a
+                href="tel:+918160602060"
                 className="inline-flex items-center gap-2.5 rounded-full border border-forest-800/20 bg-white px-6 py-3.5 text-sm sm:text-base font-semibold text-forest-800 shadow-sm transition-all duration-200 hover:border-forest-800 hover:bg-sage-50/60 active:scale-[0.99]"
               >
-                <span>Know More</span>
-              </Link>
+                <PhoneCall className="size-4 text-emerald-600" aria-hidden="true" />
+                <span>+91 81606 02060</span>
+              </a>
             </div>
 
             {/* Trust Highlights Checklist */}
             <div className="grid grid-cols-2 gap-3 pt-4 sm:grid-cols-3 sm:gap-4 border-t border-forest-800/10">
               <div className="flex items-center gap-2 text-xs sm:text-sm font-medium text-forest-900">
                 <CheckCircle2 className="size-4 text-emerald-600 shrink-0" />
-                <span>Vast Clinical Experience</span>
+                <span>15+ Years Experience</span>
               </div>
               <div className="flex items-center gap-2 text-xs sm:text-sm font-medium text-forest-900">
                 <CheckCircle2 className="size-4 text-emerald-600 shrink-0" />
-                <span>Permanent Cure</span>
+                <span>10,000+ Treated Cases</span>
               </div>
               <div className="flex items-center gap-2 text-xs sm:text-sm font-medium text-forest-900 col-span-2 sm:col-span-1">
                 <CheckCircle2 className="size-4 text-emerald-600 shrink-0" />
-                <span>Safe for All Age Groups</span>
+                <span>Safe for Kids &amp; Seniors</span>
               </div>
             </div>
           </motion.div>
@@ -97,7 +97,7 @@ export function ModernHero() {
               <div className="relative aspect-[4/3] sm:aspect-[16/11] w-full overflow-hidden rounded-[2.2rem] bg-sage-100">
                 <Image
                   src="/gallery/hero-indian-doctor.webp"
-                  alt="Dr. Neeta's Homeo Health Care - Vast Clinical Experience in Homeopathic Treatments"
+                  alt="Dr. Neeta's Homeo Health Care - Professional Indian Homeopathic Doctor Consultation"
                   fill
                   priority
                   sizes="(min-width: 1024px) 36rem, 90vw"
@@ -110,7 +110,7 @@ export function ModernHero() {
               </div>
             </div>
 
-            {/* Floating Glassmorphism Badge 1: Top-Left */}
+            {/* Floating Glassmorphism Badge 1: Top-Left (Rating) */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
@@ -122,13 +122,14 @@ export function ModernHero() {
               </div>
               <div>
                 <div className="flex items-center gap-1">
-                  <span className="font-bold text-forest-950 text-sm">Serving the best</span>
+                  <span className="font-bold text-forest-950 text-sm">4.9 / 5.0</span>
+                  <span className="text-[11px] text-ink-soft">(2,500+ Reviews)</span>
                 </div>
-                <p className="text-[11px] font-medium text-emerald-700">Treatments by Homeopathy</p>
+                <p className="text-[11px] font-medium text-emerald-700">Highest Patient Trust</p>
               </div>
             </motion.div>
 
-            {/* Floating Glassmorphism Badge 2: Bottom-Right */}
+            {/* Floating Glassmorphism Badge 2: Bottom-Right (Safe Natural) */}
             <motion.div
               initial={{ opacity: 0, y: -15 }}
               animate={{ opacity: 1, y: 0 }}
@@ -139,8 +140,8 @@ export function ModernHero() {
                 <ShieldCheck className="size-5" />
               </div>
               <div>
-                <p className="text-xs font-bold text-forest-950">Safe &amp; Very Gentle</p>
-                <p className="text-[11px] text-ink-soft">100% Side-effect free</p>
+                <p className="text-xs font-bold text-forest-950">100% Gentle &amp; Safe</p>
+                <p className="text-[11px] text-ink-soft">Zero chemical side effects</p>
               </div>
             </motion.div>
           </motion.div>

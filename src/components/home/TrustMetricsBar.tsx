@@ -6,31 +6,27 @@ import { Activity, Clock, Heart, Leaf, MapPin, Shield, Sparkles, Stethoscope, Us
 const STATS = [
   {
     icon: Stethoscope,
-    value: "15+",
-    unit: "Years",
-    title: "Clinical Experience",
-    desc: "Dedicated advance homeopathic healing by Dr. Neeta Parmar.",
+    badge: "Clinical Care",
+    title: "Vast Clinical Experience",
+    desc: "Decades of expert practice in advanced homeopathic constitutional healing by Dr. Neeta Parmar.",
   },
   {
-    icon: Users,
-    value: "10,000+",
-    unit: "Patients",
-    title: "Treated Across Gujarat",
-    desc: "Chronic respiratory, skin, female & pediatric conditions cured.",
+    icon: Heart,
+    badge: "Holistic",
+    title: "Whole-Body Treatment",
+    desc: "Understanding the complete personality and emotions to cure the whole body instead of single symptoms.",
   },
   {
     icon: Leaf,
-    value: "100%",
-    unit: "Natural",
-    title: "Zero Side-Effects",
-    desc: "Gentle remedies derived from natural mineral and herbal sources.",
+    badge: "Natural",
+    title: "Safe & Acting Very Gently",
+    desc: "Proven to have no side effects, safe from pediatric to geriatric age groups with sweet natural pills.",
   },
   {
     icon: MapPin,
-    value: "2",
-    unit: "Clinics",
+    badge: "Gujarat",
     title: "Bhavnagar & Ahmedabad",
-    desc: "Convenient clinic visits plus accessible online video consultations.",
+    desc: "Consultations in Bhavnagar (R.T.O Road) and Ahmedabad (Motera, 4D Square), plus online care.",
   },
 ];
 
@@ -55,14 +51,14 @@ export function TrustMetricsBar() {
                   <div className="flex size-12 items-center justify-center rounded-2xl bg-sage-50 text-forest-800 transition-colors duration-300 group-hover:bg-forest-800 group-hover:text-white">
                     <Icon className="size-6" aria-hidden="true" />
                   </div>
-                  <span className="font-serif text-2xl font-bold text-forest-900">
-                    {item.value} <span className="text-xs font-sans font-medium text-emerald-600">{item.unit}</span>
+                  <span className="rounded-full bg-sage-100/70 px-3 py-1 text-xs font-semibold text-forest-800">
+                    {item.badge}
                   </span>
                 </div>
-                <h3 className="font-serif text-base font-semibold text-forest-950">
+                <h3 className="font-serif text-lg font-bold text-forest-950">
                   {item.title}
                 </h3>
-                <p className="mt-1 text-xs text-ink-soft leading-relaxed">
+                <p className="mt-2 text-xs sm:text-sm text-ink-soft leading-relaxed">
                   {item.desc}
                 </p>
               </motion.div>

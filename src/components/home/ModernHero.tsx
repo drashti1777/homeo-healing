@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { ArrowRight, CheckCircle2, PhoneCall, ShieldCheck, Sparkles, Star } from "lucide-react";
+import { ArrowRight, CheckCircle2, Clock, MapPin, PhoneCall, ShieldCheck, Stethoscope } from "lucide-react";
 
 export function ModernHero() {
   return (
@@ -20,42 +20,43 @@ export function ModernHero() {
 
       <div className="wrap">
         <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-14">
-          {/* Left Column: Headline & Action */}
+          {/* Left Column: Real Live Content */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-7 space-y-6"
           >
-            {/* Pill Badge */}
+            {/* Real Header Tagline from live site */}
             <div className="inline-flex items-center gap-2.5 rounded-full border border-forest-800/10 bg-white/80 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-forest-800 shadow-sm backdrop-blur-sm">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
               </span>
-              <span>100% Gentle &amp; Natural Healing • Gujarat&apos;s Trusted Clinic</span>
+              <span>Our Mission Of Compassion. Our Vision Of Excellence.</span>
             </div>
 
-            {/* Main Headline */}
-            <h1 className="font-serif text-3xl sm:text-5xl lg:text-[3.5rem] font-medium leading-[1.12] tracking-tight text-forest-950">
-              Natural Healing for Life,{" "}
+            {/* Main Headline from live site */}
+            <h1 className="font-serif text-3xl sm:text-5xl lg:text-[3.25rem] font-medium leading-[1.15] tracking-tight text-forest-950">
+              Providing one of the best{" "}
               <span className="bg-gradient-to-r from-forest-800 via-forest-700 to-emerald-600 bg-clip-text text-transparent">
-                Rooted in Compassion &amp; Science
-              </span>
+                Homoeopathic Treatment
+              </span>{" "}
+              at our Place
             </h1>
 
-            {/* Subtitle */}
+            {/* Subtext from live site */}
             <p className="max-w-xl text-base sm:text-lg text-ink-soft leading-relaxed">
-              Experience deep, root-cause recovery with <strong>Dr. Neeta Parmar</strong> (MD Repertory, 15+ Years Clinical Experience). Gentle, personalized homeopathic care for chronic and acute ailments with zero side effects.
+              Homeopathy is a system of natural medicine based upon the ancient principle of <em>“like cures like.”</em> Vast clinical experience in homeopathic treatments by <strong>Dr. Neeta Parmar</strong>.
             </p>
 
-            {/* CTA Buttons Row */}
+            {/* CTA Buttons Row from live site */}
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <Link
                 href="/book-appointment"
                 className="group relative inline-flex items-center gap-2.5 rounded-full bg-forest-800 px-7 py-3.5 text-sm sm:text-base font-semibold text-white shadow-lg shadow-forest-800/25 transition-all duration-300 hover:bg-forest-900 hover:shadow-xl hover:shadow-forest-800/30 hover:-translate-y-0.5 active:translate-y-0"
               >
-                <span>Book Consultation</span>
+                <span>Booked an appointment</span>
                 <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
               </Link>
 
@@ -68,24 +69,24 @@ export function ModernHero() {
               </a>
             </div>
 
-            {/* Trust Highlights Checklist */}
+            {/* Real verified highlights (No dummy statistics) */}
             <div className="grid grid-cols-2 gap-3 pt-4 sm:grid-cols-3 sm:gap-4 border-t border-forest-800/10">
               <div className="flex items-center gap-2 text-xs sm:text-sm font-medium text-forest-900">
                 <CheckCircle2 className="size-4 text-emerald-600 shrink-0" />
-                <span>15+ Years Experience</span>
+                <span>Bhavnagar &amp; Ahmedabad</span>
               </div>
               <div className="flex items-center gap-2 text-xs sm:text-sm font-medium text-forest-900">
                 <CheckCircle2 className="size-4 text-emerald-600 shrink-0" />
-                <span>10,000+ Treated Cases</span>
+                <span>Monday – Saturday, 8 AM - 8 PM</span>
               </div>
               <div className="flex items-center gap-2 text-xs sm:text-sm font-medium text-forest-900 col-span-2 sm:col-span-1">
                 <CheckCircle2 className="size-4 text-emerald-600 shrink-0" />
-                <span>Safe for Kids &amp; Seniors</span>
+                <span>Pediatric to Geriatric</span>
               </div>
             </div>
           </motion.div>
 
-          {/* Right Column: Hero Visual with Floating Glass Cards */}
+          {/* Right Column: Hero Visual with Real Clinic Badges */}
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -97,7 +98,7 @@ export function ModernHero() {
               <div className="relative aspect-[4/3] sm:aspect-[16/11] w-full overflow-hidden rounded-[2.2rem] bg-sage-100">
                 <Image
                   src="/gallery/hero-indian-doctor.webp"
-                  alt="Dr. Neeta's Homeo Health Care - Professional Indian Homeopathic Doctor Consultation"
+                  alt="Dr. Neeta's Homeo Health Care - Vast Clinical Experience in Homeopathic Treatments"
                   fill
                   priority
                   sizes="(min-width: 1024px) 36rem, 90vw"
@@ -110,26 +111,23 @@ export function ModernHero() {
               </div>
             </div>
 
-            {/* Floating Glassmorphism Badge 1: Top-Left (Rating) */}
+            {/* Real Badge 1: Top-Left (Consultant identity) */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               className="absolute -top-4 -left-3 sm:-left-6 rounded-2xl border border-white/80 bg-white/95 p-3.5 shadow-xl shadow-forest-900/10 backdrop-blur-md hidden sm:flex items-center gap-3"
             >
-              <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-amber-50 text-amber-500">
-                <Star className="size-5 fill-amber-400 text-amber-500" />
+              <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-sage-50 text-forest-800">
+                <Stethoscope className="size-5 text-emerald-600" />
               </div>
               <div>
-                <div className="flex items-center gap-1">
-                  <span className="font-bold text-forest-950 text-sm">4.9 / 5.0</span>
-                  <span className="text-[11px] text-ink-soft">(2,500+ Reviews)</span>
-                </div>
-                <p className="text-[11px] font-medium text-emerald-700">Highest Patient Trust</p>
+                <p className="font-bold text-forest-950 text-xs sm:text-sm">Dr. Neeta Parmar</p>
+                <p className="text-[11px] text-ink-soft">M.D. (Repertory), B.H.M.S.</p>
               </div>
             </motion.div>
 
-            {/* Floating Glassmorphism Badge 2: Bottom-Right (Safe Natural) */}
+            {/* Real Badge 2: Bottom-Right (Safe for all ages) */}
             <motion.div
               initial={{ opacity: 0, y: -15 }}
               animate={{ opacity: 1, y: 0 }}
@@ -140,8 +138,8 @@ export function ModernHero() {
                 <ShieldCheck className="size-5" />
               </div>
               <div>
-                <p className="text-xs font-bold text-forest-950">100% Gentle &amp; Safe</p>
-                <p className="text-[11px] text-ink-soft">Zero chemical side effects</p>
+                <p className="text-xs font-bold text-forest-950">Safe &amp; Very Gently</p>
+                <p className="text-[11px] text-ink-soft">Pediatric to Geriatric</p>
               </div>
             </motion.div>
           </motion.div>

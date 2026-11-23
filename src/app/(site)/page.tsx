@@ -5,6 +5,7 @@ import { BannerSlider } from "@/components/BannerSlider";
 import { FaqList } from "@/components/Faq";
 import { HeroVisual } from "@/components/HeroVisual";
 import { TestimonialSlider } from "@/components/TestimonialSlider";
+import { TreatmentIcon } from "@/components/TreatmentIcon";
 import { CtaLink, Disclaimer, MediaImage, SectionHeading } from "@/components/ui";
 import { ABOUT_HOMEOPATHY, CLINIC, CLINIC_INTRO, GALLERY, MYTHS, TAGLINE, TESTIMONIALS, TESTIMONIALS_INTRO, WHY_CHOOSE, WHY_HOMEOPATHY, mapsLink } from "@/content/clinic";
 import { branchesFrom, defaultSettings, getDoctor, getFaqs, getGalleryImages, getSettings, getTestimonials, getTreatments } from "@/lib/data";
@@ -150,8 +151,12 @@ export default async function HomePage() {
               {featured.map((t, i) => (
                 <li key={t._id} className="group bg-paper" data-reveal data-delay={(i % 3) * 0.08}>
                   <div className="flex h-full flex-col p-8">
-                    <span className="relative size-16 shrink-0 overflow-hidden rounded-2xl bg-sage-100 transition-transform duration-500 ease-out-expo group-hover:-rotate-6 group-hover:scale-110">
-                      {t.image && <Image src={t.image} alt="" fill sizes="64px" className="object-cover" />}
+                    <span className="relative size-16 shrink-0 overflow-hidden rounded-2xl bg-sage-100 flex items-center justify-center text-forest-700 transition-transform duration-500 ease-out-expo group-hover:-rotate-6 group-hover:scale-110">
+                      {t.image ? (
+                        <Image src={t.image} alt="" fill sizes="64px" className="object-cover" />
+                      ) : (
+                        <TreatmentIcon name={t.icon} className="size-8" />
+                      )}
                     </span>
                     <h3 className="mt-6 text-2xl font-normal">{t.title}</h3>
                     <p className="mt-2 text-sm text-ink-soft">{t.summary}</p>

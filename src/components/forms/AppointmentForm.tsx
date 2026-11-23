@@ -23,6 +23,7 @@ export function AppointmentForm({ defaultBranch = "bhavnagar" }: { defaultBranch
     defaultValues: { branch: defaultBranch, consultationType: "in-clinic", message: "", website: "" },
   });
   const today = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+  const { onChange: phoneOnChange, ...phoneRegister } = register("phone");
 
   if (result) {
     return (
@@ -69,7 +70,57 @@ export function AppointmentForm({ defaultBranch = "bhavnagar" }: { defaultBranch
           <input id="name" className="field" autoComplete="name" aria-invalid={!!errors.name} {...register("name")} />
         </Field>
         <Field label="Phone number" htmlFor="phone" error={errors.phone}>
-          <input id="phone" type="tel" className="field" autoComplete="tel" inputMode="tel" aria-invalid={!!errors.phone} {...register("phone")} />
+          <div
+            className={`flex items-center rounded-xl border bg-white transition-[border-color,box-shadow] focus-within:border-forest-600 focus-within:ring-4 focus-within:ring-forest-600/15 ${
+              errors.phone ? "!border-[#b4412f]" : "border-sage-200"
+            }`}
+          >
+            <span className="flex select-none items-center rounded-l-xl border-r border-sage-200 bg-sage-50/60 px-3.5 py-[0.8rem] text-[0.95rem] font-medium text-forest-800">
+              +91
+            </span>
+            <input
+              id="phone"
+              type="tel"
+              inputMode="numeric"
+              pattern="[0-9]{10}"
+              maxLength={10}
+              placeholder="Enter 10-digit number"
+              autoComplete="tel-national"
+              className="w-full bg-transparent px-3 py-[0.8rem] text-[0.95rem] text-ink placeholder:text-ink-soft/50 focus:outline-none"
+              aria-invalid={!!errors.phone}
+              {...phoneRegister}
+              onKeyDown={(e) => {
+                if (
+                  [
+                    "Backspace",
+                    "Delete",
+                    "Tab",
+                    "Escape",
+                    "Enter",
+                    "ArrowLeft",
+                    "ArrowRight",
+                    "Home",
+                    "End",
+                  ].includes(e.key) ||
+                  e.ctrlKey ||
+                  e.metaKey
+                ) {
+                  return;
+                }
+                if (!/^\d$/.test(e.key)) {
+                  e.preventDefault();
+                }
+              }}
+              onChange={(e) => {
+                let val = e.target.value.replace(/\D/g, "");
+                if (val.length > 10 && val.startsWith("91")) {
+                  val = val.slice(2);
+                }
+                e.target.value = val.slice(0, 10);
+                phoneOnChange(e);
+              }}
+            />
+          </div>
         </Field>
       </div>
       <Field label="Email address" htmlFor="email" error={errors.email}>

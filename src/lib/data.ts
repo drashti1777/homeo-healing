@@ -1,5 +1,6 @@
 import { connectDb } from "./db";
 import { Article, Author, Condition, Doctor, Faq, GalleryImage, SeoPage, Settings, Testimonial, Treatment } from "./models";
+import { DEFAULT_DOCTOR, DEFAULT_FAQS, DEFAULT_TREATMENTS } from "@/content/fallback-data";
 
 /** Mongoose documents -> plain JSON-safe objects (ObjectId/Date become strings). */
 function plain<T>(doc: unknown): T {
@@ -52,8 +53,24 @@ export type SettingsDoc = {
 export type SeoPageDoc = { path: string; title: string; description: string; ogImage: string; noIndex: boolean };
 
 export const defaultSettings: SettingsDoc = {
-  clinicName: "Dr. Neeta's Homeo Health Care", phone: "", email: "", addressLine: "", otherAddresses: [], city: "", state: "", postalCode: "", country: "",
-  mapUrl: "", openingHours: [], instagramUrl: "", facebookUrl: "", youtubeUrl: "", verifiedStats: [], branches: [],
+  clinicName: "Dr. Neeta's Homeo Health Care",
+  phone: "+91 81606 02060",
+  email: "drneetahomeohealing@gmail.com",
+  addressLine: "2nd Floor, Ratna Plaza Complex, R.T.O, Vithalwadi Road, Above R.K Travels, Opposite Madhav Complex, Shastrinagar",
+  city: "Bhavnagar",
+  state: "Gujarat",
+  postalCode: "364001",
+  country: "India",
+  otherAddresses: [
+    "32_FF, 1st Floor, 4D Square, Opposite IIT Engineering College, Near Visat Petrol Pump, Gandhinagar Highway, Motera, Ahmedabad, Gujarat",
+  ],
+  mapUrl: "",
+  openingHours: [],
+  facebookUrl: "https://www.facebook.com/Dr-Neetss-Homeo-Health-Care-107686881068210",
+  instagramUrl: "https://www.instagram.com/drneetahomeoheathcare/",
+  youtubeUrl: "",
+  verifiedStats: [],
+  branches: [],
 };
 
 export async function getSettings(): Promise<SettingsDoc> {
@@ -62,6 +79,12 @@ export async function getSettings(): Promise<SettingsDoc> {
     const s = await Settings.findOne({ key: "main" }).lean();
     if (!s) return defaultSettings;
     const doc = { ...defaultSettings, ...plain<SettingsDoc>(s) };
+    if (!doc.facebookUrl) doc.facebookUrl = defaultSettings.facebookUrl;
+    if (!doc.instagramUrl) doc.instagramUrl = defaultSettings.instagramUrl;
+    if (!doc.phone) doc.phone = defaultSettings.phone;
+    if (!doc.email) doc.email = defaultSettings.email;
+    if (!doc.addressLine) doc.addressLine = defaultSettings.addressLine;
+    if (!doc.otherAddresses?.length) doc.otherAddresses = defaultSettings.otherAddresses;
     // Payment configuration is admin-only; the public site only needs to know whether it is enabled.
     if (doc.payment) doc.payment = { ...doc.payment, notes: "" };
     return doc;
@@ -75,18 +98,21 @@ export async function getTreatments(opts: { featured?: boolean } = {}): Promise<
     await connectDb();
     const q: Record<string, unknown> = { isPublished: true };
     if (opts.featured) q.isFeatured = true;
-    return plain(await Treatment.find(q).sort({ order: 1, title: 1 }).lean());
+    const items = plain<TreatmentDoc[]>(await Treatment.find(q).sort({ order: 1, title: 1 }).lean());
+    if (items.length > 0) return items;
+    return opts.featured ? DEFAULT_TREATMENTS.filter((t) => t.isFeatured) : DEFAULT_TREATMENTS;
   } catch (err) {
-    return [];
+    return opts.featured ? DEFAULT_TREATMENTS.filter((t) => t.isFeatured) : DEFAULT_TREATMENTS;
   }
 }
 export async function getTreatment(slug: string): Promise<TreatmentDoc | null> {
   try {
     await connectDb();
     const d = await Treatment.findOne({ slug, isPublished: true }).lean();
-    return d ? plain(d) : null;
+    if (d) return plain(d);
+    return DEFAULT_TREATMENTS.find((t) => t.slug === slug) ?? null;
   } catch (err) {
-    return null;
+    return DEFAULT_TREATMENTS.find((t) => t.slug === slug) ?? null;
   }
 }
 
@@ -205,14 +231,16 @@ export async function getFaqs(): Promise<FaqDoc[]> {
   try {
     await connectDb();
     // Public projection only: migration and review fields stay in the admin.
-    return plain(
+    const items = plain<FaqDoc[]>(
       await Faq.find({ isPublished: true })
         .select("question slug answer category relatedSlugs order isPublished")
         .sort({ order: 1, createdAt: 1 })
         .lean(),
     );
+    if (items.length > 0) return items;
+    return DEFAULT_FAQS;
   } catch (err) {
-    return [];
+    return DEFAULT_FAQS;
   }
 }
 
@@ -220,16 +248,19 @@ export async function getDoctor(): Promise<DoctorDoc | null> {
   try {
     await connectDb();
     const d = await Doctor.findOne({ key: "main" }).lean();
-    if (!d) return null;
+    if (!d) return DEFAULT_DOCTOR;
     const raw = plain<Partial<DoctorDoc>>(d);
     const doc: DoctorDoc = {
       name: "", title: "", bio: "", registrationNumber: "", photo: "", photoAlt: "", mission: "", isPublished: false,
       ...raw,
-      entries: raw.entries ?? [], vision: raw.vision ?? [], approach: raw.approach ?? [], languages: raw.languages ?? [],
+      entries: raw.entries?.length ? raw.entries : DEFAULT_DOCTOR.entries,
+      vision: raw.vision?.length ? raw.vision : DEFAULT_DOCTOR.vision,
+      approach: raw.approach?.length ? raw.approach : DEFAULT_DOCTOR.approach,
+      languages: raw.languages?.length ? raw.languages : DEFAULT_DOCTOR.languages,
     };
-    return doc.isPublished && doc.name ? doc : null;
+    return doc.isPublished && doc.name ? doc : DEFAULT_DOCTOR;
   } catch (err) {
-    return null;
+    return DEFAULT_DOCTOR;
   }
 }
 

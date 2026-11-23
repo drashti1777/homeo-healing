@@ -38,6 +38,8 @@ export function ContactForm() {
     else setDone(true);
   });
 
+  const { onChange: phoneOnChange, ...phoneRegister } = register("phone");
+
   return (
     <form onSubmit={onSubmit} noValidate className="relative space-y-6" aria-label="Contact enquiry">
       {serverError && <ErrorBanner message={serverError} />}
@@ -49,7 +51,58 @@ export function ContactForm() {
           <input id="c-email" type="email" className="field" autoComplete="email" aria-invalid={!!errors.email} aria-describedby={errors.email ? "c-email-err" : undefined} {...register("email")} />
         </Field>
         <Field label="Phone number" htmlFor="c-phone" error={errors.phone}>
-          <input id="c-phone" type="tel" inputMode="tel" className="field" autoComplete="tel" aria-invalid={!!errors.phone} aria-describedby={errors.phone ? "c-phone-err" : undefined} {...register("phone")} />
+          <div
+            className={`flex items-center rounded-xl border bg-white transition-[border-color,box-shadow] focus-within:border-forest-600 focus-within:ring-4 focus-within:ring-forest-600/15 ${
+              errors.phone ? "!border-[#b4412f]" : "border-sage-200"
+            }`}
+          >
+            <span className="flex select-none items-center rounded-l-xl border-r border-sage-200 bg-sage-50/60 px-3.5 py-[0.8rem] text-[0.95rem] font-medium text-forest-800">
+              +91
+            </span>
+            <input
+              id="c-phone"
+              type="tel"
+              inputMode="numeric"
+              pattern="[0-9]{10}"
+              maxLength={10}
+              placeholder="Enter 10-digit number"
+              autoComplete="tel-national"
+              className="w-full bg-transparent px-3 py-[0.8rem] text-[0.95rem] text-ink placeholder:text-ink-soft/50 focus:outline-none"
+              aria-invalid={!!errors.phone}
+              aria-describedby={errors.phone ? "c-phone-err" : undefined}
+              {...phoneRegister}
+              onKeyDown={(e) => {
+                if (
+                  [
+                    "Backspace",
+                    "Delete",
+                    "Tab",
+                    "Escape",
+                    "Enter",
+                    "ArrowLeft",
+                    "ArrowRight",
+                    "Home",
+                    "End",
+                  ].includes(e.key) ||
+                  e.ctrlKey ||
+                  e.metaKey
+                ) {
+                  return;
+                }
+                if (!/^\d$/.test(e.key)) {
+                  e.preventDefault();
+                }
+              }}
+              onChange={(e) => {
+                let val = e.target.value.replace(/\D/g, "");
+                if (val.length > 10 && val.startsWith("91")) {
+                  val = val.slice(2);
+                }
+                e.target.value = val.slice(0, 10);
+                phoneOnChange(e);
+              }}
+            />
+          </div>
         </Field>
       </div>
       <Field label="Message" htmlFor="c-message" error={errors.message} hint="Please do not share detailed medical records here.">

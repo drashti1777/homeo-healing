@@ -4,7 +4,16 @@ import { FOOTER_LINKS } from "@/content/site";
 import type { SettingsDoc } from "@/lib/data";
 
 export function Footer({ settings }: { settings: SettingsDoc }) {
-  const address = [settings.addressLine, settings.city, settings.state, settings.postalCode, settings.country].filter(Boolean).join(", ");
+  const facebookUrl = settings.facebookUrl || "https://www.facebook.com/Dr-Neetss-Homeo-Health-Care-107686881068210";
+  const instagramUrl = settings.instagramUrl || "https://www.instagram.com/drneetahomeoheathcare/";
+  const phone = settings.phone || "+91 81606 02060";
+  const email = settings.email || "drneetahomeohealing@gmail.com";
+  const addressLine = settings.addressLine || "2nd Floor, Ratna Plaza Complex, R.T.O, Vithalwadi Road, Above R.K Travels, Opposite Madhav Complex, Shastrinagar";
+  const otherAddresses = settings.otherAddresses?.length
+    ? settings.otherAddresses
+    : ["32_FF, 1st Floor, 4D Square, Opposite IIT Engineering College, Near Visat Petrol Pump, Gandhinagar Highway, Motera, Ahmedabad, Gujarat"];
+
+  const address = [addressLine, settings.city || "Bhavnagar", settings.state || "Gujarat", settings.postalCode || "364001", settings.country || "India"].filter(Boolean).join(", ");
 
   return (
     <footer className="relative overflow-hidden bg-white text-gray-700 border-t border-gray-200">
@@ -33,22 +42,22 @@ export function Footer({ settings }: { settings: SettingsDoc }) {
                 <span>{address}</span>
               </p>
             )}
-            {settings.otherAddresses?.map((a) => (
+            {otherAddresses.map((a) => (
               <p key={a} className="flex gap-2 items-start">
                 <span className="text-accent mt-0.5">📍</span>
                 <span>{a}</span>
               </p>
             ))}
-            {settings.phone && (
+            {phone && (
               <p className="flex gap-2 items-center">
                 <span className="text-accent">📞</span>
-                <a href={`tel:${settings.phone.replace(/[^+\d]/g, "")}`} className="hover:text-accent transition-colors">{settings.phone}</a>
+                <a href={`tel:${phone.replace(/[^+\d]/g, "")}`} className="hover:text-accent transition-colors">{phone}</a>
               </p>
             )}
-            {settings.email && (
+            {email && (
               <p className="flex gap-2 items-center">
                 <span className="text-accent">✉</span>
-                <a href={`mailto:${settings.email}`} className="hover:text-accent transition-colors">{settings.email}</a>
+                <a href={`mailto:${email}`} className="hover:text-accent transition-colors">{email}</a>
               </p>
             )}
           </address>
@@ -83,8 +92,8 @@ export function Footer({ settings }: { settings: SettingsDoc }) {
           <h2 className="font-semibold text-forest-800 mb-4 text-sm uppercase tracking-wide">Web Presence</h2>
           {/* Social icons row */}
           <div className="flex flex-wrap gap-2 mb-3">
-            {settings.facebookUrl && (
-              <a href={settings.facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Facebook"
+            {facebookUrl && (
+              <a href={facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Facebook"
                 className="size-8 rounded-full bg-blue-600 text-white flex items-center justify-center hover:opacity-80 transition-opacity text-xs font-bold">f</a>
             )}
             {settings.youtubeUrl && (
@@ -93,8 +102,8 @@ export function Footer({ settings }: { settings: SettingsDoc }) {
             )}
             <a href="https://wa.me/918160602060" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
               className="size-8 rounded-full bg-green-500 text-white flex items-center justify-center hover:opacity-80 transition-opacity text-xs font-bold">W</a>
-            {settings.instagramUrl && (
-              <a href={settings.instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram"
+            {instagramUrl && (
+              <a href={instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram"
                 className="size-8 rounded-full bg-gradient-to-br from-pink-500 to-orange-400 text-white flex items-center justify-center hover:opacity-80 transition-opacity text-xs font-bold">IG</a>
             )}
           </div>

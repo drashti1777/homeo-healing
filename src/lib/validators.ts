@@ -21,7 +21,20 @@ function isoDay(offsetDays = 0) {
 const phone = z
   .string()
   .trim()
-  .regex(/^[+()\d\s-]{7,20}$/, "Enter a valid phone number");
+  .refine((val) => {
+    const digits = val.replace(/\D/g, "");
+    const hasOnlyValidChars = /^(\+91)?[\d\s-]*$/.test(val);
+    if (!hasOnlyValidChars) return false;
+    if (val.startsWith("+91")) {
+      return digits.length === 12 && digits.startsWith("91");
+    }
+    return digits.length === 10;
+  }, "Please enter a valid 10-digit phone number")
+  .transform((val) => {
+    const digits = val.replace(/\D/g, "");
+    const clean10 = digits.length === 12 && digits.startsWith("91") ? digits.slice(2) : digits;
+    return `+91 ${clean10}`;
+  });
 
 /* ------------------------------ Public forms ----------------------------- */
 

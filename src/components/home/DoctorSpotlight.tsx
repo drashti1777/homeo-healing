@@ -3,86 +3,154 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { ArrowRight, Award, BookOpen, CheckCircle, GraduationCap, Heart, Stethoscope } from "lucide-react";
+import { ArrowRight, Award, BookOpen, CalendarCheck, CheckCircle2, GraduationCap, HeartPulse, Sparkles, Star, Stethoscope, Users } from "lucide-react";
 
 export function DoctorSpotlight() {
   const credentials = [
-    { year: "2011", title: "BHMS Degree", institute: "Swami Vivekananda Homoeopathic Medical College, Bhavnagar" },
-    { year: "2016", title: "M.D. in Repertory", institute: "Ahmedabad Homoeopathic Medical College (HNGU)" },
-    { year: "2016", title: "Master Course in Advance Homoeopathy", institute: "The Other Song, Mumbai & MUHS Nashik" },
-    { year: "2017 – Present", title: "HOD & Associate Professor", institute: "Hom. Pharmacy, Shree Swaminarayan College, Kalol" },
+    {
+      year: "2016",
+      featured: true,
+      badge: "Post-Graduate Mastery",
+      title: "M.D. in Repertory",
+      institute: "Ahmedabad Homoeopathic Medical College (HNGU)",
+      desc: "Advanced post-graduate clinical specialization in constitutional case analysis and repertory.",
+      icon: Award,
+    },
+    {
+      year: "2016",
+      featured: false,
+      badge: "Advanced Fellowship",
+      title: "Master Course in Advance Homoeopathy",
+      institute: "The Other Song, Mumbai & MUHS Nashik",
+      desc: "Trained under world-renowned homeopathy masters in advanced constitutional clinical methods.",
+      icon: Stethoscope,
+    },
+    {
+      year: "2017 – Present",
+      featured: false,
+      badge: "Academic Leadership",
+      title: "HOD & Associate Professor",
+      institute: "Hom. Pharmacy, Shree Swaminarayan College, Kalol",
+      desc: "Heading the Department of Pharmacy, mentoring doctors, and guiding evidence-informed practice.",
+      icon: GraduationCap,
+    },
+    {
+      year: "2011",
+      featured: false,
+      badge: "Medical Degree",
+      title: "B.H.M.S. Degree",
+      institute: "Swami Vivekananda Homoeopathic Medical College, Bhavnagar",
+      desc: "Solid foundational medical training in homeopathic therapeutics and clinical sciences.",
+      icon: BookOpen,
+    },
   ];
 
   return (
-    <section className="section bg-white overflow-hidden py-16 lg:py-24">
+    <section className="section bg-gradient-to-b from-white via-sand-50/40 to-white overflow-hidden py-16 lg:py-24 border-t border-forest-900/5">
       <div className="wrap">
-        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
-          {/* Doctor Visual Side (Equal 50% Width) */}
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          {/* Doctor Visual Side: Layered Luxury Bento Frame */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="relative w-full"
           >
-            {/* Visual Frame */}
-            <div className="relative mx-auto w-full max-w-sm sm:max-w-md">
-              {/* Decorative background shape */}
-              <div
-                aria-hidden="true"
-                className="absolute -top-4 -left-4 sm:-top-6 sm:-left-6 w-full h-full rounded-[2.5rem] bg-sage-100 -z-10"
-              />
-              <div className="relative aspect-[3/4] w-full overflow-hidden rounded-[2.5rem] bg-sage-50 shadow-xl shadow-forest-900/10">
+            {/* Ambient Background Glow */}
+            <div
+              aria-hidden="true"
+              className="absolute -top-10 -left-10 h-72 w-72 rounded-full bg-emerald-100/60 blur-3xl -z-10"
+            />
+            <div
+              aria-hidden="true"
+              className="absolute -bottom-10 -right-10 h-72 w-72 rounded-full bg-forest-800/10 blur-3xl -z-10"
+            />
+
+            {/* Main Portrait Frame with Interactive Depth */}
+            <div className="relative mx-auto w-full max-w-md sm:max-w-lg">
+              <div className="relative aspect-[3/4] w-full overflow-hidden rounded-[2.5rem] bg-sage-50 shadow-2xl shadow-forest-900/15 border border-forest-800/10">
                 <Image
                   src="/gallery/doc.webp"
                   alt="Dr. Neeta Parmar - Chief Homoeopathic Consultant"
                   fill
-                  sizes="(min-width: 1024px) 26rem, 90vw"
-                  className="object-cover object-top"
+                  sizes="(min-width: 1024px) 50vw, 90vw"
+                  className="object-cover object-top transition-transform duration-700 hover:scale-105"
                 />
                 <div
                   aria-hidden="true"
-                  className="absolute inset-0 bg-gradient-to-t from-forest-950/80 via-transparent to-transparent"
+                  className="absolute inset-0 bg-gradient-to-t from-forest-950/90 via-forest-950/20 to-transparent"
                 />
-                <div className="absolute bottom-6 left-6 right-6 text-white">
-                  <span className="inline-block rounded-full bg-emerald-500/90 px-3 py-1 text-xs font-semibold uppercase tracking-wider backdrop-blur-sm">
-                    Chief Consultant
+
+                {/* Floating Top-Left Experience Badge */}
+                <motion.div
+                  animate={{ y: [0, -5, 0] }}
+                  transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute top-5 left-5 z-10 inline-flex items-center gap-2 rounded-2xl bg-white/95 px-3.5 py-1.5 text-xs font-bold text-forest-950 backdrop-blur-md shadow-lg shadow-forest-900/15 border border-white/40"
+                >
+                  <Star className="size-3.5 fill-amber-400 text-amber-400" />
+                  <span>15+ Years Clinical Care</span>
+                </motion.div>
+
+                {/* Bottom Overlay Info */}
+                <div className="absolute bottom-6 left-6 right-6 text-white z-10">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/95 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider backdrop-blur-md shadow-sm">
+                    <CheckCircle2 className="size-3" />
+                    Chief Homoeopathic Consultant
                   </span>
-                  <h3 className="mt-2 font-serif text-2xl font-bold text-white">Dr. Neeta Parmar</h3>
-                  <p className="text-xs text-white/90">B.H.M.S., M.D. (Repertory), PGDHHM</p>
+                  <h3 className="mt-2.5 font-serif text-3xl font-bold text-white tracking-tight">
+                    Dr. Neeta Parmar
+                  </h3>
+                  <p className="mt-1 text-xs sm:text-sm text-emerald-200 font-medium">
+                    B.H.M.S. · M.D. (Repertory) · P.G.D.H.H.M.
+                  </p>
+                  <p className="mt-1 text-xs text-white/80">
+                    Bhavnagar (R.T.O Road) &amp; Ahmedabad (Motera)
+                  </p>
                 </div>
               </div>
-            </div>
 
-            {/* Second Image Badge (Consultation preview) with subtle floating animation */}
-            <motion.div
-              animate={{ y: [0, -6, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="hidden sm:block absolute -bottom-6 -right-4 w-44 aspect-[4/3] rounded-2xl overflow-hidden border-4 border-white shadow-xl shadow-forest-900/20"
-            >
-              <Image
-                src="/gallery/indian-consultation.webp"
-                alt="Dr. Neeta consulting a patient"
-                fill
-                sizes="11rem"
-                className="object-cover"
-              />
-            </motion.div>
+              {/* Overlapping Floating Consultation Preview Badge */}
+              <motion.div
+                animate={{ y: [0, -6, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                className="hidden sm:flex absolute -bottom-6 -right-6 items-center gap-3 rounded-3xl bg-white p-3 shadow-2xl shadow-forest-900/20 border border-forest-800/10 max-w-[15rem] backdrop-blur-sm"
+              >
+                <div className="relative size-14 shrink-0 overflow-hidden rounded-2xl">
+                  <Image
+                    src="/gallery/indian-consultation.webp"
+                    alt="Clinical consultation room"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div>
+                  <span className="flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-emerald-700">
+                    <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    Active Practice
+                  </span>
+                  <p className="text-xs font-serif font-bold text-forest-950 mt-0.5">
+                    Constitutional Evaluation
+                  </p>
+                </div>
+              </motion.div>
+            </div>
           </motion.div>
 
-          {/* Details Side (Equal 50% Width) */}
+          {/* Details Side: Bento Matrix Layout */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="space-y-6 w-full"
           >
             <div>
-              <span className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-700">
-                Meet Your Consultant
-              </span>
-              <h2 className="mt-2 font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-forest-950 leading-tight">
+              <div className="inline-flex items-center gap-2 rounded-full bg-emerald-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-emerald-800 border border-emerald-300">
+                <Sparkles className="size-3.5" />
+                <span>Meet Your Consultant</span>
+              </div>
+              <h2 className="mt-3 font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-forest-950 leading-tight">
                 Compassionate Care Backed by 15+ Years of Academic &amp; Clinical Mastery
               </h2>
             </div>
@@ -91,37 +159,82 @@ export function DoctorSpotlight() {
               Dr. Neeta Parmar is the Chief Homoeopathic Consultant at <strong>Dr. Neeta&apos;s Homeo Health Care</strong> (Bhavnagar) and Homeo Health Care &amp; Pharmacy (Ahmedabad). Combining classical homeopathy principles with contemporary scientific analysis, she delivers precise constitutional treatment for long-lasting health.
             </p>
 
-            {/* Credentials Grid */}
-            <div className="grid gap-3 pt-2 sm:grid-cols-2">
-              {credentials.map((c) => (
-                <div
-                  key={c.title}
-                  className="rounded-2xl border border-forest-800/10 bg-sage-50/50 p-4 transition-colors hover:border-forest-800/20 hover:bg-sage-50"
-                >
-                  <div className="flex items-center gap-2">
-                    <GraduationCap className="size-4 text-emerald-600 shrink-0" />
-                    <span className="text-xs font-bold uppercase tracking-wider text-emerald-800">{c.year}</span>
-                  </div>
-                  <h4 className="mt-1 font-serif text-sm font-semibold text-forest-950">{c.title}</h4>
-                  <p className="text-xs text-ink-soft mt-0.5">{c.institute}</p>
-                </div>
-              ))}
+            {/* Bento Credentials Grid */}
+            <div className="grid gap-3.5 sm:grid-cols-2 pt-2">
+              {credentials.map((c) => {
+                const Icon = c.icon;
+                return (
+                  <motion.div
+                    key={c.title}
+                    whileHover={{ y: -4, scale: 1.02, transition: { duration: 0.2 } }}
+                    className={`group relative rounded-2xl p-4.5 transition-all duration-300 ${
+                      c.featured
+                        ? "bg-forest-900 text-white shadow-lg shadow-forest-900/15 border border-forest-800"
+                        : "bg-white text-forest-950 border border-forest-800/10 shadow-sm hover:border-emerald-500/40 hover:shadow-md hover:bg-sand-50/50"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-2.5">
+                      <div
+                        className={`flex size-9 items-center justify-center rounded-xl transition-transform group-hover:scale-110 ${
+                          c.featured
+                            ? "bg-emerald-500/20 text-emerald-300"
+                            : "bg-emerald-50 text-emerald-700"
+                        }`}
+                      >
+                        <Icon className="size-4.5" />
+                      </div>
+                      <span
+                        className={`rounded-full px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider ${
+                          c.featured
+                            ? "bg-emerald-400 text-forest-950"
+                            : "bg-sage-100 text-forest-800"
+                        }`}
+                      >
+                        {c.year}
+                      </span>
+                    </div>
+
+                    <h4
+                      className={`font-serif text-sm sm:text-base font-bold leading-snug ${
+                        c.featured ? "text-white" : "text-forest-950"
+                      }`}
+                    >
+                      {c.title}
+                    </h4>
+                    <p
+                      className={`text-xs mt-1 font-medium ${
+                        c.featured ? "text-emerald-200" : "text-emerald-700"
+                      }`}
+                    >
+                      {c.institute}
+                    </p>
+                    <p
+                      className={`text-xs mt-1.5 leading-relaxed ${
+                        c.featured ? "text-white/75" : "text-ink-soft"
+                      }`}
+                    >
+                      {c.desc}
+                    </p>
+                  </motion.div>
+                );
+              })}
             </div>
 
             {/* Action Row */}
-            <div className="flex flex-wrap items-center gap-4 pt-4">
-              <Link
-                href="/about"
-                className="inline-flex items-center gap-2 rounded-full bg-forest-800 px-6 py-3 text-sm font-semibold text-white shadow-md shadow-forest-800/20 transition-all hover:bg-forest-900 hover:-translate-y-0.5"
-              >
-                <span>Read Full Biography</span>
-                <ArrowRight className="size-4" />
-              </Link>
+            <div className="flex flex-wrap items-center gap-4 pt-3">
               <Link
                 href="/book-appointment"
-                className="inline-flex items-center gap-2 rounded-full border border-forest-800/20 bg-white px-6 py-3 text-sm font-semibold text-forest-800 transition-all hover:border-forest-800 hover:bg-sage-50"
+                className="group inline-flex items-center gap-2.5 rounded-full bg-emerald-500 px-7 py-3.5 text-sm sm:text-base font-semibold text-forest-950 shadow-lg shadow-emerald-500/25 transition-all hover:bg-emerald-400 hover:shadow-emerald-500/35 hover:-translate-y-0.5 active:translate-y-0"
               >
+                <CalendarCheck className="size-4 text-forest-950" />
                 <span>Book Consultation</span>
+                <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+              <Link
+                href="/about"
+                className="inline-flex items-center gap-2 rounded-full border border-forest-800/20 bg-white px-6 py-3.5 text-sm sm:text-base font-semibold text-forest-800 shadow-sm transition-all hover:border-forest-800 hover:bg-forest-50"
+              >
+                <span>Read Full Biography</span>
               </Link>
             </div>
           </motion.div>

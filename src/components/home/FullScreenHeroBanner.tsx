@@ -173,8 +173,8 @@ export function FullScreenHeroBanner() {
       </AnimatePresence>
 
 
-      {/* Slide Indicators (Bottom Dots / Progress Bars) */}
-      <div className="absolute inset-x-0 bottom-10 sm:bottom-12 z-20 flex justify-center items-center gap-3">
+      {/* Slide Indicators (Bottom Dots / Progress Bars) - Positioned above overlapping trust cards */}
+      <div className="absolute inset-x-0 bottom-20 sm:bottom-24 z-20 flex justify-center items-center gap-3">
         {SLIDES.map((s, i) => (
           <button
             key={s.src}

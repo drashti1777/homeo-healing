@@ -181,9 +181,8 @@ export function FullScreenHeroBanner() {
             type="button"
             onClick={() => setIndex(i)}
             aria-label={`Go to slide ${i + 1}`}
-            className={`relative h-2 overflow-hidden rounded-full transition-all duration-300 ${
-              i === index ? "w-10 sm:w-12 bg-white/30" : "w-2.5 bg-white/50 hover:bg-white/80"
-            }`}
+            className={`relative h-2 overflow-hidden rounded-full transition-all duration-300 ${i === index ? "w-10 sm:w-12 bg-white/30" : "w-2.5 bg-white/50 hover:bg-white/80"
+              }`}
           >
             {i === index && (
               <motion.span

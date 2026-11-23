@@ -20,7 +20,7 @@ import {
 type Review = { name: string; location?: string; quote: string };
 
 const INTERVAL = 8500;
-const LONG = 280;
+const LONG = 550;
 
 const initials = (name: string) =>
   name
@@ -138,15 +138,13 @@ export function TestimonialSlider({
       {/* Ambient Visual Glow behind the container */}
       <div
         aria-hidden="true"
-        className={`pointer-events-none absolute -top-12 -left-12 h-80 w-80 rounded-full blur-3xl -z-10 ${
-          isLight ? "bg-emerald-100/60" : "bg-emerald-500/10"
-        }`}
+        className={`pointer-events-none absolute -top-12 -left-12 h-80 w-80 rounded-full blur-3xl -z-10 ${isLight ? "bg-emerald-100/60" : "bg-emerald-500/10"
+          }`}
       />
       <div
         aria-hidden="true"
-        className={`pointer-events-none absolute -bottom-12 -right-12 h-80 w-80 rounded-full blur-3xl -z-10 ${
-          isLight ? "bg-amber-100/40" : "bg-forest-700/30"
-        }`}
+        className={`pointer-events-none absolute -bottom-12 -right-12 h-80 w-80 rounded-full blur-3xl -z-10 ${isLight ? "bg-amber-100/40" : "bg-forest-700/30"
+          }`}
       />
 
       {/* Top Mobile/Tablet Quick-Selector Pills */}
@@ -162,15 +160,14 @@ export function TestimonialSlider({
                 setProgress(0);
                 setIndex(idx);
               }}
-              className={`flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all duration-200 ${
-                active
-                  ? isLight
-                    ? "bg-emerald-700 text-white shadow-md shadow-emerald-700/25 scale-105"
-                    : "bg-emerald-400 text-forest-950 font-bold shadow-md shadow-emerald-400/25 scale-105"
-                  : isLight
+              className={`flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all duration-200 ${active
+                ? isLight
+                  ? "bg-emerald-700 text-white shadow-md shadow-emerald-700/25 scale-105"
+                  : "bg-emerald-400 text-forest-950 font-bold shadow-md shadow-emerald-400/25 scale-105"
+                : isLight
                   ? "bg-white text-forest-900 border border-forest-800/10 hover:bg-emerald-50"
                   : "bg-white/10 text-white/80 hover:bg-white/20"
-              }`}
+                }`}
             >
               <span className="size-1.5 rounded-full bg-current" />
               <span className="truncate max-w-[120px]">
@@ -185,18 +182,16 @@ export function TestimonialSlider({
       <div className="grid gap-8 lg:grid-cols-12">
         {/* Left Column: Spotlight Patient Story (7 of 12 columns) */}
         <div
-          className={`relative lg:col-span-7 flex flex-col justify-between overflow-hidden rounded-[2.5rem] p-6 sm:p-8 md:p-10 transition-all duration-300 ${
-            isLight
-              ? "bg-white shadow-2xl shadow-forest-950/10 border border-forest-800/10"
-              : "bg-forest-950/90 text-white shadow-2xl shadow-black/30 border border-forest-700/40"
-          }`}
+          className={`relative lg:col-span-7 flex flex-col justify-between overflow-hidden rounded-[2.5rem] p-6 sm:p-8 md:p-10 transition-all duration-300 ${isLight
+            ? "bg-white shadow-2xl shadow-forest-950/10 border border-forest-800/10"
+            : "bg-forest-950/90 text-white shadow-2xl shadow-black/30 border border-forest-700/40"
+            }`}
         >
           {/* Decorative Corner Watermark */}
           <div
             aria-hidden="true"
-            className={`pointer-events-none absolute -top-4 -right-4 size-32 opacity-5 ${
-              isLight ? "text-forest-950" : "text-white"
-            }`}
+            className={`pointer-events-none absolute -top-4 -right-4 size-32 opacity-5 ${isLight ? "text-forest-950" : "text-white"
+              }`}
           >
             <Quote className="size-full" />
           </div>
@@ -214,16 +209,14 @@ export function TestimonialSlider({
                   ))}
                 </div>
                 <span
-                  className={`text-xs font-bold ${
-                    isLight ? "text-forest-900" : "text-emerald-300"
-                  }`}
+                  className={`text-xs font-bold ${isLight ? "text-forest-900" : "text-emerald-300"
+                    }`}
                 >
                   5.0 / 5.0
                 </span>
                 <span
-                  className={`hidden sm:inline text-xs ${
-                    isLight ? "text-ink-soft" : "text-white/60"
-                  }`}
+                  className={`hidden sm:inline text-xs ${isLight ? "text-ink-soft" : "text-white/60"
+                    }`}
                 >
                   · Verified Healing Story
                 </span>
@@ -240,11 +233,10 @@ export function TestimonialSlider({
 
             {/* Clinical Healing Outcome Callout */}
             <div
-              className={`mt-6 flex items-start gap-3 rounded-2xl p-4 border transition-colors ${
-                isLight
-                  ? "bg-emerald-50/70 border-emerald-500/20 text-emerald-950"
-                  : "bg-emerald-900/25 border-emerald-500/30 text-emerald-200"
-              }`}
+              className={`mt-6 flex items-start gap-3 rounded-2xl p-4 border transition-colors ${isLight
+                ? "bg-emerald-50/70 border-emerald-500/20 text-emerald-950"
+                : "bg-emerald-900/25 border-emerald-500/30 text-emerald-200"
+                }`}
             >
               <Sparkles className="size-4 shrink-0 text-emerald-600 mt-0.5" />
               <div className="text-xs sm:text-sm leading-relaxed">
@@ -266,9 +258,8 @@ export function TestimonialSlider({
                   transition={{ duration: reduce ? 0 : 0.35, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <blockquote
-                    className={`font-serif text-[clamp(1.1rem,1.8vw,1.35rem)] leading-relaxed italic ${
-                      isLight ? "text-forest-950 font-medium" : "text-white font-light"
-                    } ${isLong && !expanded ? "line-clamp-5 sm:line-clamp-6" : ""}`}
+                    className={`font-serif text-[clamp(1.1rem,1.8vw,1.35rem)] leading-relaxed italic ${isLight ? "text-forest-950 font-medium" : "text-white font-light"
+                      } ${isLong && !expanded ? "line-clamp-5 sm:line-clamp-6" : ""}`}
                   >
                     &ldquo;{activeReview.quote}&rdquo;
                   </blockquote>
@@ -292,26 +283,23 @@ export function TestimonialSlider({
             {/* Patient Avatar & Credentials */}
             <div className="flex items-center gap-3.5">
               <div
-                className={`flex size-13 items-center justify-center rounded-2xl font-serif text-lg font-bold shadow-md ring-2 ${
-                  isLight
-                    ? "bg-gradient-to-tr from-forest-900 to-emerald-700 text-white ring-emerald-100"
-                    : "bg-emerald-400 text-forest-950 ring-emerald-400/30"
-                }`}
+                className={`flex size-13 items-center justify-center rounded-2xl font-serif text-lg font-bold shadow-md ring-2 ${isLight
+                  ? "bg-gradient-to-tr from-forest-900 to-emerald-700 text-white ring-emerald-100"
+                  : "bg-emerald-400 text-forest-950 ring-emerald-400/30"
+                  }`}
               >
                 {initials(activeReview.name)}
               </div>
               <div>
                 <h3
-                  className={`font-serif text-base sm:text-lg font-bold leading-tight ${
-                    isLight ? "text-forest-950" : "text-white"
-                  }`}
+                  className={`font-serif text-base sm:text-lg font-bold leading-tight ${isLight ? "text-forest-950" : "text-white"
+                    }`}
                 >
                   {activeReview.name}
                 </h3>
                 <p
-                  className={`text-xs mt-0.5 flex items-center gap-1.5 ${
-                    isLight ? "text-ink-soft" : "text-white/70"
-                  }`}
+                  className={`text-xs mt-0.5 flex items-center gap-1.5 ${isLight ? "text-ink-soft" : "text-white/70"
+                    }`}
                 >
                   <UserCheck className="size-3.5 text-emerald-600" />
                   <span>
@@ -329,11 +317,10 @@ export function TestimonialSlider({
                 type="button"
                 onClick={() => setIsPaused((p) => !p)}
                 aria-label={isPaused ? "Resume auto play" : "Pause auto play"}
-                className={`grid size-10 place-items-center rounded-full border transition-all duration-200 active:scale-95 ${
-                  isLight
-                    ? "border-forest-900/15 bg-sand-50/60 text-forest-800 hover:bg-emerald-50 hover:text-emerald-800"
-                    : "border-white/20 bg-white/10 text-white hover:bg-white/20"
-                }`}
+                className={`grid size-10 place-items-center rounded-full border transition-all duration-200 active:scale-95 ${isLight
+                  ? "border-forest-900/15 bg-sand-50/60 text-forest-800 hover:bg-emerald-50 hover:text-emerald-800"
+                  : "border-white/20 bg-white/10 text-white hover:bg-white/20"
+                  }`}
                 title={isPaused ? "Play" : "Pause"}
               >
                 {isPaused ? <Play className="size-4" /> : <Pause className="size-4" />}
@@ -343,11 +330,10 @@ export function TestimonialSlider({
                 type="button"
                 onClick={() => go(-1)}
                 aria-label="Previous testimonial"
-                className={`grid size-10 place-items-center rounded-full border transition-all duration-200 active:scale-95 ${
-                  isLight
-                    ? "border-forest-900/15 bg-sand-50/60 text-forest-800 hover:bg-emerald-50 hover:text-emerald-800"
-                    : "border-white/20 bg-white/10 text-white hover:bg-white/20"
-                }`}
+                className={`grid size-10 place-items-center rounded-full border transition-all duration-200 active:scale-95 ${isLight
+                  ? "border-forest-900/15 bg-sand-50/60 text-forest-800 hover:bg-emerald-50 hover:text-emerald-800"
+                  : "border-white/20 bg-white/10 text-white hover:bg-white/20"
+                  }`}
               >
                 <ChevronLeft className="size-5" />
               </button>
@@ -356,11 +342,10 @@ export function TestimonialSlider({
                 type="button"
                 onClick={() => go(1)}
                 aria-label="Next testimonial"
-                className={`grid size-10 place-items-center rounded-full border transition-all duration-200 active:scale-95 ${
-                  isLight
-                    ? "border-forest-900/15 bg-sand-50/60 text-forest-800 hover:bg-emerald-50 hover:text-emerald-800"
-                    : "border-white/20 bg-white/10 text-white hover:bg-white/20"
-                }`}
+                className={`grid size-10 place-items-center rounded-full border transition-all duration-200 active:scale-95 ${isLight
+                  ? "border-forest-900/15 bg-sand-50/60 text-forest-800 hover:bg-emerald-50 hover:text-emerald-800"
+                  : "border-white/20 bg-white/10 text-white hover:bg-white/20"
+                  }`}
               >
                 <ChevronRight className="size-5" />
               </button>
@@ -372,16 +357,14 @@ export function TestimonialSlider({
         <div className="hidden lg:flex lg:col-span-5 flex-col gap-2.5 sticky top-24 lg:top-28 self-start">
           <div className="flex items-center justify-between px-2 mb-1">
             <span
-              className={`text-xs font-bold uppercase tracking-wider ${
-                isLight ? "text-forest-900" : "text-emerald-300"
-              }`}
+              className={`text-xs font-bold uppercase tracking-wider ${isLight ? "text-forest-900" : "text-emerald-300"
+                }`}
             >
               All Patient Stories ({reviews.length})
             </span>
             <span
-              className={`text-[11px] font-semibold ${
-                isLight ? "text-ink-soft" : "text-white/60"
-              }`}
+              className={`text-[11px] font-semibold ${isLight ? "text-ink-soft" : "text-white/60"
+                }`}
             >
               Click to view case
             </span>
@@ -402,15 +385,14 @@ export function TestimonialSlider({
                     setIndex(i);
                   }}
                   whileHover={{ x: 4, transition: { duration: 0.15 } }}
-                  className={`group relative text-left rounded-2xl p-4 transition-all duration-300 overflow-hidden ${
-                    active
-                      ? isLight
-                        ? "bg-white border-2 border-emerald-600 shadow-xl shadow-emerald-950/10 ring-4 ring-emerald-50"
-                        : "bg-forest-900/90 border-2 border-emerald-400 shadow-xl shadow-black/40 text-white"
-                      : isLight
+                  className={`group relative text-left rounded-2xl p-4 transition-all duration-300 overflow-hidden ${active
+                    ? isLight
+                      ? "bg-white border-2 border-emerald-600 shadow-xl shadow-emerald-950/10 ring-4 ring-emerald-50"
+                      : "bg-forest-900/90 border-2 border-emerald-400 shadow-xl shadow-black/40 text-white"
+                    : isLight
                       ? "bg-white/70 border border-forest-800/10 hover:bg-white hover:border-emerald-500/40 hover:shadow-md"
                       : "bg-white/5 border border-white/10 text-white/80 hover:bg-white/10"
-                  }`}
+                    }`}
                 >
                   {/* Active Card Progress Bar Indicator */}
                   {active && !isPaused && (
@@ -423,34 +405,31 @@ export function TestimonialSlider({
                   <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-3">
                       <div
-                        className={`flex size-9 items-center justify-center rounded-xl text-xs font-bold ${
-                          active
-                            ? "bg-emerald-600 text-white"
-                            : isLight
+                        className={`flex size-9 items-center justify-center rounded-xl text-xs font-bold ${active
+                          ? "bg-emerald-600 text-white"
+                          : isLight
                             ? "bg-sage-100 text-forest-900 group-hover:bg-emerald-100"
                             : "bg-white/10 text-white"
-                        }`}
+                          }`}
                       >
                         {initials(rev.name)}
                       </div>
                       <div>
                         <h4
-                          className={`text-sm font-bold leading-tight ${
-                            active
-                              ? isLight
-                                ? "text-forest-950"
-                                : "text-white"
-                              : isLight
+                          className={`text-sm font-bold leading-tight ${active
+                            ? isLight
+                              ? "text-forest-950"
+                              : "text-white"
+                            : isLight
                               ? "text-forest-900"
                               : "text-white/90"
-                          }`}
+                            }`}
                         >
                           {rev.name}
                         </h4>
                         <p
-                          className={`text-xs mt-0.5 truncate max-w-[190px] ${
-                            active ? "text-emerald-700 dark:text-emerald-300 font-semibold" : "text-ink-soft dark:text-white/60"
-                          }`}
+                          className={`text-xs mt-0.5 truncate max-w-[190px] ${active ? "text-emerald-700 dark:text-emerald-300 font-semibold" : "text-ink-soft dark:text-white/60"
+                            }`}
                         >
                           {meta.condition}
                         </p>

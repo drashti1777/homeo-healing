@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Clock, Heart, Leaf, Mail, MapPin, Phone, Sparkles, Users } from "lucide-react";
 import { ModernHero } from "@/components/home/ModernHero";
 import { TrustMetricsBar } from "@/components/home/TrustMetricsBar";
-import { ModernHighlightsBento } from "@/components/home/ModernHighlightsBento";
+import { ClinicIntroLive } from "@/components/home/ClinicIntroLive";
 import { DoctorSpotlight } from "@/components/home/DoctorSpotlight";
 import { MythsVsFacts } from "@/components/home/MythsVsFacts";
 import { WhyHomeopathySection } from "@/components/home/WhyHomeopathySection";
@@ -50,8 +50,8 @@ export default async function HomePage() {
       {/* 2. Elevated Trust & Metrics Bar */}
       <TrustMetricsBar />
 
-      {/* 3. Modern Interactive Highlights Bento Grid (Advanced Whole-Body Care) */}
-      <ModernHighlightsBento />
+      {/* 3. Clinic Introduction (Exact line-to-line text from live site) */}
+      <ClinicIntroLive />
 
       {/* 4. Meet Dr. Neeta Parmar (Credentials, Indian Clinic Consultation Visual) */}
       <DoctorSpotlight />

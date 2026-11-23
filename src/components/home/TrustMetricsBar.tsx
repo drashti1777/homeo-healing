@@ -32,7 +32,7 @@ const STATS = [
 
 export function TrustMetricsBar() {
   return (
-    <section className="relative mt-6 sm:mt-8 z-10 mb-12">
+    <section className="relative mt-8 sm:mt-12 z-10 mb-14">
       <div className="wrap">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {STATS.map((item, idx) => {

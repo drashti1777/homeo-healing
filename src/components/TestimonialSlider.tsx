@@ -182,10 +182,10 @@ export function TestimonialSlider({
       </div>
 
       {/* Main Dual-Column Interactive Stage */}
-      <div className="grid gap-8 lg:grid-cols-12 lg:items-stretch">
+      <div className="grid gap-8 lg:grid-cols-12 lg:items-start">
         {/* Left Column: Spotlight Patient Story (7 of 12 columns) */}
         <div
-          className={`relative lg:col-span-7 flex flex-col justify-between overflow-hidden rounded-[2.5rem] p-7 sm:p-10 md:p-12 transition-all duration-300 ${
+          className={`relative lg:col-span-7 flex flex-col justify-between overflow-hidden rounded-[2.5rem] p-6 sm:p-8 md:p-10 transition-all duration-300 ${
             isLight
               ? "bg-white shadow-2xl shadow-forest-950/10 border border-forest-800/10"
               : "bg-forest-950/90 text-white shadow-2xl shadow-black/30 border border-forest-700/40"
@@ -369,7 +369,7 @@ export function TestimonialSlider({
         </div>
 
         {/* Right Column: Interactive Patient Stories Deck (5 of 12 columns, Desktop) */}
-        <div className="hidden lg:flex lg:col-span-5 flex-col justify-between gap-3">
+        <div className="hidden lg:flex lg:col-span-5 flex-col gap-2.5">
           <div className="flex items-center justify-between px-2 mb-1">
             <span
               className={`text-xs font-bold uppercase tracking-wider ${
@@ -387,7 +387,7 @@ export function TestimonialSlider({
             </span>
           </div>
 
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-2.5">
             {reviews.map((rev, i) => {
               const active = i === index;
               const meta = getReviewMeta(rev.name, rev.quote);

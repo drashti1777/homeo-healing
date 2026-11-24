@@ -96,15 +96,15 @@ export function BestShowcase({ tabs }: { tabs: BestTab[] }) {
       {/* Main Creative Showcase Frame */}
       <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-white border border-forest-800/10 shadow-xl shadow-forest-950/5">
         {/* Visual Container: Shows image clearly */}
-        <div className="relative w-full aspect-[16/10] sm:aspect-[21/9] lg:aspect-[24/10] overflow-hidden bg-forest-950">
-          <AnimatePresence initial={false} mode="wait">
+        <div className="relative w-full aspect-[16/10] sm:aspect-[21/9] lg:aspect-[24/10] overflow-hidden bg-forest-900/60">
+          <AnimatePresence initial={false}>
             <motion.div
               key={tab.image}
               className="absolute inset-0"
-              initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 1.05 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.98 }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: reduce ? 0 : 0.45, ease: "easeInOut" }}
             >
               <Image
                 src={tab.image}
@@ -117,10 +117,10 @@ export function BestShowcase({ tabs }: { tabs: BestTab[] }) {
             </motion.div>
           </AnimatePresence>
 
-          {/* Desktop Overlay Gradient (hidden on mobile so image is 100% visible) */}
+          {/* Desktop Overlay Gradient (soft & light so image is bright & clear) */}
           <div
             aria-hidden="true"
-            className="hidden sm:block absolute inset-0 bg-gradient-to-t from-forest-950/95 via-forest-950/45 to-transparent pointer-events-none"
+            className="hidden sm:block absolute inset-0 bg-gradient-to-t from-forest-950/70 via-forest-950/20 to-transparent pointer-events-none"
           />
 
           {/* Top Floating Badge */}

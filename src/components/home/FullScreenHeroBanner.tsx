@@ -46,6 +46,7 @@ const rise = (reduce: boolean | null, delay = 0) => ({
 export function FullScreenHeroBanner() {
   const reduce = useReducedMotion();
   const [index, setIndex] = useState(0);
+  const [hoveredBtn, setHoveredBtn] = useState<"book" | "know" | null>(null);
 
   const go = useCallback((dir: number) => {
     setIndex((i) => (i + dir + SLIDES.length) % SLIDES.length);
@@ -62,16 +63,16 @@ export function FullScreenHeroBanner() {
     <section
       aria-roledescription="carousel"
       aria-label="Homeopathy Highlights Banner"
-      className="relative w-full min-h-[100dvh] overflow-hidden bg-forest-950 flex flex-col justify-center"
+      className="relative w-full min-h-[100dvh] overflow-hidden bg-forest-900 flex flex-col justify-center"
     >
-      <AnimatePresence initial={false} mode="wait">
+      <AnimatePresence initial={false}>
         <motion.div
           key={slide.src}
           className="absolute inset-0"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: reduce ? 0 : 0.9, ease: "easeInOut" }}
+          transition={{ duration: reduce ? 0 : 0.8, ease: "easeInOut" }}
         >
           {/* Background Image with Ken Burns Zoom */}
           <motion.div
@@ -90,14 +91,14 @@ export function FullScreenHeroBanner() {
             />
           </motion.div>
 
-          {/* Deep Cinematic Gradient Overlay */}
+          {/* Deep Cinematic Gradient Overlay with lighter opacity for brighter visual */}
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-r from-forest-950/95 via-forest-950/75 to-forest-950/40"
+            className="absolute inset-0 bg-gradient-to-r from-forest-950/85 via-forest-950/55 to-forest-950/20"
           />
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-t from-forest-950/90 via-transparent to-forest-950/50"
+            className="absolute inset-0 bg-gradient-to-t from-forest-950/75 via-transparent to-forest-950/40"
           />
 
           {/* Slide Text Content */}
@@ -146,15 +147,27 @@ export function FullScreenHeroBanner() {
               >
                 <Link
                   href={slide.href}
-                  className="group inline-flex items-center gap-2 rounded-full bg-emerald-500 px-6 py-3.5 sm:px-8 sm:py-4 text-xs sm:text-base font-semibold text-forest-950 shadow-xl shadow-emerald-500/25 transition-all duration-300 hover:bg-emerald-400 hover:shadow-emerald-500/35 hover:-translate-y-0.5 active:translate-y-0"
+                  onMouseEnter={() => setHoveredBtn("book")}
+                  onMouseLeave={() => setHoveredBtn(null)}
+                  className={`peer group inline-flex items-center gap-2 rounded-full px-6 py-3.5 sm:px-8 sm:py-4 text-xs sm:text-base font-bold transition-all duration-200 cursor-pointer ${
+                    hoveredBtn === "book" || hoveredBtn === "know"
+                      ? "border border-white/35 bg-white/10 text-white shadow-none backdrop-blur-sm -translate-y-0.5"
+                      : "border border-transparent bg-emerald-500 text-forest-950 shadow-xl shadow-emerald-500/25 hover:bg-white/10 hover:text-white hover:border-white/35 hover:shadow-none hover:backdrop-blur-sm hover:-translate-y-0.5 active:bg-white/20 active:text-white active:border-white/50 active:scale-95 active:translate-y-0"
+                  }`}
                 >
                   <span>{slide.cta}</span>
-                  <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
                 </Link>
 
                 <Link
                   href={slide.knowMoreHref}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-5 py-3.5 sm:px-7 sm:py-4 text-xs sm:text-base font-semibold text-white backdrop-blur-sm transition-all duration-200 hover:bg-white/20 hover:border-white/40 active:scale-[0.99]"
+                  onMouseEnter={() => setHoveredBtn("know")}
+                  onMouseLeave={() => setHoveredBtn(null)}
+                  className={`inline-flex items-center gap-2 rounded-full px-5 py-3.5 sm:px-7 sm:py-4 text-xs sm:text-base font-semibold backdrop-blur-sm transition-all duration-200 cursor-pointer ${
+                    hoveredBtn === "book" || hoveredBtn === "know"
+                      ? "border border-emerald-500 bg-emerald-500 text-forest-950 shadow-xl shadow-emerald-500/25 -translate-y-0.5"
+                      : "border border-white/30 bg-white/10 text-white peer-hover:border-emerald-500 peer-hover:bg-emerald-500 peer-hover:text-forest-950 peer-hover:shadow-xl peer-hover:shadow-emerald-500/25 peer-hover:-translate-y-0.5 peer-active:bg-emerald-600 peer-active:border-emerald-600 hover:border-emerald-500 hover:bg-emerald-500 hover:text-forest-950 hover:shadow-xl hover:shadow-emerald-500/25 hover:-translate-y-0.5 active:bg-emerald-600 active:text-forest-950 active:border-emerald-600 active:scale-95 active:translate-y-0"
+                  }`}
                 >
                   <span>Know More</span>
                 </Link>
@@ -180,9 +193,8 @@ export function FullScreenHeroBanner() {
             type="button"
             onClick={() => setIndex(i)}
             aria-label={`Go to slide ${i + 1}`}
-            className={`relative h-2 overflow-hidden rounded-full transition-all duration-300 ${
-              i === index ? "w-10 sm:w-12 bg-white/30" : "w-2.5 bg-white/50 hover:bg-white/80"
-            }`}
+            className={`relative h-2 overflow-hidden rounded-full transition-all duration-300 ${i === index ? "w-10 sm:w-12 bg-white/30" : "w-2.5 bg-white/50 hover:bg-white/80"
+              }`}
           >
             {i === index && (
               <motion.span

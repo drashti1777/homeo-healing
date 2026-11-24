@@ -9,8 +9,8 @@ export function SectionHeading({
   return (
     <div className={align === "center" ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}>
       {eyebrow && <p className="eyebrow mb-5" data-reveal>{eyebrow}</p>}
-      <Tag data-split className="text-[clamp(2rem,4.6vw,3.25rem)] font-normal">{title}</Tag>
-      {intro && <p className="mt-5 text-lg text-ink-soft" data-reveal data-delay="0.1">{intro}</p>}
+      <Tag data-split className="text-3xl sm:text-4xl lg:text-5xl font-medium font-serif text-forest-950">{title}</Tag>
+      {intro && <p className="mt-5 text-base sm:text-lg text-ink-soft leading-relaxed" data-reveal data-delay="0.1">{intro}</p>}
     </div>
   );
 }
@@ -27,16 +27,15 @@ export function PageHero({
           alt=""
           fill
           priority
-          className="object-cover object-right md:object-center opacity-85 sm:opacity-90"
+          className="object-cover object-right md:object-center opacity-90"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-beige-100/95 via-beige-100/80 to-beige-100/35 md:from-beige-100/80 md:via-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-beige-100/95 via-beige-100/75 to-transparent md:from-beige-100/85 md:via-transparent" />
       </div>
-      <div aria-hidden="true" className="float-slow absolute -right-24 top-24 size-[26rem] rounded-[58%_42%_63%_37%/45%_55%_45%_55%] bg-sage-200/30" />
       <div className="wrap relative z-10">
         {crumbs && (
-          <nav aria-label="Breadcrumb" className="mb-4 sm:mb-8 text-xs sm:text-sm text-ink-soft">
-            <ol className="flex flex-wrap items-center gap-1.5">
+          <nav aria-label="Breadcrumb" className="mb-4 sm:mb-6 text-xs sm:text-sm text-ink-soft">
+            <ol className="flex flex-wrap items-center gap-1.5 font-medium">
               <li><Link href="/" className="link-line">Home</Link></li>
               {crumbs.map((c) => (
                 <li key={c.label} className="flex items-center gap-1.5">
@@ -47,9 +46,9 @@ export function PageHero({
             </ol>
           </nav>
         )}
-        {eyebrow && <p className="eyebrow mb-3 sm:mb-5">{eyebrow}</p>}
-        <h1 data-split className="max-w-3xl text-[clamp(1.9rem,5vw,4.25rem)] font-normal leading-tight">{title}</h1>
-        {intro && <p className="mt-4 sm:mt-6 max-w-2xl text-base sm:text-lg text-ink-soft leading-relaxed" data-reveal data-delay="0.15">{intro}</p>}
+        {eyebrow && <p className="eyebrow mb-3 sm:mb-4 text-xs font-bold uppercase tracking-wider">{eyebrow}</p>}
+        <h1 data-split className="max-w-3xl text-3xl sm:text-4xl md:text-5xl font-semibold font-serif text-forest-950 leading-tight tracking-tight">{title}</h1>
+        {intro && <p className="mt-4 sm:mt-5 max-w-2xl text-base text-ink-soft leading-relaxed font-normal" data-reveal data-delay="0.15">{intro}</p>}
       </div>
     </section>
   );

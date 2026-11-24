@@ -1,15 +1,16 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { ArrowRight, Award, BookOpen, CalendarCheck, CheckCircle2, GraduationCap, HeartPulse, MapPin, Sparkles, Star, Stethoscope, Users } from "lucide-react";
 
 export function DoctorSpotlight() {
+  const [hoveredBtn, setHoveredBtn] = useState<"book" | "bio" | null>(null);
   const credentials = [
     {
       year: "2016",
-      featured: true,
       badge: "Post-Graduate Mastery",
       title: "M.D. in Repertory",
       institute: "Ahmedabad Homoeopathic Medical College (HNGU)",
@@ -18,7 +19,6 @@ export function DoctorSpotlight() {
     },
     {
       year: "2016",
-      featured: false,
       badge: "Advanced Fellowship",
       title: "Master Course in Advance Homoeopathy",
       institute: "The Other Song, Mumbai & MUHS Nashik",
@@ -27,7 +27,6 @@ export function DoctorSpotlight() {
     },
     {
       year: "2017 – Present",
-      featured: false,
       badge: "Academic Leadership",
       title: "HOD & Associate Professor",
       institute: "Hom. Pharmacy, Shree Swaminarayan College, Kalol",
@@ -36,7 +35,6 @@ export function DoctorSpotlight() {
     },
     {
       year: "2011",
-      featured: false,
       badge: "Medical Degree",
       title: "B.H.M.S. Degree",
       institute: "Swami Vivekananda Homoeopathic Medical College, Bhavnagar",
@@ -142,52 +140,24 @@ export function DoctorSpotlight() {
                   <motion.div
                     key={c.title}
                     whileHover={{ y: -4, scale: 1.02, transition: { duration: 0.2 } }}
-                    className={`group relative rounded-2xl p-4.5 transition-all duration-300 ${
-                      c.featured
-                        ? "bg-forest-900 text-white shadow-lg shadow-forest-900/15 border border-forest-800"
-                        : "bg-white text-forest-950 border border-forest-800/10 shadow-sm hover:border-emerald-500/40 hover:shadow-md hover:bg-sand-50/50"
-                    }`}
+                    className="group relative rounded-2xl p-4.5 transition-all duration-300 bg-white text-forest-950 border border-forest-800/10 shadow-sm hover:bg-forest-900 hover:text-white hover:border-forest-800 hover:shadow-xl hover:shadow-forest-900/20 cursor-pointer"
                   >
                     <div className="flex items-center justify-between mb-2.5">
-                      <div
-                        className={`flex size-9 items-center justify-center rounded-xl transition-transform group-hover:scale-110 ${
-                          c.featured
-                            ? "bg-emerald-500/20 text-emerald-300"
-                            : "bg-emerald-50 text-emerald-700"
-                        }`}
-                      >
+                      <div className="flex size-9 items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-110 bg-emerald-50 text-emerald-700 group-hover:bg-emerald-500/20 group-hover:text-emerald-300">
                         <Icon className="size-4.5" />
                       </div>
-                      <span
-                        className={`rounded-full px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider ${
-                          c.featured
-                            ? "bg-emerald-400 text-forest-950"
-                            : "bg-sage-100 text-forest-800"
-                        }`}
-                      >
+                      <span className="rounded-full px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider transition-colors duration-300 bg-sage-100 text-forest-800 group-hover:bg-emerald-400 group-hover:text-forest-950">
                         {c.year}
                       </span>
                     </div>
 
-                    <h4
-                      className={`font-serif text-sm sm:text-base font-bold leading-snug ${
-                        c.featured ? "text-white" : "text-forest-950"
-                      }`}
-                    >
+                    <h4 className="font-serif text-sm sm:text-base font-bold leading-snug transition-colors duration-300 text-forest-950 group-hover:text-white">
                       {c.title}
                     </h4>
-                    <p
-                      className={`text-xs mt-1 font-medium ${
-                        c.featured ? "text-emerald-200" : "text-emerald-700"
-                      }`}
-                    >
+                    <p className="text-xs mt-1 font-medium transition-colors duration-300 text-emerald-700 group-hover:text-emerald-200">
                       {c.institute}
                     </p>
-                    <p
-                      className={`text-xs mt-1.5 leading-relaxed ${
-                        c.featured ? "text-white/75" : "text-ink-soft"
-                      }`}
-                    >
+                    <p className="text-xs mt-1.5 leading-relaxed transition-colors duration-300 text-ink-soft group-hover:text-white/80">
                       {c.desc}
                     </p>
                   </motion.div>
@@ -199,15 +169,27 @@ export function DoctorSpotlight() {
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-3">
               <Link
                 href="/book-appointment"
-                className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-emerald-500 px-6 py-3.5 sm:px-7 sm:py-3.5 text-sm sm:text-base font-semibold text-forest-950 shadow-lg shadow-emerald-500/25 transition-all hover:bg-emerald-400 hover:shadow-emerald-500/35 hover:-translate-y-0.5 active:translate-y-0 text-center"
+                onMouseEnter={() => setHoveredBtn("book")}
+                onMouseLeave={() => setHoveredBtn(null)}
+                className={`peer group inline-flex items-center justify-center gap-2.5 rounded-full px-6 py-3.5 sm:px-7 sm:py-3.5 text-sm sm:text-base font-semibold transition-all duration-200 cursor-pointer text-center ${
+                  hoveredBtn === "book" || hoveredBtn === "bio"
+                    ? "border border-forest-800/20 bg-white text-forest-800 shadow-sm -translate-y-0.5"
+                    : "border border-transparent bg-emerald-500 text-forest-950 shadow-lg shadow-emerald-500/25 hover:border-forest-800/20 hover:bg-white hover:text-forest-800 hover:shadow-sm hover:-translate-y-0.5 active:scale-95 active:translate-y-0"
+                }`}
               >
-                <CalendarCheck className="size-4 text-forest-950 shrink-0" />
+                <CalendarCheck className={`size-4 shrink-0 transition-colors ${hoveredBtn === "book" || hoveredBtn === "bio" ? "text-forest-800" : "text-forest-950 group-hover:text-forest-800"}`} />
                 <span>Book Consultation</span>
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 shrink-0" />
               </Link>
               <Link
                 href="/about"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-forest-800/20 bg-white px-5 py-3.5 sm:px-6 sm:py-3.5 text-sm sm:text-base font-semibold text-forest-800 shadow-sm transition-all hover:border-forest-800 hover:bg-forest-50 text-center"
+                onMouseEnter={() => setHoveredBtn("bio")}
+                onMouseLeave={() => setHoveredBtn(null)}
+                className={`inline-flex items-center justify-center gap-2 rounded-full px-5 py-3.5 sm:px-6 sm:py-3.5 text-sm sm:text-base font-semibold transition-all duration-200 cursor-pointer text-center ${
+                  hoveredBtn === "book" || hoveredBtn === "bio"
+                    ? "border border-emerald-500 bg-emerald-500 text-forest-950 shadow-lg shadow-emerald-500/25 -translate-y-0.5"
+                    : "border border-forest-800/20 bg-white text-forest-800 shadow-sm peer-hover:border-emerald-500 peer-hover:bg-emerald-500 peer-hover:text-forest-950 peer-hover:shadow-lg peer-hover:shadow-emerald-500/25 peer-hover:-translate-y-0.5 hover:border-emerald-500 hover:bg-emerald-500 hover:text-forest-950 hover:shadow-lg hover:shadow-emerald-500/25 hover:-translate-y-0.5 active:bg-emerald-600 active:text-forest-950 active:scale-95 active:translate-y-0"
+                }`}
               >
                 <span>Read Full Biography</span>
               </Link>

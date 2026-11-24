@@ -44,7 +44,7 @@ export function Footer({ settings }: { settings: SettingsDoc }) {
             <Link
               href="/"
               aria-label={`${settings.clinicName} home`}
-              className="inline-block transition-transform hover:scale-105"
+              className="inline-block transition-all hover:scale-105 opacity-90 hover:opacity-100"
             >
               <Image src="/logo.webp" alt={settings.clinicName} width={483} height={184} className="h-11 sm:h-12 w-auto drop-shadow-md" />
             </Link>

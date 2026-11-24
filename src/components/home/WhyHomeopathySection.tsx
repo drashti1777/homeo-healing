@@ -96,7 +96,7 @@ export function WhyHomeopathySection() {
             <div className="pt-2">
               <Link
                 href="/treatments"
-                className="group inline-flex items-center gap-2.5 rounded-full bg-forest-800 px-7 py-3.5 text-sm sm:text-base font-semibold text-white shadow-md shadow-forest-800/20 transition-all hover:bg-forest-900 hover:shadow-lg hover:-translate-y-0.5"
+                className="group inline-flex items-center gap-2.5 rounded-full bg-forest-800 px-7 py-3.5 text-sm sm:text-base font-semibold text-white shadow-md shadow-forest-800/20 transition-all duration-200 hover:bg-emerald-500 hover:text-forest-950 hover:shadow-xl hover:shadow-emerald-500/25 hover:-translate-y-0.5 active:bg-emerald-600 active:text-forest-950 active:scale-95 active:translate-y-0 cursor-pointer"
               >
                 <span>View Treatments</span>
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />

@@ -41,18 +41,18 @@ export function ConsultationCta() {
           <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
             <Link
               href="/book-appointment"
-              className="inline-flex items-center gap-2.5 rounded-full bg-forest-800 px-8 py-4 text-sm sm:text-base font-semibold text-white shadow-xl shadow-forest-900/20 transition-all duration-300 hover:bg-forest-900 hover:shadow-forest-900/30 hover:-translate-y-0.5 active:translate-y-0"
+              className="group inline-flex items-center gap-2.5 rounded-full bg-forest-800 px-8 py-4 text-sm sm:text-base font-semibold text-white shadow-xl shadow-forest-900/20 transition-all duration-200 hover:bg-emerald-500 hover:text-forest-950 hover:shadow-emerald-500/25 hover:-translate-y-0.5 active:bg-emerald-600 active:text-forest-950 active:scale-95 cursor-pointer"
             >
-              <CalendarCheck className="size-4 text-emerald-400" />
+              <CalendarCheck className="size-4 text-emerald-400 transition-colors group-hover:text-forest-950" />
               <span>Book an appointment</span>
-              <ArrowRight className="size-4" />
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
             </Link>
 
             <a
               href="tel:+918160602060"
-              className="inline-flex items-center gap-2.5 rounded-full border border-forest-800/20 bg-white px-7 py-4 text-sm sm:text-base font-semibold text-forest-800 shadow-sm transition-all duration-300 hover:bg-forest-50 hover:border-forest-800/40 active:scale-[0.99]"
+              className="group inline-flex items-center gap-2.5 rounded-full border border-forest-800/20 bg-white px-7 py-4 text-sm sm:text-base font-semibold text-forest-800 shadow-sm transition-all duration-200 hover:bg-emerald-500 hover:text-forest-950 hover:border-emerald-500 hover:shadow-xl hover:shadow-emerald-500/25 hover:-translate-y-0.5 active:bg-emerald-600 active:text-forest-950 active:scale-95 cursor-pointer"
             >
-              <PhoneCall className="size-4 text-emerald-600" />
+              <PhoneCall className="size-4 text-emerald-600 transition-colors group-hover:text-forest-950" />
               <span>+91 81606 02060</span>
             </a>
           </div>

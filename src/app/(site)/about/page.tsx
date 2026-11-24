@@ -6,6 +6,7 @@ import { entriesFor } from "@/components/DoctorSections";
 import { JourneyTimeline, type JourneyItem } from "@/components/JourneyTimeline";
 import { TestimonialSlider } from "@/components/TestimonialSlider";
 import { ConsultationCta } from "@/components/home/ConsultationCta";
+import { AboutDoctorButtons } from "@/components/AboutDoctorButtons";
 import { CtaLink, PageHero, SectionHeading } from "@/components/ui";
 import { BRAND, CLINIC, CLINIC_INTRO, GALLERY, TAGLINE, TESTIMONIALS, TESTIMONIALS_INTRO } from "@/content/clinic";
 import { getDoctor, getSettings, getTestimonials } from "@/lib/data";
@@ -119,35 +120,20 @@ export default async function AboutPage() {
                 return (
                   <div
                     key={h.title}
-                    className="rounded-2xl border border-forest-800/10 bg-white p-4 shadow-sm transition-all hover:border-emerald-500/40 hover:shadow-md"
+                    className="group relative rounded-2xl p-4 transition-all duration-300 bg-white text-forest-950 border border-forest-800/10 shadow-sm hover:bg-forest-900 hover:text-white hover:border-forest-800 hover:shadow-xl hover:shadow-forest-900/20 hover:-translate-y-1 hover:scale-[1.02] cursor-pointer"
                   >
-                    <div className="flex size-9 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700 mb-2.5">
+                    <div className="flex size-9 items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-110 bg-emerald-50 text-emerald-700 group-hover:bg-emerald-500/20 group-hover:text-emerald-300 mb-2.5">
                       <Icon className="size-4.5" />
                     </div>
-                    <h3 className="font-serif text-sm font-bold text-forest-950 leading-snug">{h.title}</h3>
-                    <p className="mt-1 text-xs text-ink-soft leading-relaxed">{h.desc}</p>
+                    <h3 className="font-serif text-sm font-bold transition-colors duration-300 text-forest-950 group-hover:text-white leading-snug">{h.title}</h3>
+                    <p className="mt-1 text-xs transition-colors duration-300 text-ink-soft group-hover:text-white/80 leading-relaxed">{h.desc}</p>
                   </div>
                 );
               })}
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-3">
-              <Link
-                href="/book-appointment"
-                className="group inline-flex items-center gap-2.5 rounded-full bg-emerald-500 px-7 py-3.5 text-sm sm:text-base font-semibold text-forest-950 shadow-lg shadow-emerald-500/25 transition-all hover:bg-emerald-400 hover:shadow-emerald-500/35 hover:-translate-y-0.5 active:translate-y-0"
-              >
-                <CalendarCheck className="size-4 text-forest-950" />
-                <span>Book Consultation</span>
-                <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-              </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 rounded-full border border-forest-800/20 bg-white px-6 py-3.5 text-sm sm:text-base font-semibold text-forest-800 shadow-sm transition-all hover:border-forest-800 hover:bg-forest-50"
-              >
-                <span>Contact Clinic</span>
-              </Link>
-            </div>
+            <AboutDoctorButtons />
           </div>
 
           {/* Right Column: Doctor Portrait Frame */}
@@ -286,8 +272,9 @@ export default async function AboutPage() {
             {featuredPhotos.map((img, i) => (
               <li
                 key={img.src}
-                className={`group relative overflow-hidden rounded-[2rem] bg-sage-100 shadow-md shadow-forest-900/5 border border-forest-800/10 ${i === 0 ? "col-span-2 row-span-2 aspect-square" : "aspect-square"
-                  }`}
+                className={`group relative overflow-hidden rounded-[2rem] bg-sage-100 shadow-md shadow-forest-900/5 border border-forest-800/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-forest-900/25 hover:border-emerald-500/40 cursor-pointer ${
+                  i === 0 ? "col-span-2 row-span-2 aspect-square" : "aspect-square"
+                }`}
               >
                 <Image
                   src={img.src}
@@ -296,7 +283,11 @@ export default async function AboutPage() {
                   sizes={i === 0 ? "(min-width:768px) 50vw, 100vw" : "(min-width:768px) 25vw, 50vw"}
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
-                <span className="glass absolute bottom-3 left-3 rounded-full px-3 py-1 text-xs font-medium text-forest-800 shadow-sm">
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-gradient-to-t from-forest-950/80 via-forest-950/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none"
+                />
+                <span className="glass absolute bottom-3 left-3 rounded-full px-3 py-1 text-xs font-medium text-forest-800 shadow-sm transition-all duration-300 group-hover:bg-forest-950/80 group-hover:text-emerald-300 group-hover:border-emerald-400/30">
                   {img.group}
                 </span>
               </li>

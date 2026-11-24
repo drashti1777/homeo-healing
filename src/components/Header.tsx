@@ -45,12 +45,12 @@ export function Header({ clinicName }: { clinicName: string }) {
       >
         <div className="wrap flex h-[4.75rem] items-center justify-between gap-6">
           <Link href="/" className="flex items-center shrink-0" aria-label={`${clinicName} home`}>
-            <div className="transition-all">
+            <div className={`transition-all ${transparentHeader ? "opacity-90 hover:opacity-100" : "opacity-100"}`}>
               <Image src="/logo.webp" alt={clinicName} width={483} height={184} priority className="h-8 sm:h-10 md:h-11 w-auto" />
             </div>
           </Link>
 
-          <nav aria-label="Main" className={`hidden items-center gap-7 text-[1.05rem] font-medium transition-colors lg:flex ${transparentHeader ? "text-white" : "text-forest-800"}`}>
+          <nav aria-label="Main" className={`hidden items-center gap-7 text-[1.05rem] font-semibold transition-colors lg:flex ${transparentHeader ? "text-white" : "text-forest-800"}`}>
             {NAV.map((item) => (
               <Link
                 key={item.href}

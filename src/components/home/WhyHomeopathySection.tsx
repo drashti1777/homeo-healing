@@ -7,7 +7,7 @@ import { ArrowRight, CheckCircle2, Heart, Leaf, ShieldCheck, Sparkles } from "lu
 
 export function WhyHomeopathySection() {
   return (
-    <section className="section bg-sage-50/60 py-16 lg:py-24 overflow-hidden border-t border-forest-800/10">
+    <section className="section bg-sage-50/60 py-16 lg:py-24 overflow-hidden">
       <div className="wrap">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
           {/* Left Column: Image of Indian Family Health (Equal 50% Width, Clean Borderless Frame with Smooth Hover Animation) */}

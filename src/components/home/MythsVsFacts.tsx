@@ -33,7 +33,7 @@ export function MythsVsFacts() {
   ];
 
   return (
-    <section className="section relative overflow-hidden bg-gradient-to-b from-white via-sand-50/50 to-white py-16 lg:py-24 border-t border-forest-900/5">
+    <section className="section relative overflow-hidden bg-gradient-to-b from-white via-sand-50/50 to-white py-16 lg:py-24">
       {/* Subtle Background Glow Orbs */}
       <div
         aria-hidden="true"

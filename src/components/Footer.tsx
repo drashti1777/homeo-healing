@@ -94,17 +94,17 @@ export function Footer({ settings }: { settings: SettingsDoc }) {
           <div className="flex flex-wrap gap-2 mb-3">
             {facebookUrl && (
               <a href={facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Facebook"
-                className="size-8 rounded-full bg-blue-600 text-white flex items-center justify-center hover:opacity-80 transition-opacity text-xs font-bold">f</a>
+                className="size-8 rounded-full bg-forest-800 text-white flex items-center justify-center hover:bg-accent transition-colors text-xs font-bold">f</a>
             )}
             {settings.youtubeUrl && (
               <a href={settings.youtubeUrl} target="_blank" rel="noopener noreferrer" aria-label="YouTube"
-                className="size-8 rounded-full bg-red-600 text-white flex items-center justify-center hover:opacity-80 transition-opacity text-xs font-bold">▶</a>
+                className="size-8 rounded-full bg-forest-800 text-white flex items-center justify-center hover:bg-accent transition-colors text-xs font-bold">▶</a>
             )}
             <a href="https://wa.me/918160602060" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
-              className="size-8 rounded-full bg-green-500 text-white flex items-center justify-center hover:opacity-80 transition-opacity text-xs font-bold">W</a>
+              className="size-8 rounded-full bg-emerald-500 text-forest-950 flex items-center justify-center hover:bg-emerald-400 transition-colors text-xs font-bold">W</a>
             {instagramUrl && (
               <a href={instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram"
-                className="size-8 rounded-full bg-gradient-to-br from-pink-500 to-orange-400 text-white flex items-center justify-center hover:opacity-80 transition-opacity text-xs font-bold">IG</a>
+                className="size-8 rounded-full bg-forest-800 text-white flex items-center justify-center hover:bg-accent transition-colors text-xs font-bold">IG</a>
             )}
           </div>
           {/* Partner logos row (JD, Paytm, Google) */}
@@ -129,7 +129,7 @@ export function Footer({ settings }: { settings: SettingsDoc }) {
       <div className="relative z-10 border-t border-gray-200/80 bg-white/80 backdrop-blur-[2px] py-4 text-xs text-gray-600">
         <div className="wrap text-center">
           Copyright &copy;{new Date().getFullYear()} All rights reserved | Powered By{" "}
-          <a href="https://midnightdigital.in" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+          <a href="https://midnightdigital.in" target="_blank" rel="noopener noreferrer" className="text-forest-800 font-medium hover:text-accent hover:underline">
             Midnight Digital Pvt. Ltd.
           </a>
         </div>

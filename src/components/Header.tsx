@@ -12,15 +12,12 @@ export function Header({ clinicName }: { clinicName: string }) {
   const pathname = usePathname();
   const reduce = useReducedMotion();
   const [open, setOpen] = useState(false);
-  const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const closeRef = useRef<HTMLButtonElement>(null);
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    const prev = scrollY.getPrevious() ?? 0;
     setScrolled(latest > 24);
-    setHidden(latest > prev && latest > 160 && !open);
   });
 
   useEffect(() => {
@@ -41,18 +38,16 @@ export function Header({ clinicName }: { clinicName: string }) {
 
   return (
     <>
-      <motion.header
-        animate={{ y: hidden && !reduce ? "-100%" : "0%" }}
-        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
           transparentHeader
-            ? "bg-gradient-to-b from-forest-950/85 via-forest-950/45 to-transparent border-b border-white/10"
-            : "bg-white/95 backdrop-blur-md border-b border-sand-200/70 shadow-[0_2px_12px_-4px_rgba(40,36,109,0.06)]"
+            ? "bg-gradient-to-b from-forest-950/85 via-forest-950/45 to-transparent"
+            : "bg-white/95 backdrop-blur-md shadow-[0_2px_12px_-4px_rgba(40,36,109,0.06)]"
         }`}
       >
         <div className="wrap flex h-[4.75rem] items-center justify-between gap-6">
           <Link href="/" className="flex items-center shrink-0" aria-label={`${clinicName} home`}>
-            <div className={transparentHeader ? "rounded-xl bg-white/90 px-3 py-1 backdrop-blur-md shadow-xs transition-all" : "transition-all"}>
+            <div className="transition-all">
               <Image src="/logo.webp" alt={clinicName} width={483} height={184} priority className="h-8 sm:h-10 md:h-11 w-auto" />
             </div>
           </Link>
@@ -90,7 +85,7 @@ export function Header({ clinicName }: { clinicName: string }) {
             </button>
           </div>
         </div>
-      </motion.header>
+      </header>
 
       <AnimatePresence>
         {open && (
@@ -112,7 +107,7 @@ export function Header({ clinicName }: { clinicName: string }) {
                 className="flex items-center"
                 aria-label={`${clinicName} home`}
               >
-                <div className="rounded-xl bg-white px-2.5 py-1.5 shadow-sm flex items-center justify-center">
+                <div className="flex items-center justify-center">
                   <Image
                     src="/logo.webp"
                     alt={clinicName}

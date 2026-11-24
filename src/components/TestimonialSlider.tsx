@@ -143,7 +143,7 @@ export function TestimonialSlider({
       />
       <div
         aria-hidden="true"
-        className={`pointer-events-none absolute -bottom-12 -right-12 h-80 w-80 rounded-full blur-3xl -z-10 ${isLight ? "bg-amber-100/40" : "bg-forest-700/30"
+        className={`pointer-events-none absolute -bottom-12 -right-12 h-80 w-80 rounded-full blur-3xl -z-10 ${isLight ? "bg-emerald-100/40" : "bg-forest-700/30"
           }`}
       />
 
@@ -204,7 +204,7 @@ export function TestimonialSlider({
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
-                      className="size-4.5 fill-amber-400 text-amber-400 drop-shadow-sm"
+                      className="size-4.5 fill-emerald-500 text-emerald-500 drop-shadow-sm"
                     />
                   ))}
                 </div>
@@ -442,9 +442,9 @@ export function TestimonialSlider({
                           Active
                         </span>
                       ) : (
-                        <div className="flex items-center gap-0.5 text-amber-400">
+                        <div className="flex items-center gap-0.5 text-emerald-500">
                           {[...Array(5)].map((_, s) => (
-                            <Star key={s} className="size-2.5 fill-amber-400 text-amber-400" />
+                            <Star key={s} className="size-2.5 fill-emerald-500 text-emerald-500" />
                           ))}
                         </div>
                       )}

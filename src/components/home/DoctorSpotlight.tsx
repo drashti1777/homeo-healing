@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { ArrowRight, Award, BookOpen, CalendarCheck, CheckCircle2, GraduationCap, HeartPulse, Sparkles, Star, Stethoscope, Users } from "lucide-react";
+import { ArrowRight, Award, BookOpen, CalendarCheck, CheckCircle2, GraduationCap, HeartPulse, MapPin, Sparkles, Star, Stethoscope, Users } from "lucide-react";
 
 export function DoctorSpotlight() {
   const credentials = [
@@ -46,7 +46,7 @@ export function DoctorSpotlight() {
   ];
 
   return (
-    <section className="section bg-gradient-to-b from-white via-sand-50/40 to-white overflow-hidden py-16 lg:py-24 border-t border-forest-900/5">
+    <section className="section bg-gradient-to-b from-white via-sand-50/40 to-white overflow-hidden py-16 lg:py-24">
       <div className="wrap">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Doctor Visual Side: Layered Luxury Bento Frame */}
@@ -88,7 +88,7 @@ export function DoctorSpotlight() {
                   transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
                   className="absolute top-5 left-5 z-10 inline-flex items-center gap-2 rounded-2xl bg-white/95 px-3.5 py-1.5 text-xs font-bold text-forest-950 backdrop-blur-md shadow-lg shadow-forest-900/15 border border-white/40"
                 >
-                  <Star className="size-3.5 fill-amber-400 text-amber-400" />
+                  <Star className="size-3.5 fill-emerald-500 text-emerald-500" />
                   <span>15+ Years Clinical Care</span>
                 </motion.div>
 
@@ -109,31 +109,6 @@ export function DoctorSpotlight() {
                   </p>
                 </div>
               </div>
-
-              {/* Overlapping Floating Consultation Preview Badge */}
-              <motion.div
-                animate={{ y: [0, -6, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                className="hidden sm:flex absolute -bottom-6 -right-6 items-center gap-3 rounded-3xl bg-white p-3 shadow-2xl shadow-forest-900/20 border border-forest-800/10 max-w-[15rem] backdrop-blur-sm"
-              >
-                <div className="relative size-14 shrink-0 overflow-hidden rounded-2xl">
-                  <Image
-                    src="/gallery/indian-consultation.webp"
-                    alt="Clinical consultation room"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div>
-                  <span className="flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-emerald-700">
-                    <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    Active Practice
-                  </span>
-                  <p className="text-xs font-serif font-bold text-forest-950 mt-0.5">
-                    Constitutional Evaluation
-                  </p>
-                </div>
-              </motion.div>
             </div>
           </motion.div>
 
@@ -167,51 +142,45 @@ export function DoctorSpotlight() {
                   <motion.div
                     key={c.title}
                     whileHover={{ y: -4, scale: 1.02, transition: { duration: 0.2 } }}
-                    className={`group relative rounded-2xl p-4.5 transition-all duration-300 ${
-                      c.featured
-                        ? "bg-forest-900 text-white shadow-lg shadow-forest-900/15 border border-forest-800"
-                        : "bg-white text-forest-950 border border-forest-800/10 shadow-sm hover:border-emerald-500/40 hover:shadow-md hover:bg-sand-50/50"
-                    }`}
+                    className={`group relative rounded-2xl p-4.5 transition-all duration-300 ${c.featured
+                      ? "bg-forest-900 text-white shadow-lg shadow-forest-900/15 border border-forest-800"
+                      : "bg-white text-forest-950 border border-forest-800/10 shadow-sm hover:border-emerald-500/40 hover:shadow-md hover:bg-sand-50/50"
+                      }`}
                   >
                     <div className="flex items-center justify-between mb-2.5">
                       <div
-                        className={`flex size-9 items-center justify-center rounded-xl transition-transform group-hover:scale-110 ${
-                          c.featured
-                            ? "bg-emerald-500/20 text-emerald-300"
-                            : "bg-emerald-50 text-emerald-700"
-                        }`}
+                        className={`flex size-9 items-center justify-center rounded-xl transition-transform group-hover:scale-110 ${c.featured
+                          ? "bg-emerald-500/20 text-emerald-300"
+                          : "bg-emerald-50 text-emerald-700"
+                          }`}
                       >
                         <Icon className="size-4.5" />
                       </div>
                       <span
-                        className={`rounded-full px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider ${
-                          c.featured
-                            ? "bg-emerald-400 text-forest-950"
-                            : "bg-sage-100 text-forest-800"
-                        }`}
+                        className={`rounded-full px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider ${c.featured
+                          ? "bg-emerald-400 text-forest-950"
+                          : "bg-sage-100 text-forest-800"
+                          }`}
                       >
                         {c.year}
                       </span>
                     </div>
 
                     <h4
-                      className={`font-serif text-sm sm:text-base font-bold leading-snug ${
-                        c.featured ? "text-white" : "text-forest-950"
-                      }`}
+                      className={`font-serif text-sm sm:text-base font-bold leading-snug ${c.featured ? "text-white" : "text-forest-950"
+                        }`}
                     >
                       {c.title}
                     </h4>
                     <p
-                      className={`text-xs mt-1 font-medium ${
-                        c.featured ? "text-emerald-200" : "text-emerald-700"
-                      }`}
+                      className={`text-xs mt-1 font-medium ${c.featured ? "text-emerald-200" : "text-emerald-700"
+                        }`}
                     >
                       {c.institute}
                     </p>
                     <p
-                      className={`text-xs mt-1.5 leading-relaxed ${
-                        c.featured ? "text-white/75" : "text-ink-soft"
-                      }`}
+                      className={`text-xs mt-1.5 leading-relaxed ${c.featured ? "text-white/75" : "text-ink-soft"
+                        }`}
                     >
                       {c.desc}
                     </p>

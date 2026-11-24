@@ -44,9 +44,9 @@ export function Footer({ settings }: { settings: SettingsDoc }) {
             <Link
               href="/"
               aria-label={`${settings.clinicName} home`}
-              className="inline-block rounded-2xl bg-white/95 p-3.5 shadow-xl backdrop-blur-md transition-transform hover:scale-105"
+              className="inline-block transition-transform hover:scale-105"
             >
-              <Image src="/logo.webp" alt={settings.clinicName} width={483} height={184} className="h-11 sm:h-12 w-auto" />
+              <Image src="/logo.webp" alt={settings.clinicName} width={483} height={184} className="h-11 sm:h-12 w-auto drop-shadow-md" />
             </Link>
 
             <p className="text-xs sm:text-sm text-white/85 leading-relaxed max-w-md">

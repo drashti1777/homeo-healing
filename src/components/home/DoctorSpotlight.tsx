@@ -48,14 +48,14 @@ export function DoctorSpotlight() {
   return (
     <section className="section bg-sand-50/70 overflow-hidden pt-10 pb-14 lg:pt-14 lg:pb-18">
       <div className="wrap">
-        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
-          {/* Doctor Visual Side: Layered Luxury Bento Frame (Photo on LEFT) */}
+        <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
+          {/* Doctor Visual Side: Layered Luxury Bento Frame (Photo on LEFT, 5 of 12 columns, full width) */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-full"
+            className="relative w-full lg:col-span-5"
           >
             {/* Ambient Background Glow */}
             <div
@@ -68,13 +68,13 @@ export function DoctorSpotlight() {
             />
 
             {/* Main Portrait Frame with Interactive Depth */}
-            <div className="relative mx-auto w-full max-w-md sm:max-w-lg">
-              <div className="relative aspect-[3/4] w-full overflow-hidden rounded-[2.5rem] bg-sage-50 shadow-2xl shadow-forest-900/15 border border-forest-800/10">
+            <div className="relative w-full">
+              <div className="relative aspect-[3/4] w-full overflow-hidden rounded-3xl sm:rounded-[2.5rem] bg-sage-50 shadow-2xl shadow-forest-900/15 border border-forest-800/10">
                 <Image
                   src="/gallery/doc.webp"
                   alt="Dr. Neeta Parmar - Chief Homoeopathic Consultant"
                   fill
-                  sizes="(min-width: 1024px) 50vw, 90vw"
+                  sizes="(min-width: 1024px) 45vw, 100vw"
                   className="object-cover object-top transition-transform duration-700 hover:scale-105"
                 />
                 <div
@@ -112,13 +112,13 @@ export function DoctorSpotlight() {
             </div>
           </motion.div>
 
-          {/* Details Side: Bento Matrix Layout (Text & Credentials on RIGHT) */}
+          {/* Details Side: Bento Matrix Layout (Text & Credentials on RIGHT, 7 of 12 columns) */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="space-y-6 w-full"
+            className="space-y-6 w-full lg:col-span-7"
           >
             <div>
               <div className="inline-flex items-center gap-2 rounded-full bg-emerald-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-emerald-800 border border-emerald-300">

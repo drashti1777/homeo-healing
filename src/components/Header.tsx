@@ -33,17 +33,15 @@ export function Header({ clinicName }: { clinicName: string }) {
   }, [open]);
 
   const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
-  const isHome = pathname === "/";
-  const transparentHeader = isHome && !scrolled;
+  const transparentHeader = !scrolled;
 
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-          transparentHeader
-            ? "bg-gradient-to-b from-forest-950/85 via-forest-950/45 to-transparent"
-            : "bg-white/95 backdrop-blur-md shadow-[0_2px_12px_-4px_rgba(40,36,109,0.06)]"
-        }`}
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${transparentHeader
+          ? "bg-gradient-to-b from-forest-950/85 via-forest-950/45 to-transparent"
+          : "bg-white/95 backdrop-blur-md shadow-[0_2px_12px_-4px_rgba(40,36,109,0.06)]"
+          }`}
       >
         <div className="wrap flex h-[4.75rem] items-center justify-between gap-6">
           <Link href="/" className="flex items-center shrink-0" aria-label={`${clinicName} home`}>
@@ -52,7 +50,7 @@ export function Header({ clinicName }: { clinicName: string }) {
             </div>
           </Link>
 
-          <nav aria-label="Main" className={`hidden items-center gap-7 text-[0.92rem] font-medium transition-colors lg:flex ${transparentHeader ? "text-white" : "text-forest-800"}`}>
+          <nav aria-label="Main" className={`hidden items-center gap-7 text-[1.05rem] font-medium transition-colors lg:flex ${transparentHeader ? "text-white" : "text-forest-800"}`}>
             {NAV.map((item) => (
               <Link
                 key={item.href}
@@ -75,11 +73,10 @@ export function Header({ clinicName }: { clinicName: string }) {
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label="Open menu"
-              className={`grid size-11 place-items-center rounded-full border transition-colors lg:hidden ${
-                transparentHeader
-                  ? "border-white/30 text-white hover:bg-white/10"
-                  : "border-forest-800/20 text-forest-800 hover:bg-forest-50"
-              }`}
+              className={`grid size-11 place-items-center rounded-full border transition-colors lg:hidden ${transparentHeader
+                ? "border-white/30 text-white hover:bg-white/10"
+                : "border-forest-800/20 text-forest-800 hover:bg-forest-50"
+                }`}
             >
               <Menu className="size-5" aria-hidden="true" />
             </button>

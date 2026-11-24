@@ -138,17 +138,17 @@ export function TestimonialSlider({
       {/* Ambient Visual Glow behind the container */}
       <div
         aria-hidden="true"
-        className={`pointer-events-none absolute -top-12 -left-12 h-80 w-80 rounded-full blur-3xl -z-10 ${isLight ? "bg-emerald-100/60" : "bg-emerald-500/10"
+        className={`pointer-events-none absolute -top-8 -left-8 h-60 w-60 rounded-full blur-3xl -z-10 ${isLight ? "bg-emerald-100/50" : "bg-emerald-500/10"
           }`}
       />
       <div
         aria-hidden="true"
-        className={`pointer-events-none absolute -bottom-12 -right-12 h-80 w-80 rounded-full blur-3xl -z-10 ${isLight ? "bg-emerald-100/40" : "bg-forest-700/30"
+        className={`pointer-events-none absolute -bottom-8 -right-8 h-60 w-60 rounded-full blur-3xl -z-10 ${isLight ? "bg-emerald-100/30" : "bg-forest-700/20"
           }`}
       />
 
       {/* Top Mobile/Tablet Quick-Selector Pills */}
-      <div className="mb-6 flex flex-wrap items-center justify-center gap-2 lg:hidden">
+      <div className="mb-4 flex flex-wrap items-center justify-center gap-1.5 lg:hidden">
         {reviews.map((item, idx) => {
           const active = idx === index;
           return (
@@ -160,10 +160,10 @@ export function TestimonialSlider({
                 setProgress(0);
                 setIndex(idx);
               }}
-              className={`flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all duration-200 ${active
+              className={`flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold transition-all duration-200 ${active
                 ? isLight
-                  ? "bg-emerald-700 text-white shadow-md shadow-emerald-700/25 scale-105"
-                  : "bg-emerald-400 text-forest-950 font-bold shadow-md shadow-emerald-400/25 scale-105"
+                  ? "bg-emerald-700 text-white shadow-sm scale-105"
+                  : "bg-emerald-400 text-forest-950 font-bold shadow-sm scale-105"
                 : isLight
                   ? "bg-white text-forest-900 border border-forest-800/10 hover:bg-emerald-50"
                   : "bg-white/10 text-white/80 hover:bg-white/20"
@@ -179,31 +179,31 @@ export function TestimonialSlider({
       </div>
 
       {/* Main Dual-Column Interactive Stage */}
-      <div className="grid gap-8 lg:grid-cols-12">
+      <div className="grid gap-5 lg:grid-cols-12 items-start">
         {/* Left Column: Spotlight Patient Story (7 of 12 columns) */}
         <div
-          className={`relative lg:col-span-7 flex flex-col justify-between overflow-hidden rounded-[2.5rem] p-6 sm:p-8 md:p-10 transition-all duration-300 ${isLight
-            ? "bg-white shadow-2xl shadow-forest-950/10 border border-forest-800/10"
-            : "bg-forest-950/90 text-white shadow-2xl shadow-black/30 border border-forest-700/40"
+          className={`relative lg:col-span-7 flex flex-col justify-between overflow-hidden rounded-2xl sm:rounded-3xl p-5 sm:p-6 transition-all duration-300 ${isLight
+            ? "bg-white shadow-lg shadow-forest-950/5 border border-forest-800/10"
+            : "bg-forest-950/90 text-white shadow-xl shadow-black/30 border border-forest-700/40"
             }`}
         >
           {/* Decorative Corner Watermark */}
           <div
             aria-hidden="true"
-            className={`pointer-events-none absolute top-5 right-6 text-emerald-500/20`}
+            className={`pointer-events-none absolute top-4 right-5 text-emerald-500/20`}
           >
-            <Sparkles className="size-8" />
+            <Sparkles className="size-6" />
           </div>
 
           <div>
             {/* Top Bar: Star Rating & Verified Pill */}
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-forest-900/10 pb-6">
-              <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center justify-between gap-2.5 border-b border-forest-900/10 pb-4">
+              <div className="flex items-center gap-2.5">
                 <div className="flex items-center gap-1">
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
-                      className="size-4.5 fill-emerald-500 text-emerald-500 drop-shadow-sm"
+                      className="size-4 fill-emerald-500 text-emerald-500 drop-shadow-sm"
                     />
                   ))}
                 </div>
@@ -222,9 +222,9 @@ export function TestimonialSlider({
               </div>
 
               {/* Condition Badge */}
-              <div className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3.5 py-1 text-xs font-bold text-emerald-800 border border-emerald-500/20">
+              <div className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-bold text-emerald-800 border border-emerald-500/20">
                 <ShieldCheck className="size-3.5 text-emerald-600 shrink-0" />
-                <span className="truncate max-w-[200px] sm:max-w-none">
+                <span className="truncate max-w-[180px] sm:max-w-none">
                   {activeMeta.condition}
                 </span>
               </div>
@@ -232,14 +232,14 @@ export function TestimonialSlider({
 
             {/* Clinical Healing Outcome Callout */}
             <div
-              className={`mt-6 flex items-start gap-3 rounded-2xl p-4 border transition-colors ${isLight
+              className={`mt-4 flex items-start gap-3 rounded-xl p-3.5 border transition-colors ${isLight
                 ? "bg-emerald-50/70 border-emerald-500/20 text-emerald-950"
                 : "bg-emerald-900/25 border-emerald-500/30 text-emerald-200"
                 }`}
             >
               <Sparkles className="size-4 shrink-0 text-emerald-600 mt-0.5" />
-              <div className="text-xs sm:text-sm leading-relaxed">
-                <strong className="font-semibold block text-[11px] uppercase tracking-wider text-emerald-800 dark:text-emerald-300 mb-0.5">
+              <div className="text-sm leading-relaxed">
+                <strong className="font-semibold block text-xs uppercase tracking-wider text-emerald-800 dark:text-emerald-300 mb-0.5">
                   Clinical Outcome Highlight:
                 </strong>
                 <span>{activeMeta.outcome}</span>
@@ -247,18 +247,18 @@ export function TestimonialSlider({
             </div>
 
             {/* Animated Testimonial Text */}
-            <div className="relative mt-7 min-h-[9rem]">
+            <div className="relative mt-5 min-h-[7rem]">
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                   key={activeReview.name}
-                  initial={{ opacity: 0, y: reduce ? 0 : 15, scale: 0.99 }}
+                  initial={{ opacity: 0, y: reduce ? 0 : 8, scale: 0.99 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: reduce ? 0 : -15, scale: 0.99 }}
-                  transition={{ duration: reduce ? 0 : 0.35, ease: [0.16, 1, 0.3, 1] }}
+                  exit={{ opacity: 0, y: reduce ? 0 : -8, scale: 0.99 }}
+                  transition={{ duration: reduce ? 0 : 0.3, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <blockquote
-                    className={`font-serif text-[clamp(1.1rem,1.8vw,1.35rem)] leading-relaxed italic ${isLight ? "text-forest-950 font-medium" : "text-white font-light"
-                      } ${isLong && !expanded ? "line-clamp-5 sm:line-clamp-6" : ""}`}
+                    className={`font-sans text-[15px] sm:text-base leading-relaxed not-italic ${isLight ? "text-forest-900 font-normal" : "text-white/90 font-light"
+                      } ${isLong && !expanded ? "line-clamp-5" : ""}`}
                   >
                     &ldquo;{activeReview.quote}&rdquo;
                   </blockquote>
@@ -267,7 +267,7 @@ export function TestimonialSlider({
                     <button
                       type="button"
                       onClick={() => setExpanded((e) => !e)}
-                      className="mt-3 inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-emerald-700 hover:text-emerald-800 dark:text-emerald-300 dark:hover:text-emerald-200 hover:underline"
+                      className="mt-2.5 inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-emerald-700 hover:text-emerald-800 dark:text-emerald-300 dark:hover:text-emerald-200 hover:underline"
                     >
                       <span>{expanded ? "Show less ↑" : "Read full patient story →"}</span>
                     </button>
@@ -278,11 +278,11 @@ export function TestimonialSlider({
           </div>
 
           {/* Bottom Card Footer: Author Details + Controls */}
-          <div className="mt-8 pt-6 border-t border-forest-900/10 flex flex-wrap items-center justify-between gap-4">
+          <div className="mt-6 pt-4 border-t border-forest-900/10 flex flex-wrap items-center justify-between gap-3">
             {/* Patient Avatar & Credentials */}
-            <div className="flex items-center gap-3.5">
+            <div className="flex items-center gap-3">
               <div
-                className={`flex size-13 items-center justify-center rounded-2xl font-serif text-lg font-bold shadow-md ring-2 ${isLight
+                className={`flex size-11 items-center justify-center rounded-xl font-serif text-sm font-bold shadow-sm ring-1 ${isLight
                   ? "bg-gradient-to-tr from-forest-900 to-emerald-700 text-white ring-emerald-100"
                   : "bg-emerald-400 text-forest-950 ring-emerald-400/30"
                   }`}
@@ -291,7 +291,7 @@ export function TestimonialSlider({
               </div>
               <div>
                 <h3
-                  className={`font-serif text-base sm:text-lg font-bold leading-tight ${isLight ? "text-forest-950" : "text-white"
+                  className={`font-serif text-sm sm:text-base font-bold leading-tight ${isLight ? "text-forest-950" : "text-white"
                     }`}
                 >
                   {activeReview.name}
@@ -300,7 +300,7 @@ export function TestimonialSlider({
                   className={`text-xs mt-0.5 flex items-center gap-1.5 ${isLight ? "text-ink-soft" : "text-white/70"
                     }`}
                 >
-                  <UserCheck className="size-3.5 text-emerald-600" />
+                  <UserCheck className="size-3 text-emerald-600" />
                   <span>
                     {activeReview.location
                       ? `${activeReview.location} · ${activeMeta.role}`
@@ -311,50 +311,50 @@ export function TestimonialSlider({
             </div>
 
             {/* Playback & Navigation Controls */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
               <button
                 type="button"
                 onClick={() => setIsPaused((p) => !p)}
                 aria-label={isPaused ? "Resume auto play" : "Pause auto play"}
-                className={`grid size-10 place-items-center rounded-full border transition-all duration-200 active:scale-95 ${isLight
+                className={`grid size-8 place-items-center rounded-full border transition-all duration-200 active:scale-95 ${isLight
                   ? "border-forest-900/15 bg-sand-50/60 text-forest-800 hover:bg-emerald-50 hover:text-emerald-800"
                   : "border-white/20 bg-white/10 text-white hover:bg-white/20"
                   }`}
                 title={isPaused ? "Play" : "Pause"}
               >
-                {isPaused ? <Play className="size-4" /> : <Pause className="size-4" />}
+                {isPaused ? <Play className="size-3.5" /> : <Pause className="size-3.5" />}
               </button>
 
               <button
                 type="button"
                 onClick={() => go(-1)}
                 aria-label="Previous testimonial"
-                className={`grid size-10 place-items-center rounded-full border transition-all duration-200 active:scale-95 ${isLight
+                className={`grid size-8 place-items-center rounded-full border transition-all duration-200 active:scale-95 ${isLight
                   ? "border-forest-900/15 bg-sand-50/60 text-forest-800 hover:bg-emerald-50 hover:text-emerald-800"
                   : "border-white/20 bg-white/10 text-white hover:bg-white/20"
                   }`}
               >
-                <ChevronLeft className="size-5" />
+                <ChevronLeft className="size-4" />
               </button>
 
               <button
                 type="button"
                 onClick={() => go(1)}
                 aria-label="Next testimonial"
-                className={`grid size-10 place-items-center rounded-full border transition-all duration-200 active:scale-95 ${isLight
+                className={`grid size-8 place-items-center rounded-full border transition-all duration-200 active:scale-95 ${isLight
                   ? "border-forest-900/15 bg-sand-50/60 text-forest-800 hover:bg-emerald-50 hover:text-emerald-800"
                   : "border-white/20 bg-white/10 text-white hover:bg-white/20"
                   }`}
               >
-                <ChevronRight className="size-5" />
+                <ChevronRight className="size-4" />
               </button>
             </div>
           </div>
         </div>
 
         {/* Right Column: Interactive Patient Stories Deck (5 of 12 columns, Desktop) */}
-        <div className="hidden lg:flex lg:col-span-5 flex-col gap-2.5 sticky top-24 lg:top-28 self-start">
-          <div className="flex items-center justify-between px-2 mb-1">
+        <div className="hidden lg:flex lg:col-span-5 flex-col gap-2 sticky top-24 lg:top-28 self-start">
+          <div className="flex items-center justify-between px-1 mb-0.5">
             <span
               className={`text-xs font-bold uppercase tracking-wider ${isLight ? "text-forest-900" : "text-emerald-300"
                 }`}
@@ -369,7 +369,7 @@ export function TestimonialSlider({
             </span>
           </div>
 
-          <div className="flex flex-col gap-2.5">
+          <div className="flex flex-col gap-2">
             {reviews.map((rev, i) => {
               const active = i === index;
               const meta = getReviewMeta(rev.name, rev.quote);
@@ -383,28 +383,28 @@ export function TestimonialSlider({
                     setProgress(0);
                     setIndex(i);
                   }}
-                  whileHover={{ x: 4, transition: { duration: 0.15 } }}
-                  className={`group relative text-left rounded-2xl p-4 transition-all duration-300 overflow-hidden ${active
+                  whileHover={{ x: 3, transition: { duration: 0.15 } }}
+                  className={`group relative text-left rounded-lg p-2 transition-all duration-200 overflow-hidden ${active
                     ? isLight
-                      ? "bg-white border-2 border-emerald-600 shadow-xl shadow-emerald-950/10 ring-4 ring-emerald-50"
-                      : "bg-forest-900/90 border-2 border-emerald-400 shadow-xl shadow-black/40 text-white"
+                      ? "bg-white border border-emerald-500 shadow-sm ring-1 ring-emerald-500/20"
+                      : "bg-forest-900/90 border border-emerald-400 shadow-sm text-white"
                     : isLight
-                      ? "bg-white/70 border border-forest-800/10 hover:bg-white hover:border-emerald-500/40 hover:shadow-md"
+                      ? "bg-white/80 border border-forest-800/10 hover:bg-white hover:border-emerald-500/40"
                       : "bg-white/5 border border-white/10 text-white/80 hover:bg-white/10"
                     }`}
                 >
                   {/* Active Card Progress Bar Indicator */}
                   {active && !isPaused && (
                     <div
-                      className="absolute bottom-0 left-0 h-1 bg-emerald-500 transition-all duration-75"
+                      className="absolute bottom-0 left-0 h-0.5 bg-emerald-500/80 transition-all duration-75"
                       style={{ width: `${progress}%` }}
                     />
                   )}
 
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-3">
+                  <div className="flex items-center justify-between gap-2.5">
+                    <div className="flex items-center gap-2.5">
                       <div
-                        className={`flex size-9 items-center justify-center rounded-xl text-xs font-bold ${active
+                        className={`flex size-8 items-center justify-center rounded-lg text-xs font-bold ${active
                           ? "bg-emerald-600 text-white"
                           : isLight
                             ? "bg-sage-100 text-forest-900 group-hover:bg-emerald-100"
@@ -415,7 +415,7 @@ export function TestimonialSlider({
                       </div>
                       <div>
                         <h4
-                          className={`text-sm font-bold leading-tight ${active
+                          className={`text-xs sm:text-sm font-bold leading-tight ${active
                             ? isLight
                               ? "text-forest-950"
                               : "text-white"
@@ -427,7 +427,7 @@ export function TestimonialSlider({
                           {rev.name}
                         </h4>
                         <p
-                          className={`text-xs mt-0.5 truncate max-w-[190px] ${active ? "text-emerald-700 dark:text-emerald-300 font-semibold" : "text-ink-soft dark:text-white/60"
+                          className={`text-xs mt-0.5 truncate max-w-[170px] ${active ? "text-emerald-700 dark:text-emerald-300 font-semibold" : "text-ink-soft dark:text-white/60"
                             }`}
                         >
                           {meta.condition}
@@ -437,7 +437,7 @@ export function TestimonialSlider({
 
                     <div className="flex flex-col items-end gap-1">
                       {active ? (
-                        <span className="rounded-full bg-emerald-500/20 px-2 py-0.5 text-[10px] font-bold text-emerald-800 dark:text-emerald-300 uppercase tracking-wider">
+                        <span className="rounded-full bg-emerald-500/15 px-2 py-0.5 text-[10px] font-bold text-emerald-800 dark:text-emerald-300 uppercase tracking-wider">
                           Active
                         </span>
                       ) : (

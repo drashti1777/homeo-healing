@@ -47,21 +47,21 @@ export default async function HomePage() {
 
       {/* 7. Patient's Testimonials (Modern Light & Crisp Styling) */}
       {reviews.length > 0 && (
-        <section className="relative bg-white py-16 lg:py-24" aria-labelledby="testimonials-heading">
+        <section className="relative bg-white py-10 lg:py-14" aria-labelledby="testimonials-heading">
           <div className="wrap relative">
-            <div className="mx-auto max-w-2xl text-center">
-              <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-emerald-800 border border-emerald-300/60 shadow-sm">
+            <div className="mx-auto max-w-xl text-center">
+              <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-0.5 text-xs font-bold uppercase tracking-wider text-emerald-800 border border-emerald-300/60 shadow-sm">
                 <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 Patient Feedback
               </span>
-              <h2 id="testimonials-heading" className="mt-3 font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-forest-950">
+              <h2 id="testimonials-heading" className="mt-2.5 font-serif text-2xl sm:text-3xl lg:text-4xl font-medium text-forest-950">
                 Patient&apos;s Testimonials
               </h2>
-              <p className="mt-3 text-sm sm:text-base text-ink-soft">
+              <p className="mt-2 text-xs sm:text-sm text-ink-soft">
                 {TESTIMONIALS_INTRO}
               </p>
             </div>
-            <div className="mt-12">
+            <div className="mt-8">
               <TestimonialSlider reviews={reviews} theme="light" />
             </div>
           </div>

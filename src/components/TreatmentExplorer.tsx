@@ -5,12 +5,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ChevronRight, Search, ShieldAlert, X } from "lucide-react";
+import { ChevronRight, Search, ShieldAlert, Sparkles, X } from "lucide-react";
 import { TreatmentIcon } from "./TreatmentIcon";
 
 export type ExplorerItem = {
-  slug: string; title: string; summary: string; conditions: string[]; group: string;
-  icon: string; image: string; imageAlt: string; riskLevel: "standard" | "specialist";
+  slug: string;
+  title: string;
+  summary: string;
+  conditions: string[];
+  group: string;
+  icon: string;
+  image: string;
+  imageAlt: string;
+  riskLevel: "standard" | "specialist";
 };
 
 const norm = (s: string) => s.toLowerCase().normalize("NFKD").replace(/[^\p{L}\p{N} ]/gu, " ");
@@ -23,7 +30,6 @@ export function TreatmentExplorer({ items, groups }: { items: ExplorerItem[]; gr
   const [query, setQuery] = useState(params.get("q") ?? "");
   const [group, setGroup] = useState(params.get("group") ?? "all");
   const deferred = useDeferredValue(query);
-  // Cards whose full condition list is expanded ("+N more" button).
   const [open, setOpen] = useState<Record<string, boolean>>({});
 
   const tabsRef = useRef<HTMLDivElement>(null);
@@ -71,7 +77,6 @@ export function TreatmentExplorer({ items, groups }: { items: ExplorerItem[]; gr
     }, 50);
   };
 
-  // Keep the URL shareable (?q=asthma&group=mind) without adding history entries.
   useEffect(() => {
     const p = new URLSearchParams();
     if (query.trim()) p.set("q", query.trim());
@@ -98,25 +103,33 @@ export function TreatmentExplorer({ items, groups }: { items: ExplorerItem[]; gr
 
   return (
     <div>
-      <div className="glass sticky top-20 z-20 -mx-2 rounded-[1.75rem] p-2 shadow-lg shadow-forest-900/5 sm:mx-0">
+      {/* Sticky Search & Filter Header */}
+      <div className="sticky top-16 sm:top-20 z-20 -mx-1 sm:mx-0 rounded-2xl sm:rounded-[2rem] bg-white/95 p-2.5 sm:p-3 shadow-xl shadow-forest-950/5 border border-forest-800/10 backdrop-blur-md">
         <div className="relative">
-          <Search className="pointer-events-none absolute left-5 top-1/2 size-5 -translate-y-1/2 text-forest-600" aria-hidden="true" />
+          <Search className="pointer-events-none absolute left-4 sm:left-5 top-1/2 size-4.5 sm:size-5 -translate-y-1/2 text-forest-700" aria-hidden="true" />
           <label htmlFor="treatment-search" className="sr-only">Search treatment categories and conditions</label>
           <input
             id="treatment-search"
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search a condition, e.g. asthma, thyroid, migraine"
+            placeholder="Search any condition, e.g. asthma, migraine..."
             autoComplete="off"
-            className="w-full rounded-[1.4rem] border border-sage-200 bg-white py-4 pl-14 pr-12 text-base text-ink placeholder:text-ink-soft/70 focus:border-forest-600 focus:outline-none focus:ring-4 focus:ring-forest-600/15"
+            className="w-full rounded-xl sm:rounded-2xl border border-forest-800/15 bg-white py-2.5 sm:py-3.5 pl-11 sm:pl-14 pr-10 sm:pr-12 text-xs sm:text-base text-ink placeholder:text-ink-soft/70 shadow-xs focus:border-forest-700 focus:outline-none focus:ring-4 focus:ring-emerald-500/15"
           />
           {query && (
-            <button type="button" onClick={() => setQuery("")} aria-label="Clear search" className="absolute right-3 top-1/2 grid size-9 -translate-y-1/2 place-items-center rounded-full text-ink-soft hover:bg-sage-100">
+            <button
+              type="button"
+              onClick={() => setQuery("")}
+              aria-label="Clear search query"
+              className="absolute right-3.5 top-1/2 grid size-8 -translate-y-1/2 place-items-center rounded-full text-ink-soft hover:bg-sage-100 hover:text-forest-900 transition-colors"
+            >
               <X className="size-4" aria-hidden="true" />
             </button>
           )}
         </div>
+
+        {/* Category Group Tabs */}
         <div
           ref={tabsRef}
           role="group"
@@ -126,9 +139,9 @@ export function TreatmentExplorer({ items, groups }: { items: ExplorerItem[]; gr
           onMouseUp={onMouseUp}
           onMouseLeave={onMouseUp}
           style={{ WebkitOverflowScrolling: "touch" }}
-          className="mt-2 flex min-w-0 w-full max-w-full gap-2 overflow-x-auto px-1 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden touch-pan-x cursor-grab active:cursor-grabbing"
+          className="mt-3 flex min-w-0 w-full max-w-full gap-2 overflow-x-auto px-1 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden touch-pan-x cursor-grab active:cursor-grabbing"
         >
-          {[{ key: "all", label: "All", n: items.length }, ...groups.filter((g) => counts[g.key]).map((g) => ({ ...g, n: counts[g.key] }))].map((g) => {
+          {[{ key: "all", label: "All Categories", n: items.length }, ...groups.filter((g) => counts[g.key]).map((g) => ({ ...g, n: counts[g.key] }))].map((g) => {
             const active = group === g.key;
             return (
               <button
@@ -137,32 +150,65 @@ export function TreatmentExplorer({ items, groups }: { items: ExplorerItem[]; gr
                 type="button"
                 aria-pressed={active}
                 onClick={() => { if (!dragged.current) setGroup(g.key); }}
-                className={`relative shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-colors ${active ? "text-paper" : "text-forest-800 hover:bg-sage-100"}`}
+                className={`relative shrink-0 rounded-full px-4 py-2 text-xs sm:text-sm font-semibold transition-all duration-200 ${
+                  active
+                    ? "bg-forest-800 text-white shadow-md shadow-forest-900/15 scale-105"
+                    : "bg-white text-forest-800 border border-forest-800/10 hover:bg-emerald-50 hover:border-emerald-500/30"
+                }`}
               >
-                {active && <motion.span layoutId="group-pill" transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 420, damping: 34 }} className="absolute inset-0 rounded-full bg-forest-800" />}
-                <span className="relative">{g.label} <span className={active ? "text-sage-200" : "text-ink-soft"}>{g.n}</span></span>
+                <span>{g.label}</span>
+                <span
+                  className={`ml-1.5 rounded-full px-1.5 py-0.2 text-[10px] font-bold ${
+                    active ? "bg-white/25 text-white" : "bg-sage-100 text-forest-800"
+                  }`}
+                >
+                  {g.n}
+                </span>
               </button>
             );
           })}
         </div>
       </div>
 
-      <p role="status" aria-live="polite" className="mt-8 text-sm text-ink-soft">
-        {results.length === items.length ? `${items.length} categories` : `${results.length} of ${items.length} categories`}
-        {deferred.trim() && <> matching &ldquo;{deferred.trim()}&rdquo;</>}
-      </p>
+      {/* Results Count Meta */}
+      <div className="mt-8 flex items-center justify-between text-xs sm:text-sm text-ink-soft">
+        <p role="status" aria-live="polite">
+          Showing <span className="font-bold text-forest-950">{results.length}</span> of {items.length} categories
+          {deferred.trim() && <> matching &ldquo;<span className="text-forest-800 font-semibold">{deferred.trim()}</span>&rdquo;</>}
+        </p>
+        {(query || group !== "all") && (
+          <button
+            type="button"
+            onClick={reset}
+            className="text-emerald-700 hover:text-emerald-800 font-semibold underline underline-offset-4"
+          >
+            Reset Filters
+          </button>
+        )}
+      </div>
 
+      {/* Empty State */}
       {results.length === 0 ? (
-        <div className="mt-6 rounded-[2rem] border border-dashed border-sage-300 bg-sage-50 px-6 py-14 text-center">
-          <h3 className="text-2xl font-normal">No matching category</h3>
-          <p className="mx-auto mt-3 max-w-md text-ink-soft">Try a different word, or contact the clinic to ask whether your concern is something Dr. Neeta can discuss with you.</p>
+        <div className="mt-8 rounded-[2.5rem] border border-dashed border-forest-800/20 bg-sage-50/50 p-12 text-center">
+          <div className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-white shadow-sm text-forest-800 mb-4">
+            <Search className="size-6 text-emerald-600" />
+          </div>
+          <h3 className="font-serif text-2xl font-bold text-forest-950">No matching treatment category</h3>
+          <p className="mx-auto mt-2 max-w-md text-sm text-ink-soft leading-relaxed">
+            We offer holistic constitutional care for a wide spectrum of acute and chronic disorders. Contact Dr. Neeta Parmar to discuss your specific symptoms.
+          </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <button type="button" onClick={reset} className="btn btn-ghost">Show all categories</button>
-            <Link href="/contact" className="btn btn-primary">Ask the clinic</Link>
+            <button type="button" onClick={reset} className="btn btn-ghost">
+              Show All Categories
+            </button>
+            <Link href="/contact" className="btn btn-primary">
+              Ask Dr. Neeta Directly
+            </Link>
           </div>
         </div>
       ) : (
-        <motion.ul layout={!reduce} className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        /* Results Cards Grid */
+        <motion.ul layout={!reduce} className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence initial={false} mode="popLayout">
             {results.map(({ t, matched }) => (
               <motion.li
@@ -174,58 +220,71 @@ export function TreatmentExplorer({ items, groups }: { items: ExplorerItem[]; gr
                 whileHover={reduce ? undefined : { y: -6 }}
                 transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               >
-                <div className="group flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-forest-800/10 bg-white shadow-sm transition-all duration-300 hover:border-forest-800/20 hover:shadow-xl hover:shadow-forest-900/10">
+                <div className="group flex h-full flex-col justify-between overflow-hidden rounded-[2rem] border border-forest-800/10 bg-white shadow-md shadow-forest-900/5 transition-all duration-300 hover:border-emerald-500/40 hover:shadow-2xl hover:shadow-emerald-950/10">
                   <div>
+                    {/* Visual Card Header */}
                     <div className="relative aspect-[16/10] overflow-hidden bg-sage-100">
                       {t.image ? (
                         <Image
                           src={t.image}
-                          alt={t.imageAlt || ""}
+                          alt={t.imageAlt || t.title}
                           fill
                           sizes="(min-width:1024px) 30vw, (min-width:640px) 45vw, 100vw"
-                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                          className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                         />
                       ) : (
-                        <span className="grid size-full place-items-center text-forest-600">
-                          <TreatmentIcon name={t.icon} className="size-14" />
+                        <span className="grid size-full place-items-center text-forest-600 bg-sage-50">
+                          <TreatmentIcon name={t.icon} className="size-14 text-emerald-700" />
                         </span>
                       )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-forest-950/70 via-transparent to-transparent pointer-events-none" />
-                      
-                      <span className="glass absolute left-4 top-4 grid size-11 place-items-center rounded-full text-forest-800">
-                        <TreatmentIcon name={t.icon} className="size-5" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-forest-950/80 via-transparent to-transparent pointer-events-none" />
+
+                      {/* Icon Badge */}
+                      <span className="glass absolute left-4 top-4 grid size-10 place-items-center rounded-full text-forest-800 shadow-md">
+                        <TreatmentIcon name={t.icon} className="size-4.5" />
                       </span>
+
+                      {/* Specialist Care Badge */}
                       {t.riskLevel === "specialist" && (
-                        <span className="glass absolute right-4 top-4 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[0.7rem] font-semibold text-forest-800">
-                          <ShieldAlert className="size-3.5" aria-hidden="true" /> Specialist care needed
+                        <span className="glass absolute right-4 top-4 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[0.7rem] font-bold text-forest-800 shadow-md">
+                          <ShieldAlert className="size-3.5 text-amber-600" aria-hidden="true" />
+                          <span>Specialist care</span>
                         </span>
                       )}
 
-                      <div className="absolute bottom-3 left-4 right-4">
-                        <span className="inline-block rounded-full bg-white/95 px-3 py-1 text-[11px] font-semibold text-forest-800 backdrop-blur-sm shadow-sm">
-                          {t.conditions.length > 0 ? `${t.conditions.length} Conditions Treated` : "Comprehensive Care"}
+                      {/* Bottom Image Tag */}
+                      <div className="absolute bottom-3 left-4 right-4 z-10">
+                        <span className="inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1 text-xs font-bold text-forest-900 backdrop-blur-md shadow-md">
+                          <span className="size-1.5 rounded-full bg-emerald-500" />
+                          <span>{t.conditions.length > 0 ? `${t.conditions.length} Conditions Treated` : "Holistic Healing"}</span>
                         </span>
                       </div>
                     </div>
 
+                    {/* Card Body */}
                     <div className="p-6">
-                      <h3 className="font-serif text-2xl font-bold text-forest-950 group-hover:text-forest-800 transition-colors">
-                        {t.title}
+                      <h3 className="font-serif text-2xl font-bold text-forest-950 transition-colors group-hover:text-emerald-800">
+                        <Link href={`/treatments/${t.slug}`} className="hover:underline">
+                          {t.title}
+                        </Link>
                       </h3>
+
                       {t.summary && (
                         <p className="mt-2 text-xs sm:text-sm text-ink-soft line-clamp-2 leading-relaxed">
                           {t.summary}
                         </p>
                       )}
+
+                      {/* Conditions Pill Cloud */}
                       {t.conditions.length > 0 && (
-                        <ul className="mt-4 flex flex-wrap gap-1.5" aria-label={`Conditions listed under ${t.title}`}>
+                        <ul className="mt-4 flex flex-wrap gap-1.5" aria-label={`Conditions treated under ${t.title}`}>
                           {(matched.length ? matched : open[t.slug] ? t.conditions : t.conditions.slice(0, 5)).map((c) => (
                             <li
                               key={c}
-                              className={`rounded-lg px-2.5 py-1 text-xs font-medium transition-colors ${
+                              className={`rounded-lg px-2.5 py-1 text-xs font-semibold transition-colors ${
                                 matched.includes(c)
-                                  ? "bg-forest-800 text-paper"
-                                  : "bg-sage-50 text-forest-900"
+                                  ? "bg-forest-800 text-white shadow-xs"
+                                  : "bg-sage-50 text-forest-900 border border-forest-800/5 group-hover:bg-emerald-50 group-hover:border-emerald-200"
                               }`}
                             >
                               {c}
@@ -237,7 +296,7 @@ export function TreatmentExplorer({ items, groups }: { items: ExplorerItem[]; gr
                                 type="button"
                                 aria-expanded={!!open[t.slug]}
                                 onClick={() => setOpen((o) => ({ ...o, [t.slug]: !o[t.slug] }))}
-                                className="rounded-lg border border-forest-800/20 bg-white px-2.5 py-1 text-xs font-medium text-forest-800 transition-colors hover:bg-forest-800 hover:text-white"
+                                className="rounded-lg border border-forest-800/20 bg-white px-2.5 py-1 text-xs font-bold text-forest-800 transition-colors hover:bg-forest-800 hover:text-white"
                               >
                                 {open[t.slug] ? "Show less" : `+${t.conditions.length - 5} more`}
                               </button>
@@ -248,6 +307,7 @@ export function TreatmentExplorer({ items, groups }: { items: ExplorerItem[]; gr
                     </div>
                   </div>
 
+                  {/* Explore Treatment Button (Commented Out as requested)
                   <div className="p-6 pt-0">
                     <Link
                       href={`/treatments/${t.slug}`}
@@ -257,6 +317,7 @@ export function TreatmentExplorer({ items, groups }: { items: ExplorerItem[]; gr
                       <ChevronRight className="size-4" />
                     </Link>
                   </div>
+                  */}
                 </div>
               </motion.li>
             ))}

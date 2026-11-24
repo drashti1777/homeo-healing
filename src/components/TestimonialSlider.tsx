@@ -190,10 +190,9 @@ export function TestimonialSlider({
           {/* Decorative Corner Watermark */}
           <div
             aria-hidden="true"
-            className={`pointer-events-none absolute -top-4 -right-4 size-32 opacity-5 ${isLight ? "text-forest-950" : "text-white"
-              }`}
+            className={`pointer-events-none absolute top-5 right-6 text-emerald-500/20`}
           >
-            <Quote className="size-full" />
+            <Sparkles className="size-8" />
           </div>
 
           <div>

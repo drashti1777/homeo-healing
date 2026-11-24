@@ -7,7 +7,7 @@ import { ArrowRight, CheckCircle2, HeartPulse, Sparkles } from "lucide-react";
 
 export function ClinicIntroLive() {
   return (
-    <section className="section bg-white py-16 lg:py-24">
+    <section className="section bg-white pt-12 pb-6 lg:pt-16 lg:pb-8">
       <div className="wrap">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
           {/* Left Column: Image of Doctor Consultation (Equal 50% Width, Clean Borderless Frame with Smooth Hover Animation) */}

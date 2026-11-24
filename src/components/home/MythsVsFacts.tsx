@@ -33,7 +33,7 @@ export function MythsVsFacts() {
   ];
 
   return (
-    <section className="section relative overflow-hidden bg-gradient-to-b from-white via-sand-50/50 to-white py-16 lg:py-24">
+    <section className="section relative overflow-hidden bg-white py-16 lg:py-24">
       {/* Subtle Background Glow Orbs */}
       <div
         aria-hidden="true"
@@ -217,17 +217,17 @@ export function MythsVsFacts() {
             </div>
 
             {/* Bottom CTA */}
-            <div className="mt-8 pt-5 border-t border-forest-800/10 flex items-center justify-between">
+            <div className="mt-8 pt-5 border-t border-forest-800/10 flex items-center justify-between gap-4">
               <Link
                 href="/about"
-                className="group inline-flex items-center gap-2 text-sm font-bold text-forest-800 hover:text-emerald-700 transition-colors"
+                className="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-forest-800 hover:text-emerald-700 transition-colors"
               >
-                <span>Know More About Our Approach</span>
-                <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+                <span>Our Approach</span>
+                <ArrowRight className="size-4 shrink-0 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
                 href="/book-appointment"
-                className="rounded-full bg-forest-900 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-forest-800 transition-all hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center whitespace-nowrap rounded-full bg-forest-900 px-5 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-forest-800 transition-all hover:-translate-y-0.5 shrink-0"
               >
                 Book Visit
               </Link>

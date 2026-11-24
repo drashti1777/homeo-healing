@@ -62,7 +62,7 @@ export function FullScreenHeroBanner() {
     <section
       aria-roledescription="carousel"
       aria-label="Homeopathy Highlights Banner"
-      className="relative w-full h-[100dvh] min-h-[38rem] overflow-hidden bg-forest-950 flex flex-col justify-center"
+      className="relative w-full min-h-[100dvh] overflow-hidden bg-forest-950 flex flex-col justify-center"
     >
       <AnimatePresence initial={false} mode="wait">
         <motion.div
@@ -101,20 +101,20 @@ export function FullScreenHeroBanner() {
           />
 
           {/* Slide Text Content */}
-          <div className="wrap relative flex h-full flex-col justify-center pt-28 sm:pt-32 pb-20">
-            <div className="max-w-2xl lg:max-w-3xl space-y-5 text-white">
+          <div className="wrap relative flex min-h-[100dvh] flex-col justify-center pt-24 sm:pt-32 pb-24 sm:pb-20">
+            <div className="max-w-2xl lg:max-w-3xl space-y-4 sm:space-y-5 text-white">
               {/* Badge */}
               <motion.div
                 variants={rise(reduce, 0.1)}
                 initial="hidden"
                 animate="show"
-                className="inline-flex items-center gap-2.5 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-emerald-300 backdrop-blur-md"
+                className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1 text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-emerald-300 backdrop-blur-md max-w-full"
               >
-                <span className="relative flex h-2 w-2">
+                <span className="relative flex h-2 w-2 shrink-0">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
                 </span>
-                <span>{slide.badge}</span>
+                <span className="truncate">{slide.badge}</span>
               </motion.div>
 
               {/* Title */}
@@ -122,7 +122,7 @@ export function FullScreenHeroBanner() {
                 variants={rise(reduce, 0.25)}
                 initial="hidden"
                 animate="show"
-                className="font-serif text-3xl sm:text-5xl lg:text-[3.5rem] font-medium leading-[1.14] text-white tracking-tight"
+                className="font-serif text-2xl xs:text-3xl sm:text-5xl lg:text-[3.5rem] font-medium leading-[1.18] sm:leading-[1.14] text-white tracking-tight"
               >
                 {slide.title}
               </motion.h1>
@@ -132,7 +132,7 @@ export function FullScreenHeroBanner() {
                 variants={rise(reduce, 0.4)}
                 initial="hidden"
                 animate="show"
-                className="max-w-xl text-base sm:text-lg text-white/85 leading-relaxed"
+                className="max-w-xl text-sm sm:text-lg text-white/85 leading-relaxed line-clamp-3 sm:line-clamp-none"
               >
                 {slide.subtitle}
               </motion.p>
@@ -142,11 +142,11 @@ export function FullScreenHeroBanner() {
                 variants={rise(reduce, 0.55)}
                 initial="hidden"
                 animate="show"
-                className="flex flex-wrap items-center gap-4 pt-3"
+                className="flex flex-wrap items-center gap-3 sm:gap-4 pt-2 sm:pt-3"
               >
                 <Link
                   href={slide.href}
-                  className="group inline-flex items-center gap-2.5 rounded-full bg-emerald-500 px-8 py-4 text-sm sm:text-base font-semibold text-forest-950 shadow-xl shadow-emerald-500/25 transition-all duration-300 hover:bg-emerald-400 hover:shadow-emerald-500/35 hover:-translate-y-0.5 active:translate-y-0"
+                  className="group inline-flex items-center gap-2 rounded-full bg-emerald-500 px-6 py-3.5 sm:px-8 sm:py-4 text-xs sm:text-base font-semibold text-forest-950 shadow-xl shadow-emerald-500/25 transition-all duration-300 hover:bg-emerald-400 hover:shadow-emerald-500/35 hover:-translate-y-0.5 active:translate-y-0"
                 >
                   <span>{slide.cta}</span>
                   <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -154,16 +154,16 @@ export function FullScreenHeroBanner() {
 
                 <Link
                   href={slide.knowMoreHref}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-7 py-4 text-sm sm:text-base font-semibold text-white backdrop-blur-sm transition-all duration-200 hover:bg-white/20 hover:border-white/40 active:scale-[0.99]"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-5 py-3.5 sm:px-7 sm:py-4 text-xs sm:text-base font-semibold text-white backdrop-blur-sm transition-all duration-200 hover:bg-white/20 hover:border-white/40 active:scale-[0.99]"
                 >
                   <span>Know More</span>
                 </Link>
 
                 <a
                   href="tel:+918160602060"
-                  className="hidden sm:inline-flex items-center gap-2 text-sm font-semibold text-white/90 hover:text-emerald-300 pl-2"
+                  className="inline-flex sm:inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-white/90 hover:text-emerald-300 py-1"
                 >
-                  <PhoneCall className="size-4 text-emerald-400" />
+                  <PhoneCall className="size-3.5 sm:size-4 text-emerald-400" />
                   <span>+91 81606 02060</span>
                 </a>
               </motion.div>

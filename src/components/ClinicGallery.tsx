@@ -3,32 +3,51 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Filter, Maximize2, Sparkles, X } from "lucide-react";
 
 export type GallerySectionImage = { src: string; alt: string; width: number; height: number };
 export type GallerySection = { id: string; title: string; blurb?: string; images: GallerySectionImage[] };
 
-/**
- * Gallery as titled sections (Team, Consultation Room, ...). Every photo opens in one shared lightbox,
- * so left/right arrows walk through the whole gallery in page order.
- */
 export function ClinicGallery({ sections }: { sections: GallerySection[] }) {
   const reduce = useReducedMotion();
+  const [activeTab, setActiveTab] = useState<string>("all");
   const [index, setIndex] = useState<number | null>(null);
   const closeBtn = useRef<HTMLButtonElement>(null);
   const opener = useRef<HTMLElement | null>(null);
   const touchX = useRef<number | null>(null);
 
-  // One flat list, so the lightbox can step across sections.
-  const flat = useMemo(() => sections.flatMap((s) => s.images.map((img) => ({ ...img, section: s.title }))), [sections]);
-  const offsets = useMemo(() => {
-    let n = 0;
-    return sections.map((s) => { const start = n; n += s.images.length; return start; });
-  }, [sections]);
-  const current = index === null ? null : flat[index];
+  // Flattened items with category / section info
+  const allImages = useMemo(
+    () =>
+      sections.flatMap((s) =>
+        s.images.map((img) => ({
+          ...img,
+          sectionId: s.id,
+          sectionTitle: s.title,
+        }))
+      ),
+    [sections]
+  );
 
-  const close = useCallback(() => { setIndex(null); requestAnimationFrame(() => opener.current?.focus()); }, []);
-  const step = useCallback((d: 1 | -1) => setIndex((i) => (i === null ? i : (i + d + flat.length) % flat.length)), [flat.length]);
+  // Filtered list based on active tab
+  const visibleImages = useMemo(() => {
+    if (activeTab === "all") return allImages;
+    return allImages.filter((img) => img.sectionId === activeTab);
+  }, [allImages, activeTab]);
+
+  const current = index === null ? null : visibleImages[index];
+
+  const close = useCallback(() => {
+    setIndex(null);
+    requestAnimationFrame(() => opener.current?.focus());
+  }, []);
+
+  const step = useCallback(
+    (d: 1 | -1) => {
+      setIndex((i) => (i === null ? i : (i + d + visibleImages.length) % visibleImages.length));
+    },
+    [visibleImages.length]
+  );
 
   useEffect(() => {
     if (index === null) return;
@@ -40,69 +59,130 @@ export function ClinicGallery({ sections }: { sections: GallerySection[] }) {
       else if (e.key === "ArrowLeft") step(-1);
     };
     window.addEventListener("keydown", onKey);
-    return () => { document.body.style.overflow = ""; window.removeEventListener("keydown", onKey); };
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
   }, [index, close, step]);
 
-  return (
-    <>
-      <div className="space-y-24 md:space-y-32">
-        {sections.map((s, si) => {
-          const single = s.images.length === 1;
-          return (
-            <section key={s.id} aria-labelledby={`g-${s.id}`}>
-              <div className="max-w-2xl mb-8">
-                <p className="eyebrow mb-4" data-reveal>{String(si + 1).padStart(2, "0")}</p>
-                <h2 id={`g-${s.id}`} data-split className="text-[clamp(1.9rem,4vw,3rem)] font-normal">{s.title}</h2>
-                {s.blurb && <p className="mt-5 text-ink-soft" data-reveal>{s.blurb}</p>}
-              </div>
+  const tabs = [
+    { id: "all", label: "All Photos", count: allImages.length },
+    ...sections.map((s) => ({ id: s.id, label: s.title, count: s.images.length })),
+  ];
 
-              {/* Compact, even grid: 4 photos in a row on desktop, 2 on tablet/phone, so nothing is stretched past its real size. */}
-              <ul className={`mt-12 grid gap-4 ${single ? "mx-auto max-w-md grid-cols-1" : s.images.length === 3 ? "grid-cols-2 lg:grid-cols-3" : "grid-cols-2 lg:grid-cols-4"}`}>
-                {s.images.map((img, i) => (
-                  <li key={img.src} data-clip data-delay={(i % 4) * 0.12}>
-                    <button
-                      type="button"
-                      onClick={(e) => { opener.current = e.currentTarget; setIndex(offsets[si] + i); }}
-                      aria-label={`Open image: ${img.alt}`}
-                      className="group relative block w-full overflow-hidden rounded-[1.75rem] bg-sage-100 shadow-lg shadow-forest-900/5 transition-[transform,box-shadow] duration-700 ease-out-expo hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-forest-900/15"
-                    >
-                      <span className="block aspect-[4/3]">
-                        <Image
-                          src={img.src}
-                          alt={img.alt}
-                          width={img.width}
-                          height={img.height}
-                          loading="lazy"
-                          sizes={single ? "(min-width:640px) 28rem, 90vw" : "(min-width:1024px) 25vw, 50vw"}
-                          className="size-full object-cover transition-transform duration-[1400ms] ease-out-expo group-hover:scale-[1.07]"
-                        />
-                      </span>
-                      <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-t from-forest-950/55 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                      <span aria-hidden="true" className="glass pointer-events-none absolute right-4 top-4 grid size-10 translate-y-2 place-items-center rounded-full text-forest-800 opacity-0 transition-[opacity,transform] duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-                        <Maximize2 className="size-4" />
-                      </span>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </section>
+  return (
+    <div>
+      {/* Category Filter Pills */}
+      <div className="flex flex-wrap items-center justify-center gap-2.5 pb-12">
+        {tabs.map((tab) => {
+          const isActive = activeTab === tab.id;
+          return (
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => {
+                setActiveTab(tab.id);
+                setIndex(null);
+              }}
+              className={`relative inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-xs sm:text-sm font-semibold transition-all duration-300 ${
+                isActive
+                  ? "bg-forest-800 text-white shadow-lg shadow-forest-900/20 scale-105"
+                  : "bg-white text-forest-800 border border-forest-800/10 shadow-xs hover:border-emerald-500/40 hover:bg-emerald-50/50"
+              }`}
+            >
+              <span>{tab.label}</span>
+              <span
+                className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
+                  isActive ? "bg-white/20 text-white" : "bg-sage-100 text-forest-800"
+                }`}
+              >
+                {tab.count}
+              </span>
+            </button>
           );
         })}
       </div>
 
+      {/* Modern Responsive Image Grid */}
+      <motion.div
+        layout
+        className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+      >
+        <AnimatePresence mode="popLayout">
+          {visibleImages.map((img, i) => (
+            <motion.div
+              key={img.src}
+              layout={!reduce}
+              initial={reduce ? false : { opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <button
+                type="button"
+                onClick={(e) => {
+                  opener.current = e.currentTarget;
+                  setIndex(i);
+                }}
+                aria-label={`Open photo: ${img.alt}`}
+                className="group relative block w-full overflow-hidden rounded-[2rem] bg-sage-50 border border-forest-800/10 shadow-md shadow-forest-900/5 transition-all duration-500 hover:-translate-y-1.5 hover:border-emerald-500/40 hover:shadow-2xl hover:shadow-emerald-950/10 text-left"
+              >
+                <div className="relative aspect-[4/3] w-full overflow-hidden">
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 bg-gradient-to-t from-forest-950/80 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  />
+
+                  {/* Section Badge */}
+                  <div className="absolute top-4 left-4 z-10">
+                    <span className="inline-flex items-center rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-forest-900 backdrop-blur-md shadow-md">
+                      {img.sectionTitle}
+                    </span>
+                  </div>
+
+                  {/* Hover Zoom Icon Button */}
+                  <div className="absolute bottom-4 right-4 z-10 opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+                    <span className="flex size-10 items-center justify-center rounded-full bg-emerald-500 text-forest-950 shadow-lg shadow-emerald-500/30">
+                      <Maximize2 className="size-4" />
+                    </span>
+                  </div>
+
+                  {/* Caption on hover */}
+                  <div className="absolute bottom-4 left-4 right-16 z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    <p className="text-xs font-medium text-white/90 line-clamp-1">
+                      {img.alt}
+                    </p>
+                  </div>
+                </div>
+              </button>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </motion.div>
+
+      {/* Lightbox Modal */}
       <AnimatePresence>
         {current && index !== null && (
           <motion.div
             role="dialog"
             aria-modal="true"
-            aria-label={`Image ${index + 1} of ${flat.length}: ${current.alt}`}
+            aria-label={`Photo ${index + 1} of ${visibleImages.length}: ${current.alt}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: reduce ? 0 : 0.3 }}
-            className="fixed inset-0 z-[80] flex flex-col bg-forest-950/95 backdrop-blur-sm"
+            transition={{ duration: reduce ? 0 : 0.25 }}
+            className="fixed inset-0 z-[80] flex flex-col bg-forest-950/95 backdrop-blur-md"
             onClick={(e) => e.target === e.currentTarget && close()}
-            onTouchStart={(e) => { touchX.current = e.touches[0].clientX; }}
+            onTouchStart={(e) => {
+              touchX.current = e.touches[0].clientX;
+            }}
             onTouchEnd={(e) => {
               if (touchX.current === null) return;
               const dx = e.changedTouches[0].clientX - touchX.current;
@@ -110,34 +190,80 @@ export function ClinicGallery({ sections }: { sections: GallerySection[] }) {
               touchX.current = null;
             }}
           >
-            <div className="flex items-center justify-between px-4 py-4 text-paper sm:px-8">
-              <p className="text-sm text-sage-200" aria-live="polite">{index + 1} / {flat.length} · {current.section}</p>
-              <button ref={closeBtn} type="button" onClick={close} aria-label="Close" className="grid size-11 place-items-center rounded-full bg-paper/10 hover:bg-paper/20"><X className="size-5" /></button>
+            {/* Top Lightbox Bar */}
+            <div className="flex items-center justify-between px-6 py-4 text-white">
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-emerald-300 font-semibold">
+                <span className="rounded-full bg-white/10 px-3 py-1 text-white">
+                  {index + 1} / {visibleImages.length}
+                </span>
+                <span>• {current.sectionTitle}</span>
+              </div>
+              <button
+                ref={closeBtn}
+                type="button"
+                onClick={close}
+                aria-label="Close photo viewer"
+                className="grid size-10 place-items-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+              >
+                <X className="size-5" />
+              </button>
             </div>
-            <div className="relative flex flex-1 items-center justify-center px-4 pb-4 sm:px-20" onClick={(e) => e.target === e.currentTarget && close()}>
+
+            {/* Photo Stage */}
+            <div
+              className="relative flex flex-1 items-center justify-center px-4 pb-6 sm:px-16"
+              onClick={(e) => e.target === e.currentTarget && close()}
+            >
               <AnimatePresence mode="wait" initial={false}>
                 <motion.figure
                   key={current.src}
-                  initial={reduce ? { opacity: 1 } : { opacity: 0, scale: 0.97 }}
+                  initial={reduce ? { opacity: 1 } : { opacity: 0, scale: 0.96 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.97 }}
-                  transition={{ duration: reduce ? 0 : 0.35, ease: [0.16, 1, 0.3, 1] }}
-                  className="flex max-h-full flex-col items-center"
+                  exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.96 }}
+                  transition={{ duration: reduce ? 0 : 0.3, ease: [0.16, 1, 0.3, 1] }}
+                  className="flex max-h-full flex-col items-center justify-center"
                 >
-                  <Image src={current.src} alt={current.alt} width={current.width} height={current.height} sizes="100vw" className="max-h-[78vh] w-auto rounded-xl object-contain" priority />
-                  <figcaption className="mt-4 max-w-2xl text-center text-sm text-sage-100">{current.alt}</figcaption>
+                  <div className="relative overflow-hidden rounded-2xl shadow-2xl">
+                    <Image
+                      src={current.src}
+                      alt={current.alt}
+                      width={current.width}
+                      height={current.height}
+                      sizes="100vw"
+                      className="max-h-[75vh] w-auto rounded-2xl object-contain shadow-2xl"
+                      priority
+                    />
+                  </div>
+                  <figcaption className="mt-4 max-w-xl text-center text-xs sm:text-sm text-white/80">
+                    {current.alt}
+                  </figcaption>
                 </motion.figure>
               </AnimatePresence>
-              {flat.length > 1 && (
+
+              {visibleImages.length > 1 && (
                 <>
-                  <button type="button" onClick={() => step(-1)} aria-label="Previous image" className="absolute left-2 top-1/2 grid size-12 -translate-y-1/2 place-items-center rounded-full bg-paper/10 text-paper hover:bg-paper/20 sm:left-6"><ChevronLeft className="size-6" /></button>
-                  <button type="button" onClick={() => step(1)} aria-label="Next image" className="absolute right-2 top-1/2 grid size-12 -translate-y-1/2 place-items-center rounded-full bg-paper/10 text-paper hover:bg-paper/20 sm:right-6"><ChevronRight className="size-6" /></button>
+                  <button
+                    type="button"
+                    onClick={() => step(-1)}
+                    aria-label="Previous photo"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 grid size-12 place-items-center rounded-full bg-white/15 text-white backdrop-blur-md transition-all hover:bg-white/30 sm:left-6"
+                  >
+                    <ChevronLeft className="size-6" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => step(1)}
+                    aria-label="Next photo"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 grid size-12 place-items-center rounded-full bg-white/15 text-white backdrop-blur-md transition-all hover:bg-white/30 sm:right-6"
+                  >
+                    <ChevronRight className="size-6" />
+                  </button>
                 </>
               )}
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 }

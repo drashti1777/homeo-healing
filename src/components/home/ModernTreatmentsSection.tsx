@@ -148,7 +148,7 @@ export function ModernTreatmentsSection({ treatments }: { treatments: TreatmentD
                     </div>
                   </div>
 
-                  {/* Footer Action */}
+                  {/* Footer Action (Commented Out)
                   <div className="p-6 pt-0">
                     <Link
                       href={`/treatments`}
@@ -158,6 +158,7 @@ export function ModernTreatmentsSection({ treatments }: { treatments: TreatmentD
                       <ChevronRight className="size-4" />
                     </Link>
                   </div>
+                  */}
                 </motion.div>
               );
             })}

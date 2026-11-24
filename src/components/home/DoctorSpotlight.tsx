@@ -46,10 +46,10 @@ export function DoctorSpotlight() {
   ];
 
   return (
-    <section className="section bg-gradient-to-b from-white via-sand-50/40 to-white overflow-hidden py-16 lg:py-24">
+    <section className="section bg-sand-50/70 overflow-hidden pt-10 pb-14 lg:pt-14 lg:pb-18">
       <div className="wrap">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          {/* Doctor Visual Side: Layered Luxury Bento Frame */}
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+          {/* Doctor Visual Side: Layered Luxury Bento Frame (Photo on LEFT) */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -112,7 +112,7 @@ export function DoctorSpotlight() {
             </div>
           </motion.div>
 
-          {/* Details Side: Bento Matrix Layout */}
+          {/* Details Side: Bento Matrix Layout (Text & Credentials on RIGHT) */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -142,45 +142,51 @@ export function DoctorSpotlight() {
                   <motion.div
                     key={c.title}
                     whileHover={{ y: -4, scale: 1.02, transition: { duration: 0.2 } }}
-                    className={`group relative rounded-2xl p-4.5 transition-all duration-300 ${c.featured
-                      ? "bg-forest-900 text-white shadow-lg shadow-forest-900/15 border border-forest-800"
-                      : "bg-white text-forest-950 border border-forest-800/10 shadow-sm hover:border-emerald-500/40 hover:shadow-md hover:bg-sand-50/50"
-                      }`}
+                    className={`group relative rounded-2xl p-4.5 transition-all duration-300 ${
+                      c.featured
+                        ? "bg-forest-900 text-white shadow-lg shadow-forest-900/15 border border-forest-800"
+                        : "bg-white text-forest-950 border border-forest-800/10 shadow-sm hover:border-emerald-500/40 hover:shadow-md hover:bg-sand-50/50"
+                    }`}
                   >
                     <div className="flex items-center justify-between mb-2.5">
                       <div
-                        className={`flex size-9 items-center justify-center rounded-xl transition-transform group-hover:scale-110 ${c.featured
-                          ? "bg-emerald-500/20 text-emerald-300"
-                          : "bg-emerald-50 text-emerald-700"
-                          }`}
+                        className={`flex size-9 items-center justify-center rounded-xl transition-transform group-hover:scale-110 ${
+                          c.featured
+                            ? "bg-emerald-500/20 text-emerald-300"
+                            : "bg-emerald-50 text-emerald-700"
+                        }`}
                       >
                         <Icon className="size-4.5" />
                       </div>
                       <span
-                        className={`rounded-full px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider ${c.featured
-                          ? "bg-emerald-400 text-forest-950"
-                          : "bg-sage-100 text-forest-800"
-                          }`}
+                        className={`rounded-full px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider ${
+                          c.featured
+                            ? "bg-emerald-400 text-forest-950"
+                            : "bg-sage-100 text-forest-800"
+                        }`}
                       >
                         {c.year}
                       </span>
                     </div>
 
                     <h4
-                      className={`font-serif text-sm sm:text-base font-bold leading-snug ${c.featured ? "text-white" : "text-forest-950"
-                        }`}
+                      className={`font-serif text-sm sm:text-base font-bold leading-snug ${
+                        c.featured ? "text-white" : "text-forest-950"
+                      }`}
                     >
                       {c.title}
                     </h4>
                     <p
-                      className={`text-xs mt-1 font-medium ${c.featured ? "text-emerald-200" : "text-emerald-700"
-                        }`}
+                      className={`text-xs mt-1 font-medium ${
+                        c.featured ? "text-emerald-200" : "text-emerald-700"
+                      }`}
                     >
                       {c.institute}
                     </p>
                     <p
-                      className={`text-xs mt-1.5 leading-relaxed ${c.featured ? "text-white/75" : "text-ink-soft"
-                        }`}
+                      className={`text-xs mt-1.5 leading-relaxed ${
+                        c.featured ? "text-white/75" : "text-ink-soft"
+                      }`}
                     >
                       {c.desc}
                     </p>
@@ -190,18 +196,18 @@ export function DoctorSpotlight() {
             </div>
 
             {/* Action Row */}
-            <div className="flex flex-wrap items-center gap-4 pt-3">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-3">
               <Link
                 href="/book-appointment"
-                className="group inline-flex items-center gap-2.5 rounded-full bg-emerald-500 px-7 py-3.5 text-sm sm:text-base font-semibold text-forest-950 shadow-lg shadow-emerald-500/25 transition-all hover:bg-emerald-400 hover:shadow-emerald-500/35 hover:-translate-y-0.5 active:translate-y-0"
+                className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-emerald-500 px-6 py-3.5 sm:px-7 sm:py-3.5 text-sm sm:text-base font-semibold text-forest-950 shadow-lg shadow-emerald-500/25 transition-all hover:bg-emerald-400 hover:shadow-emerald-500/35 hover:-translate-y-0.5 active:translate-y-0 text-center"
               >
-                <CalendarCheck className="size-4 text-forest-950" />
+                <CalendarCheck className="size-4 text-forest-950 shrink-0" />
                 <span>Book Consultation</span>
-                <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 shrink-0" />
               </Link>
               <Link
                 href="/about"
-                className="inline-flex items-center gap-2 rounded-full border border-forest-800/20 bg-white px-6 py-3.5 text-sm sm:text-base font-semibold text-forest-800 shadow-sm transition-all hover:border-forest-800 hover:bg-forest-50"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-forest-800/20 bg-white px-5 py-3.5 sm:px-6 sm:py-3.5 text-sm sm:text-base font-semibold text-forest-800 shadow-sm transition-all hover:border-forest-800 hover:bg-forest-50 text-center"
               >
                 <span>Read Full Biography</span>
               </Link>

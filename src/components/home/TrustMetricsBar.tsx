@@ -32,9 +32,9 @@ const STATS = [
 
 export function TrustMetricsBar() {
   return (
-    <section className="relative mt-8 sm:mt-12 z-10 mb-14">
+    <section className="relative mt-4 sm:mt-12 z-10 mb-8 sm:mb-14">
       <div className="wrap">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-3.5 sm:gap-4 grid-cols-1 xs:grid-cols-2 lg:grid-cols-4">
           {STATS.map((item, idx) => {
             const Icon = item.icon;
             return (
@@ -45,7 +45,7 @@ export function TrustMetricsBar() {
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.5, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 whileHover={{ y: -8, scale: 1.02, transition: { duration: 0.25 } }}
-                className="group relative rounded-3xl border border-forest-800/10 bg-white p-6 shadow-md shadow-forest-900/5 transition-all duration-300 hover:border-emerald-500/40 hover:shadow-2xl hover:shadow-emerald-900/10 cursor-default"
+                className="group relative rounded-2xl sm:rounded-3xl border border-forest-800/10 bg-white p-4.5 sm:p-6 shadow-md shadow-forest-900/5 transition-all duration-300 hover:border-emerald-500/40 hover:shadow-2xl hover:shadow-emerald-900/10 cursor-default"
               >
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex size-12 items-center justify-center rounded-2xl bg-sage-50 text-forest-800 transition-all duration-300 group-hover:bg-emerald-600 group-hover:text-white group-hover:rotate-6 group-hover:scale-110">

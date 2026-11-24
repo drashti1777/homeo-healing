@@ -40,14 +40,18 @@ const WHAT_MAKES_US_BEST: BestTab[] = [
   {
     icon: "Target", title: "Vision & Mission", image: "/gallery/best-vision-mission.webp", imageAlt: "Medicines being prepared in the clinic dispensary",
     blocks: [
-      { heading: "Mission", lines: [
-        "As she understood in homoeopathy, every being is an individual, a unique creation and whole in itself.",
-        "She wishes to practise in an unbiased manner, always listening attentively to the patient and reaching the similimum by unfolding the altered pattern in each case in a scientific and systematic way.",
-      ] },
-      { heading: "Vision", lines: [
-        "To give relief of disease or problem and bring the patient to a healthy state by the best possible efforts, through homoeopathic remedies.",
-        "To spread the awareness of the homoeopathic system of medicine at the maximum level.",
-      ] },
+      {
+        heading: "Mission", lines: [
+          "As she understood in homoeopathy, every being is an individual, a unique creation and whole in itself.",
+          "She wishes to practise in an unbiased manner, always listening attentively to the patient and reaching the similimum by unfolding the altered pattern in each case in a scientific and systematic way.",
+        ]
+      },
+      {
+        heading: "Vision", lines: [
+          "To give relief of disease or problem and bring the patient to a healthy state by the best possible efforts, through homoeopathic remedies.",
+          "To spread the awareness of the homoeopathic system of medicine at the maximum level.",
+        ]
+      },
     ],
   },
 ];
@@ -200,7 +204,7 @@ export default async function AboutPage() {
       </section>
 
       {/* 2. Experience & Qualifications Timeline */}
-      <section className="section relative overflow-hidden bg-gradient-to-b from-white via-sand-50/50 to-white py-16 lg:py-24" aria-labelledby="journey-heading">
+      <section className="section relative overflow-hidden bg-sage-50/60 py-16 lg:py-24" aria-labelledby="journey-heading">
         <div aria-hidden="true" className="pointer-events-none absolute -right-40 top-20 size-[28rem] rounded-full bg-emerald-100/30 blur-3xl -z-10" />
         <div aria-hidden="true" className="pointer-events-none absolute -left-40 bottom-20 size-[24rem] rounded-full bg-sage-100/40 blur-3xl -z-10" />
         <div className="wrap relative">
@@ -221,7 +225,7 @@ export default async function AboutPage() {
       </section>
 
       {/* 3. What Makes Us Best */}
-      <section className="section relative overflow-hidden bg-sage-50/60 py-16 lg:py-24" aria-labelledby="best-heading">
+      <section className="section relative overflow-hidden bg-white py-16 lg:py-24" aria-labelledby="best-heading">
         <div aria-hidden="true" className="pointer-events-none absolute -left-40 -top-24 size-[30rem] rounded-full bg-emerald-100/30 blur-3xl -z-10" />
         <div className="wrap relative">
           <div className="mx-auto max-w-2xl text-center">
@@ -242,7 +246,7 @@ export default async function AboutPage() {
 
       {/* 4. Patient's Testimonials (Modern Light & Crisp Styling) */}
       {reviews.length > 0 && (
-        <section className="relative bg-gradient-to-b from-white via-sand-50/70 to-white py-16 lg:py-24" aria-labelledby="about-testimonials-heading">
+        <section className="relative bg-sage-50/60 py-16 lg:py-24" aria-labelledby="about-testimonials-heading">
           <div className="wrap relative">
             <div className="mx-auto max-w-2xl text-center">
               <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-emerald-800 border border-emerald-300/60 shadow-xs">
@@ -282,9 +286,8 @@ export default async function AboutPage() {
             {featuredPhotos.map((img, i) => (
               <li
                 key={img.src}
-                className={`group relative overflow-hidden rounded-[2rem] bg-sage-100 shadow-md shadow-forest-900/5 border border-forest-800/10 ${
-                  i === 0 ? "col-span-2 row-span-2 aspect-square" : "aspect-square"
-                }`}
+                className={`group relative overflow-hidden rounded-[2rem] bg-sage-100 shadow-md shadow-forest-900/5 border border-forest-800/10 ${i === 0 ? "col-span-2 row-span-2 aspect-square" : "aspect-square"
+                  }`}
               >
                 <Image
                   src={img.src}

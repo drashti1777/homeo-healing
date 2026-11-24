@@ -94,13 +94,14 @@ export function BestShowcase({ tabs }: { tabs: BestTab[] }) {
       </div>
 
       {/* Main Creative Showcase Frame */}
-      <div className="relative overflow-hidden rounded-3xl bg-white border border-forest-800/10 shadow-xl shadow-forest-950/5">
-        <div className="relative aspect-[16/10] sm:aspect-[21/9] lg:aspect-[24/10] w-full min-h-[340px] sm:min-h-[420px] overflow-hidden bg-forest-950">
+      <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-white border border-forest-800/10 shadow-xl shadow-forest-950/5">
+        {/* Visual Container: Shows image clearly */}
+        <div className="relative w-full aspect-[16/10] sm:aspect-[21/9] lg:aspect-[24/10] overflow-hidden bg-forest-950">
           <AnimatePresence initial={false} mode="wait">
             <motion.div
               key={tab.image}
               className="absolute inset-0"
-              initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 1.06 }}
+              initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 1.05 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.98 }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
@@ -116,27 +117,27 @@ export function BestShowcase({ tabs }: { tabs: BestTab[] }) {
             </motion.div>
           </AnimatePresence>
 
-          {/* Cinematic Vignette & Bottom Content Overlay */}
+          {/* Desktop Overlay Gradient (hidden on mobile so image is 100% visible) */}
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-t from-forest-950/95 via-forest-950/45 to-transparent pointer-events-none"
+            className="hidden sm:block absolute inset-0 bg-gradient-to-t from-forest-950/95 via-forest-950/45 to-transparent pointer-events-none"
           />
 
           {/* Top Floating Badge */}
-          <div className="absolute top-5 left-5 z-10 flex items-center gap-2 rounded-full bg-white/95 px-3.5 py-1.5 text-xs font-bold text-forest-950 backdrop-blur-md shadow-md border border-white/40">
-            <Sparkles className="size-3.5 text-emerald-600" />
+          <div className="absolute top-3 sm:top-5 left-3 sm:left-5 z-10 flex items-center gap-1.5 sm:gap-2 rounded-full bg-white/95 px-3 sm:px-3.5 py-1 sm:py-1.5 text-[11px] sm:text-xs font-bold text-forest-950 backdrop-blur-md shadow-md border border-white/40">
+            <Sparkles className="size-3 sm:size-3.5 text-emerald-600" />
             <span>Practice Feature</span>
           </div>
 
           {/* Top Right Counter */}
-          <div className="absolute top-5 right-5 z-10 flex items-center gap-1.5 rounded-full bg-forest-950/80 px-3.5 py-1.5 text-xs font-bold text-white border border-white/20 backdrop-blur-md">
+          <div className="absolute top-3 sm:top-5 right-3 sm:right-5 z-10 flex items-center gap-1.5 rounded-full bg-forest-950/80 px-3 sm:px-3.5 py-1 sm:py-1.5 text-[11px] sm:text-xs font-bold text-white border border-white/20 backdrop-blur-md">
             <span className="text-emerald-300">0{active + 1}</span>
             <span className="text-white/40">/</span>
             <span>0{tabs.length}</span>
           </div>
 
-          {/* Bottom Overlay Details (Exact Live Data) */}
-          <div className="absolute bottom-6 left-6 right-6 z-10 text-white max-w-4xl">
+          {/* Desktop Bottom Overlay Content (Hidden on Mobile) */}
+          <div className="hidden sm:block absolute bottom-6 left-6 right-6 z-10 text-white max-w-4xl">
             <AnimatePresence mode="wait">
               <motion.div
                 key={tab.title}
@@ -154,19 +155,18 @@ export function BestShowcase({ tabs }: { tabs: BestTab[] }) {
                   {tab.title}
                 </h3>
 
-                {/* If tab has live Mission & Vision blocks */}
                 {tab.blocks && tab.blocks.length > 0 ? (
-                  <div className="mt-4 grid gap-3 sm:gap-4 sm:grid-cols-2">
+                  <div className="mt-4 grid gap-4 sm:grid-cols-2">
                     {tab.blocks.map((b) => (
                       <div
                         key={b.heading}
                         className="rounded-2xl bg-white/10 p-4 backdrop-blur-md border border-white/20 shadow-lg"
                       >
-                        <h4 className="font-serif text-base sm:text-lg font-bold text-emerald-300 flex items-center gap-1.5 mb-1.5">
+                        <h4 className="font-serif text-lg font-bold text-emerald-300 flex items-center gap-1.5 mb-1.5">
                           <span className="size-1.5 rounded-full bg-emerald-400" />
                           {b.heading}
                         </h4>
-                        <div className="space-y-1.5 text-xs sm:text-sm text-white/90 leading-relaxed font-light">
+                        <div className="space-y-1.5 text-sm text-white/90 leading-relaxed font-light">
                           {b.lines.map((l) => (
                             <p key={l}>{l}</p>
                           ))}
@@ -176,7 +176,7 @@ export function BestShowcase({ tabs }: { tabs: BestTab[] }) {
                   </div>
                 ) : (
                   tab.text && (
-                    <p className="mt-3 text-sm sm:text-base text-white/90 leading-relaxed max-w-2xl font-light">
+                    <p className="mt-3 text-base text-white/90 leading-relaxed max-w-2xl font-light">
                       {tab.text}
                     </p>
                   )
@@ -184,6 +184,45 @@ export function BestShowcase({ tabs }: { tabs: BestTab[] }) {
               </motion.div>
             </AnimatePresence>
           </div>
+        </div>
+
+        {/* Mobile Dedicated Content Section (Placed below image so photo is never covered or hidden) */}
+        <div className="block sm:hidden p-4 bg-sand-50/50 border-t border-forest-900/10">
+          <div className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-0.5 text-[10px] font-bold text-emerald-800 border border-emerald-500/20 mb-2">
+            <Compass className="size-3 text-emerald-600" />
+            <span>Dr. Neeta&apos;s Homoeo Health Care</span>
+          </div>
+
+          <h3 className="font-serif text-xl font-bold text-forest-950">
+            {tab.title}
+          </h3>
+
+          {tab.blocks && tab.blocks.length > 0 ? (
+            <div className="mt-3 space-y-2.5">
+              {tab.blocks.map((b) => (
+                <div
+                  key={b.heading}
+                  className="rounded-xl bg-white p-3 border border-forest-900/10 shadow-xs"
+                >
+                  <h4 className="font-serif text-sm font-bold text-emerald-800 flex items-center gap-1.5 mb-1">
+                    <span className="size-1.5 rounded-full bg-emerald-500" />
+                    {b.heading}
+                  </h4>
+                  <div className="space-y-1 text-xs text-ink-soft leading-relaxed">
+                    {b.lines.map((l) => (
+                      <p key={l}>{l}</p>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            tab.text && (
+              <p className="mt-2 text-xs text-ink-soft leading-relaxed">
+                {tab.text}
+              </p>
+            )
+          )}
         </div>
 
         {/* Bottom Interactive Progress Indicators */}

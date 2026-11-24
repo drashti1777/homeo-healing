@@ -263,10 +263,11 @@ export function TreatmentExplorer({ items, groups }: { items: ExplorerItem[]; gr
 
                     {/* Card Body */}
                     <div className="p-6">
-                      <h3 className="font-serif text-2xl font-bold text-forest-950 transition-colors group-hover:text-emerald-800">
-                        <Link href={`/treatments/${t.slug}`} className="hover:underline">
-                          {t.title}
-                        </Link>
+                      <h3 className="font-serif text-2xl font-bold text-forest-950">
+                        {/* Separate page link commented out as requested */}
+                        {/* <Link href={`/treatments/${t.slug}`} className="hover:underline"> */}
+                        {t.title}
+                        {/* </Link> */}
                       </h3>
 
                       {t.summary && (

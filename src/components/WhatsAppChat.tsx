@@ -42,7 +42,10 @@ export function WhatsAppChat() {
   return (
     <>
       {/* Floating WhatsApp trigger button */}
-      <div className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50">
+      <div
+        className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50"
+        suppressHydrationWarning
+      >
         <motion.button
           type="button"
           onClick={() => (isOpen ? setIsOpen(false) : handleOpen())}

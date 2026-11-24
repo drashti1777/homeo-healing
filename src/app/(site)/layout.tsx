@@ -28,7 +28,11 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       <ScrollToTop />
       <WhatsAppChat />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(clinicJsonLd(settings)) }} />
-      <Link href="/book-appointment" className="btn btn-primary fixed inset-x-4 bottom-4 z-40 shadow-xl sm:hidden">
+      <Link
+        href="/book-appointment"
+        className="btn btn-primary fixed inset-x-4 bottom-4 z-40 shadow-xl sm:hidden"
+        suppressHydrationWarning
+      >
         Book a consultation
       </Link>
     </>

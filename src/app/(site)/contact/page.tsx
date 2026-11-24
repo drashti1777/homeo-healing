@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowRight, Clock, Mail, MapPin, Phone, ShieldCheck, Sparkles } from "lucide-react";
 import { ContactForm } from "@/components/forms/ContactForm";
-import { PageHero, SectionHeading } from "@/components/ui";
+import { ConsultationCta } from "@/components/home/ConsultationCta";
+import { PageHero } from "@/components/ui";
 import { CLINIC, mapsLink } from "@/content/clinic";
 import { branchesFrom, getSettings } from "@/lib/data";
 import { SITE_URL } from "@/lib/env";
@@ -16,85 +17,132 @@ export const generateMetadata = () =>
 
 const telHref = (p: string) => `tel:${p.replace(/[^+\d]/g, "")}`;
 
-/** Source: the clinic's live Contact page (contact.php): title, intro line, map, form, contact info and the "Consult Us Now" bar. */
 export default async function ContactPage() {
   const s = await getSettings();
   const branches = branchesFrom(s);
-  // The live page shows one map (the Bhavnagar clinic).
-  const map = branches.find((b) => b.mapEmbedUrl);
+  const map = branches.find((b) => b.mapEmbedUrl) || branches[0];
 
   return (
     <>
-      <PageHero eyebrow="Contact" title="Contact us" intro="Contact Us Our Hospital" crumbs={[{ label: "Contact" }]} />
+      {/* 1. Header Hero Banner */}
+      <PageHero
+        eyebrow="Contact"
+        title="Contact Us"
+        intro="Dr Neeta Homeopathy Clinic is a one and half decade old renowned clinic that offers the best quality, non-toxic and highly effective treatment in Bhavnagar."
+        crumbs={[{ label: "Contact" }]}
+      />
 
-      {/* Title, intro line and map */}
-      <section className="section !pb-12">
+      {/* 2. Modern Integrated Contact Hub */}
+      <section className="section py-14 lg:py-20 bg-gradient-to-b from-white via-sand-50/50 to-white" id="enquiry">
         <div className="wrap">
-          <div className="max-w-3xl">
-            <SectionHeading eyebrow="Contact" title="Contact Us Our Hospital" />
-            <p className="mt-6 text-lg text-ink-soft" data-reveal>
-              Dr Neeta Homeopathy Clinic is a one and half decade old renowned clinic that offers the best quality, non-toxic and highly effective treatment in Bhavnagar.
-            </p>
-          </div>
-          {map && (
-            <div className="relative mt-12 h-[18rem] w-full overflow-hidden rounded-[2rem] bg-sage-100 shadow-xl shadow-forest-900/5 md:h-[28rem]" data-clip>
-              <iframe
-                src={map.mapEmbedUrl}
-                title={`Map: ${map.name}`}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="absolute inset-0 size-full border-0"
-                allowFullScreen
-              />
+          <div className="grid gap-8 lg:grid-cols-12 items-stretch">
+            
+            {/* Left Column: Form & Online Query (7 of 12) */}
+            <div className="lg:col-span-7 flex flex-col justify-between rounded-3xl bg-white p-7 sm:p-10 shadow-xl shadow-forest-950/5 border border-forest-800/10">
+              <div>
+                <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-emerald-800 border border-emerald-500/20 mb-3">
+                  <Sparkles className="size-3.5 text-emerald-600" />
+                  Leave a Reply
+                </span>
+                <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-forest-950">
+                  Send Your Health Query
+                </h2>
+                <p className="mt-2 text-xs sm:text-sm text-ink-soft leading-relaxed">
+                  Have a question about homeopathic medicines or wish to consult Dr. Neeta Parmar? Fill out your message below.
+                </p>
+
+                <div className="mt-8">
+                  <ContactForm />
+                </div>
+              </div>
+
+              {/* Bottom Assurance Note */}
+              <div className="mt-8 pt-5 border-t border-forest-900/10 flex items-center gap-2.5 text-xs text-ink-soft">
+                <ShieldCheck className="size-4 text-emerald-600 shrink-0" />
+                <span>All health queries are kept strictly confidential by our clinical team.</span>
+              </div>
             </div>
-          )}
-        </div>
-      </section>
 
-      {/* Form + contact info */}
-      <section className="section !pt-0" id="enquiry">
-        <div className="wrap grid gap-14 lg:grid-cols-[1.3fr_0.7fr]">
-          <div>
-            <SectionHeading eyebrow="Enquiry" title="Leave a message" />
-            <div className="mt-10"><ContactForm /></div>
-          </div>
-
-          <aside className="lg:pt-28">
-            <h2 className="text-2xl font-normal" data-reveal>Contact Info</h2>
-            <ul className="mt-8 space-y-6">
-              {branches.map((b, i) => (
-                <li key={b.key} className="flex gap-4" data-reveal data-delay={i * 0.08}>
-                  <span className="grid size-11 shrink-0 place-items-center rounded-full bg-sage-100 text-forest-700"><MapPin className="size-5" aria-hidden="true" /></span>
-                  <a href={b.mapLinkUrl || mapsLink(b.address)} target="_blank" rel="noopener noreferrer" className="pt-1 text-ink-soft transition-colors hover:text-forest-800">{b.address}</a>
-                </li>
-              ))}
-              {s.phone && (
-                <li className="flex gap-4" data-reveal data-delay="0.16">
-                  <span className="grid size-11 shrink-0 place-items-center rounded-full bg-sage-100 text-forest-700"><Phone className="size-5" aria-hidden="true" /></span>
-                  <a href={telHref(s.phone)} className="pt-2 text-ink-soft transition-colors hover:text-forest-800">{s.phone}</a>
-                </li>
+            {/* Right Column: Direct Info Cards & Embedded Live Map (5 of 12) */}
+            <div className="lg:col-span-5 flex flex-col justify-between gap-4">
+              
+              {/* Integrated Live Interactive Google Map Frame (Enlarged to balance exact level) */}
+              {map?.mapEmbedUrl && (
+                <div className="relative flex-1 min-h-[300px] sm:min-h-[340px] rounded-3xl overflow-hidden shadow-lg border border-forest-800/10 bg-sage-100">
+                  <iframe
+                    src={map.mapEmbedUrl}
+                    title={`Map: ${map.name || "Dr. Neeta's Homeo Health Care"}`}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="absolute inset-0 size-full border-0"
+                    allowFullScreen
+                  />
+                </div>
               )}
-              {s.email && (
-                <li className="flex gap-4" data-reveal data-delay="0.24">
-                  <span className="grid size-11 shrink-0 place-items-center rounded-full bg-sage-100 text-forest-700"><Mail className="size-5" aria-hidden="true" /></span>
-                  <a href={`mailto:${s.email}`} className="break-all pt-2 text-ink-soft transition-colors hover:text-forest-800">{s.email}</a>
-                </li>
-              )}
-            </ul>
-          </aside>
-        </div>
-      </section>
 
-      {/* Consult Us Now */}
-      <section className="section relative overflow-hidden bg-forest-900 text-paper">
-        <div aria-hidden="true" className="float-slow absolute -right-32 -top-32 size-[28rem] rounded-full bg-forest-700/40 blur-2xl" />
-        <div className="wrap relative flex flex-wrap items-center justify-between gap-8">
-          <h2 data-split className="!text-paper text-[clamp(2rem,4.4vw,3.25rem)] font-normal">Consult Us Now</h2>
-          <div data-reveal>
-            <Link href="/book-appointment" className="btn btn-light">Book now <ArrowRight className="size-4" aria-hidden="true" /></Link>
+              {/* Direct Touchpoints (Phone & Email) */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div className="rounded-2xl bg-white p-4 shadow-md shadow-forest-950/5 border border-forest-800/10">
+                  <div className="flex size-9 items-center justify-center rounded-xl bg-forest-800 text-emerald-300 mb-2 shadow-xs">
+                    <Phone className="size-4" />
+                  </div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 block">Phone Consultation</span>
+                  <a href={telHref(s.phone || "+918160602060")} className="mt-0.5 block text-xs sm:text-sm font-bold text-forest-950 hover:text-emerald-700 transition-colors">
+                    {s.phone || "+91 81606 02060"}
+                  </a>
+                  <span className="text-[10px] text-ink-soft block mt-0.5">Mon – Sat (10am - 8pm)</span>
+                </div>
+
+                <div className="rounded-2xl bg-white p-4 shadow-md shadow-forest-950/5 border border-forest-800/10">
+                  <div className="flex size-9 items-center justify-center rounded-xl bg-emerald-600 text-white mb-2 shadow-xs">
+                    <Mail className="size-4" />
+                  </div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 block">Email Support</span>
+                  <a href={`mailto:${s.email || "drneetaparmar@yahoo.com"}`} className="mt-0.5 block text-xs sm:text-sm font-bold text-forest-950 hover:text-emerald-700 transition-colors truncate">
+                    {s.email || "drneetaparmar@yahoo.com"}
+                  </a>
+                  <span className="text-[10px] text-ink-soft block mt-0.5">Prompt response</span>
+                </div>
+              </div>
+
+              {/* Clinic Addresses Card (Below) */}
+              <div className="rounded-3xl bg-forest-950 p-5 text-white shadow-xl shadow-forest-950/15 border border-forest-800/40">
+                <div className="flex items-center justify-between mb-3 pb-2 border-b border-white/10">
+                  <h3 className="font-serif text-base font-bold text-white">Our Clinics</h3>
+                  <span className="text-[10px] uppercase font-bold tracking-wider rounded-full bg-emerald-500/20 px-2 py-0.5 text-emerald-300">
+                    2 Centers
+                  </span>
+                </div>
+
+                <div className="space-y-3">
+                  {branches.map((b) => (
+                    <div key={b.key} className="text-xs">
+                      <div className="flex items-center justify-between mb-0.5">
+                        <strong className="text-emerald-300 font-semibold text-xs">
+                          {b.key === "ahmedabad" ? "Ahmedabad Branch" : "Bhavnagar Main Clinic"}
+                        </strong>
+                        <a
+                          href={b.mapLinkUrl || mapsLink(b.address)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[11px] text-emerald-400 hover:text-emerald-300 underline"
+                        >
+                          Directions →
+                        </a>
+                      </div>
+                      <p className="text-white/80 leading-relaxed text-[11px] sm:text-xs">{b.address}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
+
+      {/* 3. Consult Us Now CTA Banner */}
+      <ConsultationCta />
 
       <script
         type="application/ld+json"
@@ -106,13 +154,22 @@ export default async function ContactPage() {
               "@id": `${SITE_URL}/contact#${b.key}`,
               name: b.name || CLINIC,
               medicalSpecialty: "Homeopathic",
-              address: { "@type": "PostalAddress", streetAddress: b.address, addressLocality: b.key === "ahmedabad" ? "Ahmedabad" : "Bhavnagar", addressRegion: "Gujarat", addressCountry: "IN" },
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: b.address,
+                addressLocality: b.key === "ahmedabad" ? "Ahmedabad" : "Bhavnagar",
+                addressRegion: "Gujarat",
+                addressCountry: "IN",
+              },
               ...(b.phone && { telephone: b.phone }),
               ...(s.email && { email: s.email }),
               ...(b.hours.length && { openingHours: b.hours }),
               parentOrganization: { "@id": `${SITE_URL}/#clinic` },
             })),
-            breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Contact", path: "/contact" }]),
+            breadcrumbJsonLd([
+              { name: "Home", path: "/" },
+              { name: "Contact", path: "/contact" },
+            ]),
           ]),
         }}
       />

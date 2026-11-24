@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import Link from "next/link";
-import { ArrowRight, Phone, ShieldAlert, Sparkles, Stethoscope } from "lucide-react";
+import { ArrowRight, CheckCircle2, Phone, ShieldAlert, Sparkles, Stethoscope } from "lucide-react";
+import { AnimatedCounter } from "@/components/AnimatedCounter";
 import { TreatmentExplorer, type ExplorerItem } from "@/components/TreatmentExplorer";
 import { ConsultationCta } from "@/components/home/ConsultationCta";
 import { EmptyState, PageHero, SectionHeading } from "@/components/ui";
@@ -65,27 +66,70 @@ export default async function TreatmentsPage() {
           </div>
 
           {/* Quick Metrics Cards */}
-          <div className="grid grid-cols-1 xs:grid-cols-2 gap-3 sm:gap-4">
-            <div className="rounded-2xl sm:rounded-[2.25rem] bg-sage-50/80 p-5 sm:p-8 shadow-md shadow-forest-900/5 border border-forest-800/10 text-center transition-all hover:border-emerald-500/40 hover:shadow-xl">
-              <div className="mx-auto flex size-10 sm:size-12 items-center justify-center rounded-2xl bg-white shadow-xs text-emerald-700 mb-2 sm:mb-3">
-                <Stethoscope className="size-5 sm:size-6" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+            {/* Card 1: Clinical Categories */}
+            <div className="group relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-white via-sand-50/60 to-white p-6 sm:p-7 shadow-lg shadow-forest-950/5 border border-forest-800/10 transition-all duration-300 hover:-translate-y-1 hover:border-emerald-500/40 hover:shadow-xl">
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -right-8 -top-8 size-28 rounded-full bg-emerald-100/50 blur-2xl transition-opacity duration-300 group-hover:opacity-100"
+              />
+
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex size-11 sm:size-12 items-center justify-center rounded-2xl bg-forest-800 text-emerald-300 shadow-md shadow-forest-900/15 ring-2 ring-emerald-50 transition-transform duration-300 group-hover:scale-105">
+                  <Stethoscope className="size-5 sm:size-6" />
+                </div>
+                <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-emerald-800 border border-emerald-500/20">
+                  Verified
+                </span>
               </div>
-              <p className="font-serif text-3xl sm:text-5xl font-bold text-forest-950">{categories.length}</p>
-              <p className="mt-1 sm:mt-2 text-[11px] sm:text-sm font-semibold text-forest-800 uppercase tracking-wider">
+
+              <div className="flex items-baseline gap-1">
+                <AnimatedCounter
+                  end={categories.length}
+                  duration={1.8}
+                  className="font-serif text-4xl sm:text-5xl font-bold text-forest-950 tracking-tight"
+                />
+              </div>
+
+              <h3 className="mt-2 text-xs sm:text-sm font-bold uppercase tracking-wider text-forest-900">
                 Clinical Categories
+              </h3>
+              <p className="mt-1 text-xs text-ink-soft leading-normal">
+                Comprehensive specialized departments &amp; organ systems.
               </p>
-              <p className="mt-0.5 sm:mt-1 text-[11px] sm:text-xs text-ink-soft">Comprehensive Care</p>
             </div>
 
-            <div className="rounded-2xl sm:rounded-[2.25rem] bg-sage-50/80 p-5 sm:p-8 shadow-md shadow-forest-900/5 border border-forest-800/10 text-center transition-all hover:border-emerald-500/40 hover:shadow-xl">
-              <div className="mx-auto flex size-10 sm:size-12 items-center justify-center rounded-2xl bg-white shadow-xs text-emerald-700 mb-2 sm:mb-3">
-                <Sparkles className="size-5 sm:size-6" />
+            {/* Card 2: Conditions Treated */}
+            <div className="group relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-white via-sand-50/60 to-white p-6 sm:p-7 shadow-lg shadow-forest-950/5 border border-forest-800/10 transition-all duration-300 hover:-translate-y-1 hover:border-emerald-500/40 hover:shadow-xl">
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -right-8 -top-8 size-28 rounded-full bg-emerald-100/50 blur-2xl transition-opacity duration-300 group-hover:opacity-100"
+              />
+
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex size-11 sm:size-12 items-center justify-center rounded-2xl bg-emerald-600 text-white shadow-md shadow-emerald-700/20 ring-2 ring-emerald-50 transition-transform duration-300 group-hover:scale-105">
+                  <Sparkles className="size-5 sm:size-6" />
+                </div>
+                <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-emerald-800 border border-emerald-500/20">
+                  Acute &amp; Chronic
+                </span>
               </div>
-              <p className="font-serif text-3xl sm:text-5xl font-bold text-forest-950">{conditionCount}+</p>
-              <p className="mt-1 sm:mt-2 text-[11px] sm:text-sm font-semibold text-forest-800 uppercase tracking-wider">
+
+              <div className="flex items-baseline gap-1">
+                <AnimatedCounter
+                  end={conditionCount}
+                  suffix="+"
+                  duration={2.2}
+                  className="font-serif text-4xl sm:text-5xl font-bold text-forest-950 tracking-tight"
+                />
+              </div>
+
+              <h3 className="mt-2 text-xs sm:text-sm font-bold uppercase tracking-wider text-forest-900">
                 Conditions Treated
+              </h3>
+              <p className="mt-1 text-xs text-ink-soft leading-normal">
+                Evidence-based personalized constitutional healing.
               </p>
-              <p className="mt-0.5 sm:mt-1 text-[11px] sm:text-xs text-ink-soft">Acute &amp; Chronic</p>
             </div>
           </div>
         </div>

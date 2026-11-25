@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
@@ -11,9 +12,14 @@ export function GalleryGrid({ items, categories }: { items: GalleryItem[]; categ
   const reduce = useReducedMotion();
   const [filter, setFilter] = useState("all");
   const [index, setIndex] = useState<number | null>(null);
+  const [mounted, setMounted] = useState(false);
   const closeBtn = useRef<HTMLButtonElement>(null);
   const opener = useRef<HTMLElement | null>(null);
   const touchX = useRef<number | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const visible = useMemo(() => (filter === "all" ? items : items.filter((i) => i.category === filter)), [items, filter]);
   const counts = useMemo(() => Object.fromEntries(categories.map((c) => [c.key, items.filter((i) => i.category === c.key).length])), [items, categories]);
@@ -85,54 +91,58 @@ export function GalleryGrid({ items, categories }: { items: GalleryItem[]; categ
         </AnimatePresence>
       </ul>
 
-      <AnimatePresence>
-        {current && index !== null && (
-          <motion.div
-            role="dialog"
-            aria-modal="true"
-            aria-label={`Image ${index + 1} of ${visible.length}: ${current.alt}`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: reduce ? 0 : 0.3 }}
-            className="fixed inset-0 z-[80] flex flex-col bg-forest-950/95 backdrop-blur-sm"
-            onClick={(e) => e.target === e.currentTarget && close()}
-            onTouchStart={(e) => { touchX.current = e.touches[0].clientX; }}
-            onTouchEnd={(e) => {
-              if (touchX.current === null) return;
-              const dx = e.changedTouches[0].clientX - touchX.current;
-              if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1);
-              touchX.current = null;
-            }}
-          >
-            <div className="flex items-center justify-between px-4 py-4 text-paper sm:px-8">
-              <p className="text-sm text-sage-200" aria-live="polite">{index + 1} / {visible.length} · {labelOf(current.category)}</p>
-              <button ref={closeBtn} type="button" onClick={close} aria-label="Close" className="grid size-11 place-items-center rounded-full bg-paper/10 hover:bg-paper/20"><X className="size-5" /></button>
-            </div>
-            <div className="relative flex flex-1 items-center justify-center px-4 pb-4 sm:px-20" onClick={(e) => e.target === e.currentTarget && close()}>
-              <AnimatePresence mode="wait" initial={false}>
-                <motion.figure
-                  key={current.id}
-                  initial={reduce ? { opacity: 1 } : { opacity: 0, scale: 0.97 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.97 }}
-                  transition={{ duration: reduce ? 0 : 0.35, ease: [0.16, 1, 0.3, 1] }}
-                  className="flex max-h-full flex-col items-center"
-                >
-                  <Image src={current.src} alt={current.alt} width={current.width || 1600} height={current.height || 1200} sizes="100vw" className="max-h-[78vh] w-auto rounded-xl object-contain" priority />
-                  {(current.caption || current.alt) && <figcaption className="mt-4 max-w-2xl text-center text-sm text-sage-100">{current.caption || current.alt}</figcaption>}
-                </motion.figure>
-              </AnimatePresence>
-              {visible.length > 1 && (
-                <>
-                  <button type="button" onClick={() => step(-1)} aria-label="Previous image" className="absolute left-2 top-1/2 grid size-12 -translate-y-1/2 place-items-center rounded-full bg-paper/10 text-paper hover:bg-paper/20 sm:left-6"><ChevronLeft className="size-6" /></button>
-                  <button type="button" onClick={() => step(1)} aria-label="Next image" className="absolute right-2 top-1/2 grid size-12 -translate-y-1/2 place-items-center rounded-full bg-paper/10 text-paper hover:bg-paper/20 sm:right-6"><ChevronRight className="size-6" /></button>
-                </>
-              )}
-            </div>
-          </motion.div>
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {current && index !== null && (
+              <motion.div
+                role="dialog"
+                aria-modal="true"
+                aria-label={`Image ${index + 1} of ${visible.length}: ${current.alt}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: reduce ? 0 : 0.3 }}
+                className="fixed inset-0 z-[120] flex flex-col bg-forest-950/60 backdrop-blur-md"
+                onClick={(e) => e.target === e.currentTarget && close()}
+                onTouchStart={(e) => { touchX.current = e.touches[0].clientX; }}
+                onTouchEnd={(e) => {
+                  if (touchX.current === null) return;
+                  const dx = e.changedTouches[0].clientX - touchX.current;
+                  if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1);
+                  touchX.current = null;
+                }}
+              >
+                <div className="flex items-center justify-between px-4 py-4 text-paper sm:px-8">
+                  <p className="text-sm text-sage-200" aria-live="polite">{index + 1} / {visible.length} · {labelOf(current.category)}</p>
+                  <button ref={closeBtn} type="button" onClick={close} aria-label="Close" className="grid size-11 place-items-center rounded-full bg-paper/10 hover:bg-paper/20"><X className="size-5" /></button>
+                </div>
+                <div className="relative flex flex-1 items-center justify-center px-4 pb-4 sm:px-20" onClick={(e) => e.target === e.currentTarget && close()}>
+                  <AnimatePresence mode="wait" initial={false}>
+                    <motion.figure
+                      key={current.id}
+                      initial={reduce ? { opacity: 1 } : { opacity: 0, scale: 0.97 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.97 }}
+                      transition={{ duration: reduce ? 0 : 0.35, ease: [0.16, 1, 0.3, 1] }}
+                      className="flex max-h-full flex-col items-center"
+                    >
+                      <Image src={current.src} alt={current.alt} width={current.width || 1600} height={current.height || 1200} sizes="100vw" className="max-h-[78vh] w-auto rounded-xl object-contain" priority />
+                      {(current.caption || current.alt) && <figcaption className="mt-4 max-w-2xl text-center text-sm text-sage-100">{current.caption || current.alt}</figcaption>}
+                    </motion.figure>
+                  </AnimatePresence>
+                  {visible.length > 1 && (
+                    <>
+                      <button type="button" onClick={() => step(-1)} aria-label="Previous image" className="absolute left-2 top-1/2 grid size-12 -translate-y-1/2 place-items-center rounded-full bg-paper/10 text-paper hover:bg-paper/20 sm:left-6"><ChevronLeft className="size-6" /></button>
+                      <button type="button" onClick={() => step(1)} aria-label="Next image" className="absolute right-2 top-1/2 grid size-12 -translate-y-1/2 place-items-center rounded-full bg-paper/10 text-paper hover:bg-paper/20 sm:right-6"><ChevronRight className="size-6" /></button>
+                    </>
+                  )}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body
         )}
-      </AnimatePresence>
     </div>
   );
 }

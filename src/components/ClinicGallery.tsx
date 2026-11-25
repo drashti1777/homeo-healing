@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ChevronLeft, ChevronRight, Maximize2, Sparkles, X } from "lucide-react";
@@ -14,9 +15,14 @@ export function ClinicGallery({ sections }: { sections: GallerySection[] }) {
   const reduce = useReducedMotion();
   const [activeTab, setActiveTab] = useState<string>("all");
   const [index, setIndex] = useState<number | null>(null);
+  const [mounted, setMounted] = useState(false);
   const closeBtn = useRef<HTMLButtonElement>(null);
   const opener = useRef<HTMLElement | null>(null);
   const touchX = useRef<number | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Flattened items with category / section info
   const allImages = useMemo(
@@ -175,6 +181,7 @@ export function ClinicGallery({ sections }: { sections: GallerySection[] }) {
                     fill
                     sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    unoptimized
                   />
                   <div
                     aria-hidden="true"
@@ -209,103 +216,108 @@ export function ClinicGallery({ sections }: { sections: GallerySection[] }) {
         </AnimatePresence>
       </motion.div>
 
-      {/* 4. Lightbox Modal */}
-      <AnimatePresence>
-        {current && index !== null && (
-          <motion.div
-            role="dialog"
-            aria-modal="true"
-            aria-label={`Photo ${index + 1} of ${visibleImages.length}: ${current.alt}`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: reduce ? 0 : 0.25 }}
-            className="fixed inset-0 z-[80] flex flex-col bg-forest-950/95 backdrop-blur-md"
-            onClick={(e) => e.target === e.currentTarget && close()}
-            onTouchStart={(e) => {
-              touchX.current = e.touches[0].clientX;
-            }}
-            onTouchEnd={(e) => {
-              if (touchX.current === null) return;
-              const dx = e.changedTouches[0].clientX - touchX.current;
-              if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1);
-              touchX.current = null;
-            }}
-          >
-            {/* Top Lightbox Bar */}
-            <div className="flex items-center justify-between px-6 py-4 text-white">
-              <div className="flex items-center gap-2 text-xs sm:text-sm text-emerald-300 font-semibold">
-                <span className="rounded-full bg-white/10 px-3 py-1 text-white">
-                  {index + 1} / {visibleImages.length}
-                </span>
-                <span>• {current.sectionTitle}</span>
-              </div>
-              <button
-                ref={closeBtn}
-                type="button"
-                onClick={close}
-                aria-label="Close photo viewer"
-                className="grid size-10 place-items-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 cursor-pointer"
+      {/* 4. Lightbox Modal rendered via Portal directly to body */}
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {current && index !== null && (
+              <motion.div
+                role="dialog"
+                aria-modal="true"
+                aria-label={`Photo ${index + 1} of ${visibleImages.length}: ${current.alt}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: reduce ? 0 : 0.25 }}
+                className="fixed inset-0 z-[120] flex flex-col bg-forest-950/60 backdrop-blur-md"
+                onClick={(e) => e.target === e.currentTarget && close()}
+                onTouchStart={(e) => {
+                  touchX.current = e.touches[0].clientX;
+                }}
+                onTouchEnd={(e) => {
+                  if (touchX.current === null) return;
+                  const dx = e.changedTouches[0].clientX - touchX.current;
+                  if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1);
+                  touchX.current = null;
+                }}
               >
-                <X className="size-5" />
-              </button>
-            </div>
-
-            {/* Photo Stage */}
-            <div
-              className="relative flex flex-1 items-center justify-center px-4 pb-6 sm:px-16"
-              onClick={(e) => e.target === e.currentTarget && close()}
-            >
-              <AnimatePresence mode="wait" initial={false}>
-                <motion.figure
-                  key={current.src}
-                  initial={reduce ? { opacity: 1 } : { opacity: 0, scale: 0.96 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.96 }}
-                  transition={{ duration: reduce ? 0 : 0.3, ease: EASE_OUT }}
-                  className="flex max-h-full flex-col items-center justify-center"
-                >
-                  <div className="relative overflow-hidden rounded-2xl shadow-2xl">
-                    <Image
-                      src={current.src}
-                      alt={current.alt}
-                      width={current.width}
-                      height={current.height}
-                      sizes="100vw"
-                      className="max-h-[75vh] w-auto rounded-2xl object-contain shadow-2xl"
-                      priority
-                    />
+                {/* Top Lightbox Bar */}
+                <div className="flex items-center justify-between px-6 py-4 text-white">
+                  <div className="flex items-center gap-2 text-xs sm:text-sm text-emerald-300 font-semibold">
+                    <span className="rounded-full bg-white/10 px-3 py-1 text-white">
+                      {index + 1} / {visibleImages.length}
+                    </span>
+                    <span>• {current.sectionTitle}</span>
                   </div>
-                  <figcaption className="mt-4 max-w-xl text-center text-xs sm:text-sm text-white/80">
-                    {current.alt}
-                  </figcaption>
-                </motion.figure>
-              </AnimatePresence>
+                  <button
+                    ref={closeBtn}
+                    type="button"
+                    onClick={close}
+                    aria-label="Close photo viewer"
+                    className="grid size-10 place-items-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 cursor-pointer"
+                  >
+                    <X className="size-5" />
+                  </button>
+                </div>
 
-              {visibleImages.length > 1 && (
-                <>
-                  <button
-                    type="button"
-                    onClick={() => step(-1)}
-                    aria-label="Previous photo"
-                    className="absolute left-3 top-1/2 -translate-y-1/2 grid size-12 place-items-center rounded-full bg-white/15 text-white backdrop-blur-md transition-all hover:bg-white/30 sm:left-6 cursor-pointer"
-                  >
-                    <ChevronLeft className="size-6" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => step(1)}
-                    aria-label="Next photo"
-                    className="absolute right-3 top-1/2 -translate-y-1/2 grid size-12 place-items-center rounded-full bg-white/15 text-white backdrop-blur-md transition-all hover:bg-white/30 sm:right-6 cursor-pointer"
-                  >
-                    <ChevronRight className="size-6" />
-                  </button>
-                </>
-              )}
-            </div>
-          </motion.div>
+                {/* Photo Stage */}
+                <div
+                  className="relative flex flex-1 items-center justify-center px-4 pb-6 sm:px-16"
+                  onClick={(e) => e.target === e.currentTarget && close()}
+                >
+                  <AnimatePresence mode="wait" initial={false}>
+                    <motion.figure
+                      key={current.src}
+                      initial={reduce ? { opacity: 1 } : { opacity: 0, scale: 0.96 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.96 }}
+                      transition={{ duration: reduce ? 0 : 0.3, ease: EASE_OUT }}
+                      className="flex max-h-full flex-col items-center justify-center"
+                    >
+                      <div className="relative overflow-hidden rounded-2xl shadow-2xl">
+                        <Image
+                          src={current.src}
+                          alt={current.alt}
+                          width={current.width}
+                          height={current.height}
+                          sizes="100vw"
+                          className="max-h-[75vh] w-auto rounded-2xl object-contain shadow-2xl"
+                          priority
+                          unoptimized
+                        />
+                      </div>
+                      <figcaption className="mt-4 max-w-xl text-center text-xs sm:text-sm text-white/80">
+                        {current.alt}
+                      </figcaption>
+                    </motion.figure>
+                  </AnimatePresence>
+
+                  {visibleImages.length > 1 && (
+                    <>
+                      <button
+                        type="button"
+                        onClick={() => step(-1)}
+                        aria-label="Previous photo"
+                        className="absolute left-3 top-1/2 -translate-y-1/2 grid size-12 place-items-center rounded-full bg-white/15 text-white backdrop-blur-md transition-all hover:bg-white/30 sm:left-6 cursor-pointer"
+                      >
+                        <ChevronLeft className="size-6" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => step(1)}
+                        aria-label="Next photo"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 grid size-12 place-items-center rounded-full bg-white/15 text-white backdrop-blur-md transition-all hover:bg-white/30 sm:right-6 cursor-pointer"
+                      >
+                        <ChevronRight className="size-6" />
+                      </button>
+                    </>
+                  )}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body
         )}
-      </AnimatePresence>
     </div>
   );
 }

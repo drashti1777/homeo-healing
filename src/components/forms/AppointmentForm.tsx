@@ -33,7 +33,7 @@ import {
 } from "@/lib/validators";
 import { ErrorBanner, SuccessPanel } from "./FormBits";
 
-type FormValues = Omit<AppointmentInput, "consent"> & { consent: boolean };
+type FormValues = AppointmentInput;
 
 export function AppointmentForm({
   defaultBranch = "bhavnagar",
@@ -366,11 +366,10 @@ export function AppointmentForm({
             return (
               <label
                 key={t}
-                className={`relative flex items-center justify-center gap-2.5 p-3 rounded-xl border cursor-pointer text-xs font-medium transition-all ${
-                  isChecked
-                    ? "border-emerald-600 bg-emerald-50 text-forest-950 font-bold ring-1 ring-emerald-500/30"
-                    : "border-sage-200 bg-white hover:border-sage-300 text-ink-soft hover:text-ink"
-                }`}
+                className={`relative flex items-center justify-center gap-2.5 p-3 rounded-xl border cursor-pointer text-xs font-medium transition-all ${isChecked
+                  ? "border-emerald-600 bg-emerald-50 text-forest-950 font-bold ring-1 ring-emerald-500/30"
+                  : "border-sage-200 bg-white hover:border-sage-300 text-ink-soft hover:text-ink"
+                  }`}
               >
                 <input
                   type="radio"
@@ -468,35 +467,7 @@ export function AppointmentForm({
         </label>
       </div>
 
-      {/* 5. Privacy Consent Checkbox */}
-      <div className="rounded-xl bg-sand-50/70 p-3.5 border border-forest-900/10">
-        <label className="flex items-start gap-3 text-xs sm:text-sm text-ink-soft cursor-pointer">
-          <input
-            type="checkbox"
-            className="mt-1 size-4 rounded accent-forest-700 cursor-pointer"
-            aria-invalid={!!errors.consent}
-            {...register("consent")}
-          />
-          <span className="leading-relaxed">
-            I agree that Dr. Neeta&apos;s Homeo Health Care may store these details and use them to
-            contact me about this request, as described in the{" "}
-            <Link
-              href="/privacy-policy"
-              className="font-medium text-forest-800 hover:text-emerald-700 underline underline-offset-4"
-            >
-              Privacy Policy
-            </Link>
-            .
-          </span>
-        </label>
-        {errors.consent && (
-          <p role="alert" className="field-error mt-1.5">
-            {errors.consent.message}
-          </p>
-        )}
-      </div>
-
-      {/* 6. Action Button */}
+      {/* 5. Action Button */}
       <div className="pt-1">
         <button
           type="submit"

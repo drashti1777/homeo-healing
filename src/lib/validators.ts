@@ -55,12 +55,11 @@ export const appointmentSchema = z.object({
   preferredTime: z.enum(TIME_SLOTS, { error: "Choose a preferred time" }),
   consultationType: z.enum(CONSULTATION_TYPES, { error: "Choose a consultation type" }),
   message: z.string().trim().max(1000, "Please keep your message under 1000 characters"),
-  consent: z.literal(true, { error: "Please agree so we can contact you about this request" }),
   website: z.string().max(500).optional(), // honeypot: real users leave it empty; filled = bot, dropped silently by the API
 });
 export type AppointmentInput = z.infer<typeof appointmentSchema>;
 
-// Fields follow the original contact form: Full Name, E-mail Address, Phone No, Message (plus consent).
+// Fields follow the original contact form: Full Name, E-mail Address, Phone No, Message.
 export const contactSchema = z.object({
   name: z.string().trim().min(2, "Please enter your full name").max(100),
   email: z.email("Enter a valid email address").max(200),
@@ -68,7 +67,6 @@ export const contactSchema = z.object({
   branch: z.enum(["bhavnagar", "ahmedabad", "either"]).default("either"),
   subject: z.string().trim().max(150).default(""),
   message: z.string().trim().min(10, "Please write at least 10 characters").max(2000),
-  consent: z.literal(true, { error: "Please agree so we can reply to you" }),
   website: z.string().max(500).optional(), // honeypot
 });
 export type ContactInput = z.infer<typeof contactSchema>;

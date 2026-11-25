@@ -8,9 +8,9 @@ import Link from "next/link";
 import { contactSchema, type ContactInput } from "@/lib/validators";
 import { ErrorBanner, Field, SuccessPanel, postJson } from "./FormBits";
 
-type FormValues = Omit<ContactInput, "consent"> & { consent: boolean };
+type FormValues = ContactInput;
 
-/** Fields match the previous website's form: Full Name, E-mail Address, Phone No, Message, plus privacy consent. */
+/** Fields match the previous website's form: Full Name, E-mail Address, Phone No, Message. */
 export function ContactForm() {
   const [done, setDone] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
@@ -110,16 +110,6 @@ export function ContactForm() {
       </Field>
       <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
         <label>Leave this field empty<input type="text" tabIndex={-1} autoComplete="off" {...register("website")} /></label>
-      </div>
-      <div>
-        <label className="flex items-start gap-3 text-sm text-ink-soft">
-          <input type="checkbox" className="mt-1 size-4 accent-forest-700" aria-invalid={!!errors.consent} {...register("consent")} />
-          <span>
-            I agree that Dr. Neeta&apos;s Homeo Health Care may store these details and use them to reply to me, as described in the{" "}
-            <Link href="/privacy-policy" className="font-medium text-forest-700 underline underline-offset-4">Privacy Policy</Link>.
-          </span>
-        </label>
-          {errors.consent && <p role="alert" className="field-error">{errors.consent.message}</p>}
       </div>
       <button type="submit" disabled={isSubmitting} className="btn btn-primary">
         {isSubmitting && <Loader2 className="size-4 animate-spin" aria-hidden="true" />}

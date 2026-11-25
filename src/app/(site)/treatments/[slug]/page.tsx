@@ -38,7 +38,7 @@ export default async function TreatmentDetailPage({ params }: Props) {
       />
       <section className="section">
         <div className="wrap grid items-start gap-14 lg:grid-cols-[1.3fr_0.7fr]">
-          <div className="min-w-0">
+          <div className="min-w-0" data-reveal>
             {/* Safety notice comes first for serious categories, before any other content. */}
             {t.safetyNotice && (
               <aside
@@ -81,7 +81,7 @@ export default async function TreatmentDetailPage({ params }: Props) {
             )}
           </div>
 
-          <aside className="space-y-6 lg:sticky lg:top-28">
+          <aside className="space-y-6 lg:sticky lg:top-28" data-reveal data-delay="0.1">
             {conditions.length > 0 && (
               <div className="rounded-[2rem] bg-sage-50 p-7">
                 <h2 className="text-xl font-normal">Conditions listed</h2>

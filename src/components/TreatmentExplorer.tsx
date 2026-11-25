@@ -22,6 +22,8 @@ export type ExplorerItem = {
 
 const norm = (s: string) => s.toLowerCase().normalize("NFKD").replace(/[^\p{L}\p{N} ]/gu, " ");
 
+const EASE_OUT = [0.16, 1, 0.3, 1] as const;
+
 export function TreatmentExplorer({ items, groups }: { items: ExplorerItem[]; groups: { key: string; label: string }[] }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -103,8 +105,13 @@ export function TreatmentExplorer({ items, groups }: { items: ExplorerItem[]; gr
 
   return (
     <div>
-      {/* Sticky Search & Filter Header */}
-      <div className="sticky top-16 sm:top-20 z-20 -mx-1 sm:mx-0 rounded-2xl sm:rounded-[2rem] bg-white/95 p-2.5 sm:p-3 shadow-xl shadow-forest-950/5 border border-forest-800/10 backdrop-blur-md">
+      {/* Sticky Search & Filter Header with Slow Elegant Entrance Animation */}
+      <motion.div
+        initial={reduce ? false : { opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: EASE_OUT }}
+        className="sticky top-16 sm:top-20 z-20 -mx-1 sm:mx-0 rounded-2xl sm:rounded-[2rem] bg-white/95 p-2.5 sm:p-3 shadow-xl shadow-forest-950/5 border border-forest-800/10 backdrop-blur-md"
+      >
         <div className="relative">
           <Search className="pointer-events-none absolute left-4 sm:left-5 top-1/2 size-4.5 sm:size-5 -translate-y-1/2 text-forest-700" aria-hidden="true" />
           <label htmlFor="treatment-search" className="sr-only">Search treatment categories and conditions</label>
@@ -129,7 +136,7 @@ export function TreatmentExplorer({ items, groups }: { items: ExplorerItem[]; gr
           )}
         </div>
 
-        {/* Category Group Tabs */}
+        {/* Category Group Tabs with Animated Sliding Pill */}
         <div
           ref={tabsRef}
           role="group"
@@ -150,15 +157,22 @@ export function TreatmentExplorer({ items, groups }: { items: ExplorerItem[]; gr
                 type="button"
                 aria-pressed={active}
                 onClick={() => { if (!dragged.current) setGroup(g.key); }}
-                className={`relative shrink-0 rounded-full px-4 py-2 text-xs sm:text-sm font-semibold transition-all duration-200 ${
+                className={`relative shrink-0 rounded-full px-4 py-2 text-xs sm:text-sm font-semibold transition-colors duration-200 cursor-pointer ${
                   active
-                    ? "bg-forest-800 text-white shadow-md shadow-forest-900/15 scale-105"
+                    ? "text-white shadow-md shadow-forest-900/15 scale-105"
                     : "bg-white text-forest-800 border border-forest-800/10 hover:bg-emerald-50 hover:border-emerald-500/30"
                 }`}
               >
-                <span>{g.label}</span>
+                {active && (
+                  <motion.span
+                    layoutId="treatment-active-pill"
+                    transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 420, damping: 34 }}
+                    className="absolute inset-0 rounded-full bg-forest-800 -z-0"
+                  />
+                )}
+                <span className="relative z-10">{g.label}</span>
                 <span
-                  className={`ml-1.5 rounded-full px-1.5 py-0.2 text-[10px] font-bold ${
+                  className={`relative z-10 ml-1.5 rounded-full px-1.5 py-0.2 text-[10px] font-bold ${
                     active ? "bg-white/25 text-white" : "bg-sage-100 text-forest-800"
                   }`}
                 >
@@ -168,10 +182,15 @@ export function TreatmentExplorer({ items, groups }: { items: ExplorerItem[]; gr
             );
           })}
         </div>
-      </div>
+      </motion.div>
 
       {/* Results Count Meta */}
-      <div className="mt-8 flex items-center justify-between text-xs sm:text-sm text-ink-soft">
+      <motion.div
+        initial={reduce ? false : { opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.15 }}
+        className="mt-8 flex items-center justify-between text-xs sm:text-sm text-ink-soft"
+      >
         <p role="status" aria-live="polite">
           Showing <span className="font-bold text-forest-950">{results.length}</span> of {items.length} categories
           {deferred.trim() && <> matching &ldquo;<span className="text-forest-800 font-semibold">{deferred.trim()}</span>&rdquo;</>}
@@ -185,11 +204,16 @@ export function TreatmentExplorer({ items, groups }: { items: ExplorerItem[]; gr
             Reset Filters
           </button>
         )}
-      </div>
+      </motion.div>
 
       {/* Empty State */}
       {results.length === 0 ? (
-        <div className="mt-8 rounded-[2.5rem] border border-dashed border-forest-800/20 bg-sage-50/50 p-12 text-center">
+        <motion.div
+          initial={reduce ? false : { opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="mt-8 rounded-[2.5rem] border border-dashed border-forest-800/20 bg-sage-50/50 p-12 text-center"
+        >
           <div className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-white shadow-sm text-forest-800 mb-4">
             <Search className="size-6 text-emerald-600" />
           </div>
@@ -205,20 +229,25 @@ export function TreatmentExplorer({ items, groups }: { items: ExplorerItem[]; gr
               Ask Dr. Neeta Directly
             </Link>
           </div>
-        </div>
+        </motion.div>
       ) : (
-        /* Results Cards Grid */
+        /* Results Cards Grid: Cards animate in SLOWLY and ONE-BY-ONE */
         <motion.ul layout={!reduce} className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <AnimatePresence initial={false} mode="popLayout">
-            {results.map(({ t, matched }) => (
+          <AnimatePresence mode="popLayout">
+            {results.map(({ t, matched }, i) => (
               <motion.li
                 key={t.slug}
                 layout={!reduce}
-                initial={reduce ? false : { opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.96 }}
-                whileHover={reduce ? undefined : { y: -6 }}
-                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                initial={reduce ? false : { opacity: 0, y: 35, scale: 0.94 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-40px" }}
+                exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.92, transition: { duration: 0.3 } }}
+                whileHover={reduce ? undefined : { y: -8, scale: 1.01, transition: { duration: 0.25 } }}
+                transition={{
+                  duration: 0.75,
+                  delay: reduce ? 0 : (i < 6 ? i * 0.14 : (i % 3) * 0.18),
+                  ease: EASE_OUT,
+                }}
               >
                 <div className="group flex h-full flex-col justify-between overflow-hidden rounded-[2rem] border border-forest-800/10 bg-white shadow-md shadow-forest-900/5 transition-all duration-300 hover:border-emerald-500/40 hover:shadow-2xl hover:shadow-emerald-950/10">
                   <div>
@@ -240,7 +269,7 @@ export function TreatmentExplorer({ items, groups }: { items: ExplorerItem[]; gr
                       <div className="absolute inset-0 bg-gradient-to-t from-forest-950/80 via-transparent to-transparent pointer-events-none" />
 
                       {/* Icon Badge */}
-                      <span className="glass absolute left-4 top-4 grid size-10 place-items-center rounded-full text-forest-800 shadow-md">
+                      <span className="glass absolute left-4 top-4 grid size-10 place-items-center rounded-full text-forest-800 shadow-md transition-transform duration-300 group-hover:scale-110">
                         <TreatmentIcon name={t.icon} className="size-4.5" />
                       </span>
 
@@ -255,7 +284,7 @@ export function TreatmentExplorer({ items, groups }: { items: ExplorerItem[]; gr
                       {/* Bottom Image Tag */}
                       <div className="absolute bottom-3 left-4 right-4 z-10">
                         <span className="inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1 text-xs font-bold text-forest-900 backdrop-blur-md shadow-md">
-                          <span className="size-1.5 rounded-full bg-emerald-500" />
+                          <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
                           <span>{t.conditions.length > 0 ? `${t.conditions.length} Conditions Treated` : "Holistic Healing"}</span>
                         </span>
                       </div>
@@ -263,11 +292,8 @@ export function TreatmentExplorer({ items, groups }: { items: ExplorerItem[]; gr
 
                     {/* Card Body */}
                     <div className="p-6">
-                      <h3 className="font-serif text-2xl font-bold text-forest-950">
-                        {/* Separate page link commented out as requested */}
-                        {/* <Link href={`/treatments/${t.slug}`} className="hover:underline"> */}
+                      <h3 className="font-serif text-2xl font-bold text-forest-950 transition-colors group-hover:text-emerald-900">
                         {t.title}
-                        {/* </Link> */}
                       </h3>
 
                       {t.summary && (
@@ -276,21 +302,28 @@ export function TreatmentExplorer({ items, groups }: { items: ExplorerItem[]; gr
                         </p>
                       )}
 
-                      {/* Conditions Pill Cloud */}
+                      {/* Conditions Pill Cloud with Layout Animation */}
                       {t.conditions.length > 0 && (
-                        <ul className="mt-4 flex flex-wrap gap-1.5" aria-label={`Conditions treated under ${t.title}`}>
-                          {(matched.length ? matched : open[t.slug] ? t.conditions : t.conditions.slice(0, 5)).map((c) => (
-                            <li
-                              key={c}
-                              className={`rounded-lg px-2.5 py-1 text-xs font-semibold transition-colors ${
-                                matched.includes(c)
-                                  ? "bg-forest-800 text-white shadow-xs"
-                                  : "bg-sage-50 text-forest-900 border border-forest-800/5 group-hover:bg-emerald-50 group-hover:border-emerald-200"
-                              }`}
-                            >
-                              {c}
-                            </li>
-                          ))}
+                        <motion.ul layout={!reduce} className="mt-4 flex flex-wrap gap-1.5" aria-label={`Conditions treated under ${t.title}`}>
+                          <AnimatePresence initial={false}>
+                            {(matched.length ? matched : open[t.slug] ? t.conditions : t.conditions.slice(0, 5)).map((c) => (
+                              <motion.li
+                                key={c}
+                                layout={!reduce}
+                                initial={reduce ? false : { opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.9 }}
+                                transition={{ duration: 0.2 }}
+                                className={`rounded-lg px-2.5 py-1 text-xs font-semibold transition-colors ${
+                                  matched.includes(c)
+                                    ? "bg-forest-800 text-white shadow-xs"
+                                    : "bg-sage-50 text-forest-900 border border-forest-800/5 group-hover:bg-emerald-50 group-hover:border-emerald-200"
+                                }`}
+                              >
+                                {c}
+                              </motion.li>
+                            ))}
+                          </AnimatePresence>
                           {t.conditions.length > 5 && !matched.length && (
                             <li>
                               <button
@@ -303,22 +336,10 @@ export function TreatmentExplorer({ items, groups }: { items: ExplorerItem[]; gr
                               </button>
                             </li>
                           )}
-                        </ul>
+                        </motion.ul>
                       )}
                     </div>
                   </div>
-
-                  {/* Explore Treatment Button (Commented Out as requested)
-                  <div className="p-6 pt-0">
-                    <Link
-                      href={`/treatments/${t.slug}`}
-                      className="inline-flex w-full items-center justify-between rounded-xl bg-sage-50/70 px-4 py-2.5 text-xs font-semibold text-forest-800 transition-all hover:bg-forest-800 hover:text-white"
-                    >
-                      <span>Explore Treatment</span>
-                      <ChevronRight className="size-4" />
-                    </Link>
-                  </div>
-                  */}
                 </div>
               </motion.li>
             ))}

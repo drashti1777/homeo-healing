@@ -3,10 +3,12 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ChevronLeft, ChevronRight, Filter, Maximize2, Sparkles, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Maximize2, Sparkles, X } from "lucide-react";
 
 export type GallerySectionImage = { src: string; alt: string; width: number; height: number };
 export type GallerySection = { id: string; title: string; blurb?: string; images: GallerySectionImage[] };
+
+const EASE_OUT = [0.16, 1, 0.3, 1] as const;
 
 export function ClinicGallery({ sections }: { sections: GallerySection[] }) {
   const reduce = useReducedMotion();
@@ -72,8 +74,34 @@ export function ClinicGallery({ sections }: { sections: GallerySection[] }) {
 
   return (
     <div>
-      {/* Category Filter Pills */}
-      <div className="flex flex-wrap items-center justify-center gap-2.5 pb-12">
+      {/* 1. Header with Scroll Entrance Animation */}
+      <motion.div
+        initial={reduce ? false : { opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-40px" }}
+        transition={{ duration: 0.6, ease: EASE_OUT }}
+        className="mx-auto max-w-3xl text-center mb-12"
+      >
+        <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-emerald-800 border border-emerald-500/20 shadow-xs">
+          <Sparkles className="size-3.5 text-emerald-600 animate-pulse" />
+          Inside Our Clinics
+        </span>
+        <h2 id="g-photos" className="mt-3 font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-forest-950 leading-tight">
+          A Modern, Healing Environment
+        </h2>
+        <p className="mt-3 text-base text-ink-soft">
+          Click on any category to view specific clinic areas, or tap any photograph to inspect in high resolution.
+        </p>
+      </motion.div>
+
+      {/* 2. Category Filter Pills with Animated Sliding Indicator */}
+      <motion.div
+        initial={reduce ? false : { opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-30px" }}
+        transition={{ duration: 0.5, delay: 0.1, ease: EASE_OUT }}
+        className="flex flex-wrap items-center justify-center gap-2.5 pb-12"
+      >
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;
           return (
@@ -84,15 +112,22 @@ export function ClinicGallery({ sections }: { sections: GallerySection[] }) {
                 setActiveTab(tab.id);
                 setIndex(null);
               }}
-              className={`relative inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-xs sm:text-sm font-semibold transition-all duration-300 ${
+              className={`relative inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-xs sm:text-sm font-semibold transition-colors duration-200 cursor-pointer ${
                 isActive
-                  ? "bg-forest-800 text-white shadow-lg shadow-forest-900/20 scale-105"
+                  ? "text-white shadow-lg shadow-forest-900/20 scale-105"
                   : "bg-white text-forest-800 border border-forest-800/10 shadow-xs hover:border-emerald-500/40 hover:bg-emerald-50/50"
               }`}
             >
-              <span>{tab.label}</span>
+              {isActive && (
+                <motion.span
+                  layoutId="clinic-gallery-pill"
+                  transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 420, damping: 34 }}
+                  className="absolute inset-0 rounded-full bg-forest-800 -z-0"
+                />
+              )}
+              <span className="relative z-10">{tab.label}</span>
               <span
-                className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
+                className={`relative z-10 rounded-full px-2 py-0.5 text-[10px] font-bold ${
                   isActive ? "bg-white/20 text-white" : "bg-sage-100 text-forest-800"
                 }`}
               >
@@ -101,9 +136,9 @@ export function ClinicGallery({ sections }: { sections: GallerySection[] }) {
             </button>
           );
         })}
-      </div>
+      </motion.div>
 
-      {/* Modern Responsive Image Grid */}
+      {/* 3. Modern Responsive Image Grid with Staggered Entrance & Hover Zoom */}
       <motion.div
         layout
         className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
@@ -113,10 +148,16 @@ export function ClinicGallery({ sections }: { sections: GallerySection[] }) {
             <motion.div
               key={img.src}
               layout={!reduce}
-              initial={reduce ? false : { opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              initial={reduce ? false : { opacity: 0, y: 35, scale: 0.93 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, margin: "-40px" }}
+              exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.92, transition: { duration: 0.3 } }}
+              whileHover={reduce ? undefined : { y: -8, scale: 1.01, transition: { duration: 0.25 } }}
+              transition={{
+                duration: 0.75,
+                delay: reduce ? 0 : (i < 6 ? i * 0.14 : (i % 3) * 0.18),
+                ease: EASE_OUT,
+              }}
             >
               <button
                 type="button"
@@ -125,7 +166,7 @@ export function ClinicGallery({ sections }: { sections: GallerySection[] }) {
                   setIndex(i);
                 }}
                 aria-label={`Open photo: ${img.alt}`}
-                className="group relative block w-full overflow-hidden rounded-[2rem] bg-sage-50 border border-forest-800/10 shadow-md shadow-forest-900/5 transition-all duration-500 hover:-translate-y-1.5 hover:border-emerald-500/40 hover:shadow-2xl hover:shadow-emerald-950/10 text-left"
+                className="group relative block w-full overflow-hidden rounded-[2rem] bg-sage-50 border border-forest-800/10 shadow-md shadow-forest-900/5 transition-all duration-500 hover:border-emerald-500/40 hover:shadow-2xl hover:shadow-emerald-950/10 text-left cursor-pointer"
               >
                 <div className="relative aspect-[4/3] w-full overflow-hidden">
                   <Image
@@ -137,25 +178,26 @@ export function ClinicGallery({ sections }: { sections: GallerySection[] }) {
                   />
                   <div
                     aria-hidden="true"
-                    className="absolute inset-0 bg-gradient-to-t from-forest-950/80 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    className="absolute inset-0 bg-gradient-to-t from-forest-950/80 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none"
                   />
 
                   {/* Section Badge */}
                   <div className="absolute top-4 left-4 z-10">
-                    <span className="inline-flex items-center rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-forest-900 backdrop-blur-md shadow-md">
-                      {img.sectionTitle}
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-forest-900 backdrop-blur-md shadow-md">
+                      <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                      <span>{img.sectionTitle}</span>
                     </span>
                   </div>
 
                   {/* Hover Zoom Icon Button */}
                   <div className="absolute bottom-4 right-4 z-10 opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
-                    <span className="flex size-10 items-center justify-center rounded-full bg-emerald-500 text-forest-950 shadow-lg shadow-emerald-500/30">
+                    <span className="flex size-10 items-center justify-center rounded-full bg-emerald-500 text-forest-950 shadow-lg shadow-emerald-500/30 group-hover:scale-105 transition-transform">
                       <Maximize2 className="size-4" />
                     </span>
                   </div>
 
                   {/* Caption on hover */}
-                  <div className="absolute bottom-4 left-4 right-16 z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  <div className="absolute bottom-4 left-4 right-16 z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none">
                     <p className="text-xs font-medium text-white/90 line-clamp-1">
                       {img.alt}
                     </p>
@@ -167,7 +209,7 @@ export function ClinicGallery({ sections }: { sections: GallerySection[] }) {
         </AnimatePresence>
       </motion.div>
 
-      {/* Lightbox Modal */}
+      {/* 4. Lightbox Modal */}
       <AnimatePresence>
         {current && index !== null && (
           <motion.div
@@ -203,7 +245,7 @@ export function ClinicGallery({ sections }: { sections: GallerySection[] }) {
                 type="button"
                 onClick={close}
                 aria-label="Close photo viewer"
-                className="grid size-10 place-items-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+                className="grid size-10 place-items-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 cursor-pointer"
               >
                 <X className="size-5" />
               </button>
@@ -220,7 +262,7 @@ export function ClinicGallery({ sections }: { sections: GallerySection[] }) {
                   initial={reduce ? { opacity: 1 } : { opacity: 0, scale: 0.96 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.96 }}
-                  transition={{ duration: reduce ? 0 : 0.3, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: reduce ? 0 : 0.3, ease: EASE_OUT }}
                   className="flex max-h-full flex-col items-center justify-center"
                 >
                   <div className="relative overflow-hidden rounded-2xl shadow-2xl">
@@ -246,7 +288,7 @@ export function ClinicGallery({ sections }: { sections: GallerySection[] }) {
                     type="button"
                     onClick={() => step(-1)}
                     aria-label="Previous photo"
-                    className="absolute left-3 top-1/2 -translate-y-1/2 grid size-12 place-items-center rounded-full bg-white/15 text-white backdrop-blur-md transition-all hover:bg-white/30 sm:left-6"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 grid size-12 place-items-center rounded-full bg-white/15 text-white backdrop-blur-md transition-all hover:bg-white/30 sm:left-6 cursor-pointer"
                   >
                     <ChevronLeft className="size-6" />
                   </button>
@@ -254,7 +296,7 @@ export function ClinicGallery({ sections }: { sections: GallerySection[] }) {
                     type="button"
                     onClick={() => step(1)}
                     aria-label="Next photo"
-                    className="absolute right-3 top-1/2 -translate-y-1/2 grid size-12 place-items-center rounded-full bg-white/15 text-white backdrop-blur-md transition-all hover:bg-white/30 sm:right-6"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 grid size-12 place-items-center rounded-full bg-white/15 text-white backdrop-blur-md transition-all hover:bg-white/30 sm:right-6 cursor-pointer"
                   >
                     <ChevronRight className="size-6" />
                   </button>

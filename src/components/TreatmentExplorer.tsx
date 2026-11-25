@@ -238,7 +238,7 @@ export function TreatmentExplorer({ items, groups }: { items: ExplorerItem[]; gr
               <motion.li
                 key={t.slug}
                 layout={!reduce}
-                initial={reduce ? false : { opacity: 0, y: 35, scale: 0.94 }}
+                initial={reduce ? false : { opacity: 0, y: -25, scale: 0.96 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, margin: "-40px" }}
                 exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.92, transition: { duration: 0.3 } }}

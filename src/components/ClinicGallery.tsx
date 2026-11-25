@@ -74,9 +74,9 @@ export function ClinicGallery({ sections }: { sections: GallerySection[] }) {
 
   return (
     <div>
-      {/* 1. Header with Scroll Entrance Animation */}
+      {/* 1. Header with Scroll Entrance Animation (upar se niche) */}
       <motion.div
-        initial={reduce ? false : { opacity: 0, y: 24 }}
+        initial={reduce ? false : { opacity: 0, y: -24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-40px" }}
         transition={{ duration: 0.6, ease: EASE_OUT }}
@@ -96,7 +96,7 @@ export function ClinicGallery({ sections }: { sections: GallerySection[] }) {
 
       {/* 2. Category Filter Pills with Animated Sliding Indicator */}
       <motion.div
-        initial={reduce ? false : { opacity: 0, y: 16 }}
+        initial={reduce ? false : { opacity: 0, y: -16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-30px" }}
         transition={{ duration: 0.5, delay: 0.1, ease: EASE_OUT }}
@@ -148,7 +148,7 @@ export function ClinicGallery({ sections }: { sections: GallerySection[] }) {
             <motion.div
               key={img.src}
               layout={!reduce}
-              initial={reduce ? false : { opacity: 0, y: 35, scale: 0.93 }}
+              initial={reduce ? false : { opacity: 0, y: -25, scale: 0.95 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, margin: "-40px" }}
               exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.92, transition: { duration: 0.3 } }}

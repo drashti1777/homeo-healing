@@ -14,7 +14,7 @@ export function GalleryVideoShowcase() {
     reduce
       ? { initial: false, whileInView: { opacity: 1 }, viewport: { once: true } }
       : {
-          initial: { opacity: 0, y: 30 },
+          initial: { opacity: 0, y: -30 },
           whileInView: { opacity: 1, y: 0 },
           viewport: { once: true, margin: "-40px" },
           transition: { duration: 0.75, delay, ease: EASE_OUT },
@@ -24,7 +24,7 @@ export function GalleryVideoShowcase() {
     reduce
       ? { initial: false, whileInView: { opacity: 1 }, viewport: { once: true } }
       : {
-          initial: { opacity: 0, y: 35, scale: 0.95 },
+          initial: { opacity: 0, y: -25, scale: 0.96 },
           whileInView: { opacity: 1, y: 0, scale: 1 },
           viewport: { once: true, margin: "-40px" },
           transition: { duration: 0.8, delay, ease: EASE_OUT },

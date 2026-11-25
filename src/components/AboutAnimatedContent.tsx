@@ -42,11 +42,12 @@ export function AboutAnimatedContent({
 }: AboutAnimatedContentProps) {
   const reduce = useReducedMotion();
 
-  const fadeUp = (delay = 0) =>
+  // Entrance from TOP to BOTTOM (upar se niche)
+  const fadeDown = (delay = 0) =>
     reduce
       ? { initial: false, whileInView: { opacity: 1 }, viewport: { once: true } }
       : {
-          initial: { opacity: 0, y: 24 },
+          initial: { opacity: 0, y: -24 },
           whileInView: { opacity: 1, y: 0 },
           viewport: { once: true, margin: "-40px" },
           transition: { duration: 0.6, delay, ease: EASE_OUT },
@@ -56,8 +57,8 @@ export function AboutAnimatedContent({
     reduce
       ? { initial: false, whileInView: { opacity: 1 }, viewport: { once: true } }
       : {
-          initial: { opacity: 0, x: -30 },
-          whileInView: { opacity: 1, x: 0 },
+          initial: { opacity: 0, x: -30, y: -15 },
+          whileInView: { opacity: 1, x: 0, y: 0 },
           viewport: { once: true, margin: "-40px" },
           transition: { duration: 0.7, delay, ease: EASE_OUT },
         };
@@ -66,8 +67,8 @@ export function AboutAnimatedContent({
     reduce
       ? { initial: false, whileInView: { opacity: 1 }, viewport: { once: true } }
       : {
-          initial: { opacity: 0, x: 30 },
-          whileInView: { opacity: 1, x: 0 },
+          initial: { opacity: 0, x: 30, y: -15 },
+          whileInView: { opacity: 1, x: 0, y: 0 },
           viewport: { once: true, margin: "-40px" },
           transition: { duration: 0.7, delay, ease: EASE_OUT },
         };
@@ -143,14 +144,14 @@ export function AboutAnimatedContent({
               She graduated from <strong>Swami Vivekananda Homoeopathic Medical College, Bhavnagar in 2011</strong>, and completed her post-graduation (M.D. in Repertory) at <strong>Ahmedabad Homoeopathic Medical College</strong>, affiliated with Hemchandracharya North Gujarat University, Patan, in June 2016.
             </p>
 
-            {/* 4 Mini Highlight Cards with Stagger & Hover Animation */}
+            {/* 4 Mini Highlight Cards with Top-to-Bottom Stagger & Hover Animation */}
             <div className="grid gap-3 sm:grid-cols-2 pt-2">
               {highlights.map((h, i) => {
                 const Icon = h.icon;
                 return (
                   <motion.div
                     key={h.title}
-                    initial={reduce ? false : { opacity: 0, y: 20 }}
+                    initial={reduce ? false : { opacity: 0, y: -20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-20px" }}
                     transition={{ duration: 0.5, delay: reduce ? 0 : i * 0.1, ease: EASE_OUT }}
@@ -168,7 +169,7 @@ export function AboutAnimatedContent({
             </div>
 
             {/* Action Buttons */}
-            <motion.div {...fadeUp(0.2)}>
+            <motion.div {...fadeDown(0.2)}>
               <AboutDoctorButtons />
             </motion.div>
           </motion.div>
@@ -203,7 +204,7 @@ export function AboutAnimatedContent({
 
               {/* Floating Top-Left Experience Badge */}
               <motion.div
-                initial={reduce ? false : { opacity: 0, scale: 0.85, y: -10 }}
+                initial={reduce ? false : { opacity: 0, scale: 0.85, y: -15 }}
                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
                 viewport={{ once: true }}
                 animate={floatAnimation}
@@ -216,7 +217,7 @@ export function AboutAnimatedContent({
 
               {/* Bottom Overlay Info */}
               <motion.div
-                initial={reduce ? false : { opacity: 0, y: 15 }}
+                initial={reduce ? false : { opacity: 0, y: -15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
@@ -254,7 +255,7 @@ export function AboutAnimatedContent({
           className="pointer-events-none absolute -left-40 bottom-20 size-[24rem] rounded-full bg-sage-100/40 blur-3xl -z-10"
         />
         <div className="wrap relative">
-          <motion.div {...fadeUp(0)} className="mx-auto max-w-2xl text-center">
+          <motion.div {...fadeDown(0)} className="mx-auto max-w-2xl text-center">
             <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-emerald-800 border border-emerald-500/20 shadow-xs">
               <GraduationCap className="size-3.5 text-emerald-600" />
               Clinical Milestones
@@ -266,7 +267,7 @@ export function AboutAnimatedContent({
               Clinical practice, advanced postgraduate training, and academic faculty roles across Gujarat.
             </p>
           </motion.div>
-          <motion.div {...fadeUp(0.15)}>
+          <motion.div {...fadeDown(0.15)}>
             <JourneyTimeline items={journey} />
           </motion.div>
         </div>
@@ -280,7 +281,7 @@ export function AboutAnimatedContent({
           className="pointer-events-none absolute -left-40 -top-24 size-[30rem] rounded-full bg-emerald-100/30 blur-3xl -z-10"
         />
         <div className="wrap relative">
-          <motion.div {...fadeUp(0)} className="mx-auto max-w-2xl text-center">
+          <motion.div {...fadeDown(0)} className="mx-auto max-w-2xl text-center">
             <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-emerald-800 border border-emerald-500/20 shadow-xs">
               <Award className="size-3.5 text-emerald-600" />
               Clinical Excellence
@@ -292,7 +293,7 @@ export function AboutAnimatedContent({
               Core clinical standards, multi-generational patient trust, and personalized constitutional evaluation.
             </p>
           </motion.div>
-          <motion.div {...fadeUp(0.15)}>
+          <motion.div {...fadeDown(0.15)}>
             <BestShowcase tabs={whatMakesUsBest} />
           </motion.div>
         </div>
@@ -302,7 +303,7 @@ export function AboutAnimatedContent({
       {reviews.length > 0 && (
         <section className="relative bg-sage-50/60 py-16 lg:py-24" aria-labelledby="about-testimonials-heading">
           <div className="wrap relative">
-            <motion.div {...fadeUp(0)} className="mx-auto max-w-2xl text-center">
+            <motion.div {...fadeDown(0)} className="mx-auto max-w-2xl text-center">
               <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-emerald-800 border border-emerald-300/60 shadow-xs">
                 <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 Patient Stories
@@ -314,7 +315,7 @@ export function AboutAnimatedContent({
                 {TESTIMONIALS_INTRO}
               </p>
             </motion.div>
-            <motion.div {...fadeUp(0.15)} className="mt-12">
+            <motion.div {...fadeDown(0.15)} className="mt-12">
               <TestimonialSlider reviews={reviews} theme="light" />
             </motion.div>
           </div>
@@ -324,7 +325,7 @@ export function AboutAnimatedContent({
       {/* 5. Clinic photographs */}
       <section className="section py-16 lg:py-24 bg-white" aria-labelledby="clinic-photos-heading">
         <div className="wrap">
-          <motion.div {...fadeUp(0)} className="flex flex-wrap items-end justify-between gap-6 pb-10">
+          <motion.div {...fadeDown(0)} className="flex flex-wrap items-end justify-between gap-6 pb-10">
             <div>
               <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-emerald-800 border border-emerald-500/20 shadow-xs">
                 <Sparkles className="size-3.5 text-emerald-600" />
@@ -340,7 +341,7 @@ export function AboutAnimatedContent({
             {featuredPhotos.map((img, i) => (
               <motion.li
                 key={img.src}
-                initial={reduce ? false : { opacity: 0, y: 25, scale: 0.96 }}
+                initial={reduce ? false : { opacity: 0, y: -25, scale: 0.96 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, margin: "-30px" }}
                 transition={{ duration: 0.5, delay: reduce ? 0 : i * 0.1, ease: EASE_OUT }}

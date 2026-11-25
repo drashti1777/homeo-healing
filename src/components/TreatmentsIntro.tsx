@@ -17,8 +17,8 @@ export function TreatmentsIntro({ categoriesCount, conditionsCount }: Treatments
   const slideLeft = reduce
     ? { initial: false, whileInView: { opacity: 1 }, viewport: { once: true } }
     : {
-        initial: { opacity: 0, x: -35 },
-        whileInView: { opacity: 1, x: 0 },
+        initial: { opacity: 0, x: -30, y: -15 },
+        whileInView: { opacity: 1, x: 0, y: 0 },
         viewport: { once: true, margin: "-40px" },
         transition: { duration: 0.8, ease: EASE_OUT },
       };
@@ -27,7 +27,7 @@ export function TreatmentsIntro({ categoriesCount, conditionsCount }: Treatments
     reduce
       ? { initial: false, whileInView: { opacity: 1 }, viewport: { once: true } }
       : {
-          initial: { opacity: 0, y: 35, scale: 0.94 },
+          initial: { opacity: 0, y: -25, scale: 0.96 },
           whileInView: { opacity: 1, y: 0, scale: 1 },
           viewport: { once: true, margin: "-40px" },
           transition: { duration: 0.8, delay, ease: EASE_OUT },

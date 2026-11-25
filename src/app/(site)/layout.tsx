@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { NavigationScrollReset } from "@/components/NavigationScrollReset";
 import { ScrollEffects } from "@/components/ScrollEffects";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { ScrollToTop } from "@/components/ScrollToTop";
@@ -17,6 +18,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
   }
   return (
     <>
+      <NavigationScrollReset />
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-forest-800 focus:px-5 focus:py-3 focus:text-paper">
         Skip to content
       </a>
